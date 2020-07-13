@@ -566,7 +566,7 @@ void fiber_viewer::prepare_data() {
 		}
 	}
 
-	//Susu's coolwarm, extended kindlmann
+	//Scalar Colormapping
 
 	//read .niidata
 	nifti_image* nii1 = nifti_image_read("C:\\dev\\mycpp\\volume_data\\dti_FA.nii", 1);
@@ -747,7 +747,7 @@ void fiber_viewer::prepare_data() {
 			
 		}
 	}
-	//end of Susu's coolwarm, extended kindlmann
+	//Scalar Colormapping
 
 	//Alaleh's boy's surface
 	for (unsigned i = 0; i < tracts.size(); ++i) {
@@ -1655,25 +1655,3 @@ void rp2ColorMapping(float startP[3], float endP[3], float rgb[3])
 #include <cgv/base/register.h>
 
 extern CGV_API cgv::base::object_registration<fiber_viewer> fiber_viewer_reg("fiber_viewer");
-
-void getniidata(){
-	nifti_image* nii1 = nifti_image_read("C:\dev\mycpp\volume_data\dit_FA.nii", 1);
-	if (!nii1) {
-		fprintf(stderr, "** failed to read NIfTI from '%s'.\n", "C:\dev\mycpp\volume data\dit_FA.nii");
-		//return 2;
-	}
-	else { std::cout << "NII LOADED\n"; }
-
-	// Get dimensions of input
-	const int size_x = nii1->nx;
-	const int size_y = nii1->ny;
-	const int size_z = nii1->nz;
-	const int size_time = nii1->nt;
-	const int nx = nii1->nx;
-	const int nxy = nii1->nx * nii1->ny;
-	const int nxyz = nii1->nx * nii1->ny * nii1->nz;
-	const int nr_voxels = size_time * size_z * size_y * size_x;
-
-	std::cout << "----------------NIINIINIINII--------------" << std::endl;
-	std::cout << size_x << std::endl;
-}
