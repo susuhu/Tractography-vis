@@ -568,6 +568,7 @@ void fiber_viewer::prepare_data() {
 
 	//Susu's coolwarm, extended kindlmann
 
+	//read .niidata
 	nifti_image* nii1 = nifti_image_read("C:\\dev\\mycpp\\volume_data\\dti_FA.nii", 1);
 	if (!nii1) {
 		fprintf(stderr, "** failed to read NIfTI from '%s'.\n", "C:\\dev\\mycpp\\volume_data\\dti_FA.nii");
@@ -585,13 +586,19 @@ void fiber_viewer::prepare_data() {
 	const int nr_voxels = size_time * size_z * size_y * size_x;
 	float* ptrdata = (float*)nii1->data;
 
+	//check fa data
 	float fa_max = 0;
+	float fa_avr = 0;
 	for (int i = 0; i < nr_voxels; i++) {
+		fa_avr = fa_avr + ptrdata[i];
 		if (ptrdata[i] > fa_max) {
 			fa_max = ptrdata[i];
 		}
 	}
-	//std::cout << "=============MAX=FA===============" << fa_max << std::endl;
+	fa_avr = fa_avr / nr_voxels;
+
+	std::cout << "=============AVR=FA===============: " << fa_avr << std::endl;
+	std::cout << "=============MAX=FA===============: " << fa_max << std::endl;
 
 	rgba col5[8];
 	col5[0] = rgba(0.3f, 0.3f, 0.8f, 1.0f);
