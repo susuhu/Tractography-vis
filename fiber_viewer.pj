@@ -1,0 +1,20 @@
+@=
+projectType="application_plugin";
+projectName="fiber_viewer";
+projectGUID="A8330D33-9286-4634-B4C7-D380DA3C425E";
+addProjectDirs=[CGV_DIR."/libs", CGV_DIR."/plugins", CGV_DIR."/3rd"];
+addIncDirs=[CGV_DIR."/libs", INPUT_DIR];
+addProjectDeps=[
+	"cgv_utils", "cgv_type", "cgv_reflect", "cgv_data", "cgv_signal", "cgv_base", "cmi_io", "cgv_media", "cgv_gui", "cgv_render", "cgv_os",
+	"cgv_reflect_types", "cgv_gl", "plot",
+	"glew",
+	"cg_fltk", "crg_stereo_view", "crg_light", "crg_grid", "cg_icons", 
+	"cgv_viewer"
+];
+
+addSharedDefines=["FIBER_VR_EXPORTS"];
+
+addCommandLineArguments=[
+	'config:"'.INPUT_DIR.'/config.def"',
+	after("type(shader_config):shader_path='".INPUT_DIR."/glsl;".CGV_DIR."/libs/plot/glsl;".CGV_DIR."/libs/cgv_gl/glsl'", "cg_fltk")
+];

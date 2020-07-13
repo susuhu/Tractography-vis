@@ -1,0 +1,4 @@
+files:tube_transparent
+vertex_file:view.glsl
+geometry_file:view.glsl
+fragment_file:tube_transparent_al.glfs

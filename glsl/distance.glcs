@@ -1,0 +1,63 @@
+#version 430
+
+layout(local_size_x = 64) in;
+
+struct data_object {
+	// Must specify each component as individually, when using vec3 as position attributes in the vertex buffer object
+	// Segment start position
+	float x0;
+	float y0;
+	float z0;
+	// Segment end position
+	float x1;
+	float y1;
+	float z1;
+};
+
+layout(std430, binding = 0) readonly buffer data_buffer {
+    data_object data[];
+};
+
+layout(std430, binding = 1) writeonly buffer distance_buffer {
+    uint distances[];
+};
+
+layout(std430, binding = 2) writeonly buffer index_buffer {
+    uint indices[];
+};
+
+uniform uint n;
+uniform uint n_padded;
+
+uniform vec3 eye_pos;
+
+void main() {
+
+    for(uint idx = gl_WorkGroupID.x*gl_WorkGroupSize.x + gl_LocalInvocationID.x; idx < n_padded; idx += gl_WorkGroupSize.x*gl_NumWorkGroups.x) {
+        if(idx < n) {
+			data_object obj = data[idx];
+            
+			vec3 a = vec3(abs(obj.x0), obj.y0, obj.z0);
+			vec3 b = vec3(abs(obj.x1), obj.y1, obj.z1);
+			vec3 center = 0.5 * (a + b);
+
+			vec3 d = b - a;
+			vec3 cd = a - eye_pos;
+
+			float t = - dot(cd, d) / dot(d, d);
+
+			t = clamp(t, 0.0, 1.0);
+
+			vec3 x = a + t*d;
+
+			//vec3 eye_to_pos = center - eye_pos;
+			vec3 eye_to_pos = x - eye_pos;
+			
+            //distances[idx] = ~floatBitsToUint(dot(eye_to_pos, eye_to_pos)); // Back-to-front
+			distances[idx] = floatBitsToUint(dot(eye_to_pos, eye_to_pos)); // Front-to-back
+        } else {
+            distances[idx] = 0xFFFFFFFF;
+        }
+        indices[idx] = idx;
+    }
+}

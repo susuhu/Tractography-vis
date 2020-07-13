@@ -1,0 +1,8 @@
+files:tube_transparent
+vertex_file:view.glsl
+geometry_file:view.glsl
+fragment_file:tube_transparent_naive.glfs
+fragment_file:side.glsl
+fragment_file:lights.glsl
+fragment_file:surface.glsl
+fragment_file:brdf.glsl

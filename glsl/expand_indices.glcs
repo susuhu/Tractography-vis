@@ -1,0 +1,26 @@
+#version 430
+
+layout(local_size_x = 64) in;
+
+layout(std430, binding = 0) readonly buffer indices_in_buffer {
+    uint indices_in[];
+};
+
+layout(std430, binding = 1) writeonly buffer indices_out_buffer {
+    uint indices_out[];
+};
+
+uniform uint n;
+uniform uint n_padded;
+
+void main() {
+
+    for(uint idx = gl_WorkGroupID.x*gl_WorkGroupSize.x + gl_LocalInvocationID.x; idx < n_padded; idx += gl_WorkGroupSize.x*gl_NumWorkGroups.x) {
+        if(idx < n) {
+			uint index = indices_in[idx];
+
+            indices_out[2*idx + 0] = 2*index;
+            indices_out[2*idx + 1] = 2*index + 1;
+        }
+    }
+}

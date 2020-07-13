@@ -1,0 +1,350 @@
+#version 430
+#extension GL_ARB_fragment_shader_interlock : enable
+
+#extension GL_NV_gpu_shader5 : enable
+#extension GL_NV_shader_atomic_int64 : enable
+
+#define ENABLE_AMBIENT_OCCLUSION 0
+
+
+
+/*** Begin illumination hack ***/
+/*
+	Using the extension GL_ARB_fragment_shader_interlock causes compilation problems with
+	the lighting interface given by the framework. So we have to hack it back in and loose
+	some of the functionality by restricting lighting to lambert diffuse only.
+*/
+uniform int illumination_mode = 2;
+
+struct LightSource
+{
+	int light_source_type;
+	vec3 position;
+	vec3 emission;
+	float ambient_scale;
+	vec3 spot_direction;
+	float spot_exponent;
+	float spot_cos_cutoff;
+	float constant_attenuation;
+	float linear_attenuation;
+	float quadratic_attenuation;
+};
+
+uniform LightSource light_sources[8];
+uniform int nr_light_sources = 1;
+
+struct Material {
+	int brdf_type;
+	vec3 diffuse_reflectance;
+	float roughness;
+	float metalness;
+	float ambient_occlusion;
+	vec3 emission;
+	float transparency;
+	vec2 propagation_slow_down;
+	float roughness_anisotropy;
+	float roughness_orientation;
+	vec3 specular_reflectance;
+};
+
+uniform Material material;
+
+void evaluate_light(LightSource L, in vec3 p_eye, out vec3 omega_in, out vec3 radiance_in)
+{
+	radiance_in = L.emission;
+	
+	if (L.light_source_type == 0) {
+		omega_in = normalize(L.position);
+	}
+}
+
+vec3 evaluate_material(Material material, vec3 normal, vec3 omega_in, vec3 omega_out)
+{
+	vec3 res = vec3(0.0);
+	// check whether light illuminates surface point
+	float fd = dot(normal, omega_in);
+	if (fd < 0.0)
+		return res;
+	
+	if(material.brdf_type == 0)
+		res = fd * material.diffuse_reflectance; // lambert diffuse contribution
+	return res;
+}
+
+vec3 compute_reflected_radiance(in Material M, vec3 position_eye, vec3 normal_eye)
+{
+	vec3 res = vec3(0.0, 0.0, 0.0);
+	for (int i = 0; i < nr_light_sources; ++i) {
+		LightSource L = light_sources[i];
+		// add ambient constribution
+		res.rgb += M.diffuse_reflectance * M.ambient_occlusion * L.ambient_scale * L.emission;
+		// compute direct lighting
+		vec3 omega_in;
+		vec3 radiance_in;
+		evaluate_light(L, position_eye, omega_in, radiance_in);
+		// evaluate material 
+		res.rgb += evaluate_material(M, normal_eye, omega_in, normalize(-position_eye))*radiance_in;
+		// add emission
+	}
+	res.rgb += M.emission;
+	return res;
+}
+
+vec3 compute_reflected_appearance(vec3 position_eye, vec3 normal_eye, vec3 color)
+{
+	if (illumination_mode == 0) {
+		return color;
+	}
+	
+	Material M = material;
+	M.diffuse_reflectance = color;
+	return compute_reflected_radiance(M, position_eye, normal_eye);
+}
+/*** End illumination hack ***/
+
+
+
+layout (pixel_interlock_unordered) in;
+
+layout (std430, binding = 3) buffer scratch_buffer {
+	uint64_t scratch[];
+};
+
+layout (binding = 0) uniform sampler2D alpha_mipmap;
+
+layout (binding = 1) uniform sampler3D density_tex;
+
+// Ambient occlusion parameters
+uniform float ao_offset;
+uniform float ao_distance;
+uniform float ao_strength;
+uniform vec3 density_tex_offset;
+uniform vec3 density_tex_scaling;
+uniform vec3 tex_coord_scaling;
+uniform float texel_size;
+uniform float cone_angle_factor;
+uniform vec3 sample_dirs[3];
+
+uniform mat4 inverse_modelview_mat;
+uniform mat3 inverse_normal_mat;
+
+uniform ivec2 viewport_dims;
+uniform uint scratch_size;
+
+in vec3 position;
+in flat vec4 start_fs;
+in flat vec4 end_fs;
+in flat vec4 tp2;
+in flat vec4 tp3;
+in vec4 color_start_fs;
+in vec4 color_end_fs;
+
+in flat vec3 clip_dir0;
+in flat vec3 clip_dir1;
+in flat int clip;
+
+out vec4 frag_color;
+
+vec3 ortho_vec(vec3 v) {
+
+	return abs(v.x) > abs(v.z) ? vec3(-v.y, v.x, 0.0f) : vec3(0.0f, -v.z, v.y);
+}
+
+void main()
+{
+	vec3 dir = normalize(position);
+
+	// The MIT License
+	// Copyright © 2018 Inigo Quilez
+	// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+	// and associated documentation files (the "Software"), to deal in the Software without restriction,
+	// including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+	// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+	// subject to the following conditions: The above copyright notice and this permission notice shall be
+	// included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS",
+	// WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+	// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+	// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+	// OTHER DEALINGS IN THE SOFTWARE.
+	
+	// Rounded cone intersection from: https://www.shadertoy.com/view/MlKfzm
+
+	float ra = start_fs.w;
+	float rb = end_fs.w;
+
+    vec3  ba = end_fs.xyz - start_fs.xyz;
+	vec3  oa = -start_fs.xyz;
+	vec3  ob = -end_fs.xyz;
+    float rr = ra - rb;
+    float m0 = dot(ba,ba);
+    float m1 = dot(ba,oa);
+    float m2 = dot(ba,dir);
+    float m3 = dot(dir,oa);
+    float m5 = dot(oa,oa);
+	float m6 = dot(ob,dir);
+    float m7 = dot(ob,ob);
+    
+    float d2 = m0-rr*rr;
+    
+	float k2 = d2    - m2*m2;
+    float k1 = d2*m3 - m1*m2 + m2*rr*ra;
+    float k0 = d2*m5 - m1*m1 + m1*rr*ra*2.0 - m0*ra*ra;
+    
+	float h = k1*k1 - k0*k2;
+
+	if(h < 0.0) {
+		discard;
+	}
+
+	bool hit = false;
+	float l = 0.0;
+	vec3 normal = vec3(0.0);
+
+    float t = (-sqrt(h)-k1) / k2;
+	float y = m1 - ra*rr + t*m2;
+    
+    if(y > 0.0 && y < d2) {
+		hit = true;
+		l = y / d2;
+		normal = normalize(d2*(oa + t*dir) - ba*y);
+    } else {
+		float h1 = m3*m3 - m5 + ra*ra;
+		float h2 = m6*m6 - m7 + rb*rb;
+
+		float t1 = 1e20;
+
+		if(h1 > 0.0) {
+			hit = true;
+    		t = -m3 - sqrt(h1);
+			t1 = t;
+			l = 0.0;
+			normal = (oa + t*dir) / ra;
+		}
+
+		if(h2 > 0.0) {
+    		t = -m6 - sqrt(h2);
+			if(t < t1) {
+				hit = true;
+				t1 = t;
+				l = 1.0;
+				normal = (ob + t*dir) / rb;
+			}
+		}
+
+		t = t1;
+	}
+
+	vec3 hit_pos = t * dir;
+
+	if((clip & 0x01) > 0) {
+		vec3 dir0 = clip_dir0 + normalize(end_fs.xyz - start_fs.xyz);
+		if(dot(hit_pos - start_fs.xyz, dir0) < 0)
+			hit = false;
+	}
+
+	if((clip & 0x02) > 0) {
+		vec3 dir1 = clip_dir1 + normalize(end_fs.xyz - start_fs.xyz);
+		if(dot(hit_pos - end_fs.xyz, dir1) > 0)
+			hit = false;
+	}
+
+	if(!hit) {
+		discard;
+	}
+
+	vec4 color = mix(color_start_fs, color_end_fs, l);
+
+#if ENABLE_AMBIENT_OCCLUSION == 1
+	{
+		vec3 pos = (inverse_modelview_mat * vec4(hit_pos, 1.0)).xyz;
+		vec3 normal = normalize(inverse_normal_mat * normal);
+
+		// Do voxel cone tracing to determine occlusion of ambient light
+		float ao = 0.0;
+
+		vec3 new_y = normal;
+		vec3 new_x = cross(new_y, normalize(pos));
+		vec3 new_z = cross(new_x, new_y);
+
+		mat3 R = mat3(new_x, new_y, new_z);
+
+		for(int i = 0; i < 3; ++i) {
+			vec3 sd = R * sample_dirs[i];
+
+			float sample_distance = ao_offset + 0.001;
+			vec3 normalized_pos = (pos - density_tex_offset) * density_tex_scaling;
+			float lod_texel_size = 0.0f;
+			
+			float illumination = 1.0;
+
+			do {
+				// Get cone base radius at current distance and then the according mipmap sample level
+				float cone_radius = sample_distance * cone_angle_factor;
+				float sample_level = clamp(log2(cone_radius / texel_size), 0.0, 7.0);
+
+				lod_texel_size = pow(2.0, sample_level) * texel_size;
+
+				vec3 sample_pos = normalized_pos + sample_distance * sd * tex_coord_scaling;
+				float density = textureLod(density_tex, sample_pos, sample_level).r;
+				// Apply the compositing function
+				illumination *= 1.0 - density * illumination;
+				
+				// Get the next sample distance and position
+				sample_distance += cone_radius;
+			} while(sample_distance < ao_distance - lod_texel_size && illumination > 0.02);
+
+			ao += (1.0 - illumination);
+		}
+
+		float ao_factor = 1.0 - clamp(ao_strength * ao / 3.0, 0.0, 1.0);
+		color.rgb *= ao_factor;
+	}
+#endif
+
+	color.rgb = compute_reflected_appearance(hit_pos, normal, color.rgb);
+
+	vec4 v_eye = vec4(hit_pos, 1.0);
+	float depth = dot(tp2, v_eye);
+	float depth_w = dot(tp3, v_eye);
+	float final_depth = 0.5*(depth / depth_w) + 0.5;
+
+	// Get the scratch buffer starting index of this pixel
+	ivec2 pixel_coords = ivec2(gl_FragCoord.xy);
+	uint base_index = pixel_coords.x + viewport_dims.x * pixel_coords.y;
+	base_index *= scratch_size;
+		
+	// Pack depth and color into a single 64 bit unsigned integer
+	uint packed_color = packUnorm4x8(color);
+	uint packed_depth = floatBitsToUint(final_depth);
+	uint64_t f_test = packUint2x32(uvec2(packed_color, packed_depth));
+
+	uint64_t f_old;
+
+	beginInvocationInterlockARB();
+
+	for(uint i = 0; i < scratch_size; ++i) {
+		f_old = atomicMax(scratch[base_index + i], f_test);
+
+		uvec2 old = unpackUint2x32(f_old);
+		uvec2 test = unpackUint2x32(f_test);
+		if(old.y == 0x00000000u || old.y == test.y) {
+			f_test = old.y < test.y ? f_old : f_test;
+			break;
+		}
+		f_test = old.y < test.y ? f_old : f_test;
+	}
+
+	endInvocationInterlockARB();
+
+	uvec2 value = unpackUint2x32(f_test);
+
+	if(value.y != 0x00000000u) {
+		vec4 color = unpackUnorm4x8(value.x);
+		color.a = 1.0 - color.a; // Front-to-back blending
+
+		frag_color = color;
+	} else {
+		discard;
+	}
+}

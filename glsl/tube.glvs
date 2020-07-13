@@ -1,0 +1,26 @@
+#version 430 
+
+//***** begin interface of view.glsl ***********************************
+mat4 get_modelview_matrix();
+mat4 get_projection_matrix();
+mat4 get_modelview_projection_matrix();
+mat4 get_inverse_modelview_matrix();
+mat4 get_inverse_modelview_projection_matrix();
+mat3 get_normal_matrix();
+mat3 get_inverse_normal_matrix();
+//***** end interface of view.glsl ***********************************
+
+uniform float radius_scale;
+
+in vec4 position;
+in float radius;
+in vec4 color;
+
+out vec4 color_gs;
+
+void main()
+{
+	color_gs = color;
+	
+	gl_Position = vec4(position.xyz, radius * radius_scale);
+}

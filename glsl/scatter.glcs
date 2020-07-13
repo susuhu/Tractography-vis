@@ -1,0 +1,70 @@
+#version 430
+
+layout(local_size_x = 64) in;
+
+layout(std430, binding = 0) readonly buffer values_in_buffer {
+    uint values_in[];
+};
+
+layout(std430, binding = 1) writeonly buffer values_out_buffer {
+    uint values_out[];
+};
+
+layout(std430, binding = 2) readonly buffer keys_in_buffer {
+    uint keys_in[];
+};
+
+layout(std430, binding = 3) writeonly buffer keys_out_buffer {
+    uint keys_out[];
+};
+
+layout(std430, binding = 4) readonly buffer prefix_sum_buffer {
+    uint prefix_sum[];
+};
+
+layout(std430, binding = 5) readonly buffer blocksum_buffer {
+    uvec4 blocksum[];
+};
+
+uniform uint n;
+uniform uint bit;
+uniform uint blocksum_offset_shift;
+
+shared uint hist[4];
+
+void main() {
+
+    if(gl_LocalInvocationID.x == 0) {
+        uint count[4];
+        //uint hist[4];
+
+        uint last_prefix_sum = prefix_sum[n - 1];
+        uvec4 last_blocksum = blocksum[(n>>blocksum_offset_shift) - 1];
+        uint last_value = (values_in[n - 1]>>bit)&3;
+
+        count[0] = (last_prefix_sum&0x000000FF) + last_blocksum.x;
+        count[1] = ((last_prefix_sum>>8)&0x000000FF) + last_blocksum.y;
+        count[2] = ((last_prefix_sum>>16)&0x000000FF) + last_blocksum.z;
+        //count[3] = ((last_prefix_sum>>24)&0x000000FF) + last_blocksum.w;
+        
+        count[last_value] += 1;
+
+        hist[0] = 0;
+        hist[1] = count[0];
+        hist[2] = hist[1] + count[1];
+        hist[3] = hist[2] + count[2];
+    }
+
+    barrier();
+
+
+    for(uint idx = gl_WorkGroupID.x*gl_WorkGroupSize.x + gl_LocalInvocationID.x; idx < n; idx += gl_WorkGroupSize.x*gl_NumWorkGroups.x) {
+        uint val = (values_in[idx]>>bit)&3; // either 0,1,2 or 3
+        
+        uint prefix_sum_value = (prefix_sum[idx]>>(8*val))&0x000000FF;
+        uint scatter_addr = hist[val] + prefix_sum_value + blocksum[idx>>blocksum_offset_shift][val];
+
+        keys_out[scatter_addr] = keys_in[idx];
+        values_out[scatter_addr] = values_in[idx];   
+    }
+}

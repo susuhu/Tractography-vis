@@ -1,0 +1,32 @@
+#version 430
+#extension GL_NV_gpu_shader5 : enable
+#extension GL_NV_shader_atomic_int64 : enable
+
+layout (std430, binding = 0) buffer scratch_buffer {
+	uint64_t scratch[];
+};
+
+uniform ivec2 viewport_dims;
+uniform uint scratch_size;
+uniform int idx;
+
+in vec2 texcoord_fs;
+
+out vec4 frag_color;
+
+void main() {
+
+	ivec2 pixel_coords = ivec2(gl_FragCoord.xy);
+	uint base_index = pixel_coords.x + viewport_dims.x * pixel_coords.y;
+	base_index *= scratch_size;
+	
+	uvec2 fragment = unpackUint2x32(scratch[base_index + idx]);
+
+	if(fragment.x == 0x00000000u) {
+		frag_color = vec4(0.0, 0.0, 0.0, 1.0); // Front-to-back blending
+	} else {
+		vec4 color = unpackUnorm4x8(fragment.x);
+		color.a = 1.0 - color.a; // Front-to-back blending
+		frag_color = color;
+	}
+}

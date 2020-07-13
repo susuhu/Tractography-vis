@@ -1,0 +1,147 @@
+#version 430
+#extension GL_EXT_geometry_shader4 : enable
+
+//***** begin interface of view.glsl ***********************************
+mat4 get_modelview_matrix();
+mat4 get_projection_matrix();
+mat4 get_modelview_projection_matrix();
+mat4 get_inverse_modelview_matrix();
+mat4 get_inverse_modelview_projection_matrix();
+mat3 get_normal_matrix();
+mat3 get_inverse_normal_matrix();
+//***** end interface of view.glsl ***********************************
+
+layout (lines) in;
+layout (triangle_strip, max_vertices = 4) out;
+
+layout (binding = 0) uniform sampler2D depth_mipmap;
+
+uniform vec3 eye_pos;
+uniform vec3 view_dir;
+uniform float texel_factor;
+uniform bool first_layer;
+
+in vec4 color_gs[];
+
+out vec3 position;
+out flat vec4 start_fs;
+out flat vec4 end_fs;
+out flat vec4 tp2;
+out flat vec4 tp3;
+out vec4 color_start_fs;
+out vec4 color_end_fs;
+
+float get_depth(vec4 pos, vec4 tp2, vec4 tp3) {
+
+	float depth = dot(tp2, pos);
+	float depth_w = dot(tp3, pos);
+	return 0.5*(depth / depth_w) + 0.5;
+}
+
+void main()
+{
+	vec4 start = gl_in[0].gl_Position;
+	vec4 end = gl_in[1].gl_Position;
+
+	vec3 ps = start.xyz;
+	vec3 pe = end.xyz;
+	float rs = start.w;
+	float re = end.w;
+	vec3 delta = normalize(pe - ps);
+
+	mat4 PM = get_projection_matrix();
+	mat4 MVM = get_modelview_matrix();
+	
+	// transform cone start and end position to eye space
+	start_fs = vec4((MVM * vec4(ps, 1.0)).xyz, rs);
+	end_fs = vec4((MVM * vec4(pe, 1.0)).xyz, re);
+
+	color_start_fs = color_gs[0];
+	color_end_fs = color_gs[1];
+
+	tp2 = vec4(PM[0][2], PM[1][2], PM[2][2], PM[3][2]);
+	tp3 = vec4(PM[0][3], PM[1][3], PM[2][3], PM[3][3]);
+
+	vec3 start_to_eye = eye_pos - ps;
+	vec3 end_to_eye = eye_pos - pe;
+	
+	float ds = length(start_to_eye);
+	float de = length(end_to_eye);
+
+	float prs_fac = rs / sqrt(ds*ds - rs*rs);
+	float pre_fac = re / sqrt(de*de - re*re);
+	float prs = ds * prs_fac;
+	float pre = de * pre_fac;
+
+	start_to_eye /= ds;
+	end_to_eye /= de;
+
+	float prm_fac = max(prs_fac, pre_fac);
+
+	float prs2 = ds * prm_fac;
+	float pre2 = de * prm_fac;
+
+	vec3 aligned_up = normalize(cross(delta, start_to_eye));
+	vec3 bitangent0 = cross(aligned_up, start_to_eye); // aligned_up and start_to_eye are perpendicular and unit vectors, so no normalization is needed
+	vec3 bitangent1 = cross(aligned_up, end_to_eye); // same as for bitangent0
+
+	vec3 p0 = ps + prs * bitangent0;
+	vec3 p1 = ps - prs * bitangent0;
+	vec3 p2 = pe + pre * bitangent1;
+	vec3 p3 = pe - pre * bitangent1;
+
+	vec3 test_dir = normalize(cross(aligned_up, view_dir));
+
+	float mag0 = dot(normalize(p0 - eye_pos), test_dir);
+	float mag1 = dot(normalize(p1 - eye_pos), test_dir);
+	float mag2 = dot(normalize(p2 - eye_pos), test_dir);
+	float mag3 = dot(normalize(p3 - eye_pos), test_dir);
+
+	vec3 a = p0;
+	vec3 b = p3;
+	float ra = prs2;
+	float rb = pre2;
+
+	if(mag0 > mag2) {
+		a = p2;
+		ra = pre2;
+	}
+
+	if(mag1 > mag3) {
+		b = p1;
+		rb = prs2;
+	}
+
+	vec4 P0 = vec4(a - ra * aligned_up, 1.0);
+	vec4 P1 = vec4(a + ra * aligned_up, 1.0);
+	vec4 P2 = vec4(b - rb * aligned_up, 1.0);
+	vec4 P3 = vec4(b + rb * aligned_up, 1.0);
+
+	P0 = MVM * P0;
+	P1 = MVM * P1;
+	P2 = MVM * P2;
+	P3 = MVM * P3;
+
+	vec4 pP0 = PM * P0;
+	vec4 pP1 = PM * P1;
+	vec4 pP2 = PM * P2;
+	vec4 pP3 = PM * P3;
+
+	position = P0.xyz;
+	gl_Position = pP0;
+	EmitVertex();
+
+	position = P1.xyz;
+	gl_Position = pP1;
+	EmitVertex();
+
+	position = P2.xyz;
+	gl_Position = pP2;
+	EmitVertex();
+
+	position = P3.xyz;
+	gl_Position = pP3;
+	EmitVertex();
+
+	EndPrimitive();
+}

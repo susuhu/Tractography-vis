@@ -1,0 +1,158 @@
+#version 430
+
+#define LOCAL_SIZE 64
+
+layout(local_size_x = LOCAL_SIZE) in;
+
+layout(std430, binding = 0) readonly buffer distance_buffer {
+    uint distances[];
+};
+
+layout(std430, binding = 4) writeonly buffer prefix_sum_buffer {
+    uint prefix_sum[];
+};
+
+layout(std430, binding = 5) writeonly buffer blocksum_buffer {
+    uint blocksum[];
+};
+
+uniform uint bit; // the bit used for the scan
+uniform uint n; // the total number of items to sort
+
+shared uint scan_values[2*LOCAL_SIZE];
+
+void main() {
+
+    uint tid = gl_LocalInvocationID.x;
+    uint block_offset = 8*LOCAL_SIZE*gl_WorkGroupID.x;
+    uint offset = 1;
+
+    uint values1[3];
+    uint values2[3];
+
+
+    uint thread_offset = 4 * tid + block_offset; // thread offset in global memory
+    uint thread_offset2 = 4 * (tid + LOCAL_SIZE) + block_offset;
+
+    uint ai = tid;
+    uint bi = tid + LOCAL_SIZE;
+
+    // Load and scan the first 4 values.
+    uint val = (distances[thread_offset + 0]>>bit)&3;
+    values1[0] = 1<<(8*val);
+
+    val = (distances[thread_offset + 1]>>bit)&3;
+    values1[1] = (1<<(8*val)) + values1[0];
+
+    val = (distances[thread_offset + 2]>>bit)&3;
+    values1[2] = (1<<(8*val)) + values1[1];
+
+    val = (distances[thread_offset + 3]>>bit)&3;
+    scan_values[ai] = (1<<(8*val)) + values1[2];
+
+    // Load and scan the second 4 values.
+    val = (distances[thread_offset2 + 0]>>bit)&3;
+    values2[0] = 1<<(8*val);
+
+    val = (distances[thread_offset2 + 1]>>bit)&3;
+    values2[1] = (1<<(8*val)) + values2[0];
+
+    val = (distances[thread_offset2 + 2]>>bit)&3;
+    values2[2] = (1<<(8*val)) + values2[1];
+
+    val = (distances[thread_offset2 + 3]>>bit)&3;
+    scan_values[bi] = (1<<(8*val)) + values2[2];
+
+    for(uint d = LOCAL_SIZE; d > 2; d >>= 1) {
+        barrier();
+
+        if(tid < d) {
+            //uint ai = offset*(2*tid+1)-1;
+            //uint bi = offset*(2*tid+2)-1;
+            uint ai = offset*(tid+tid+1)-1;
+            uint bi = offset*(tid+tid+2)-1;
+            scan_values[bi] += scan_values[ai];
+        }
+        //offset *= 2;
+        offset += offset;
+    }
+
+    barrier();
+
+    /*if(tid < 2) {
+        uint ai = 32*(2*tid+1)-1;
+        uint bi = 32*(2*tid+2)-1;
+        uint va = scan_values[ai];
+        uint vb = scan_values[bi];
+        
+        uint gi = 4 * (2 * gl_WorkGroupID.x + tid);
+
+        uint val = (va&0x000000FF) + (vb&0x000000FF);
+        va >>= 8;
+        vb >>= 8;
+        blocksum[gi + 0] = val;
+
+        val = (va&0x000000FF) + (vb&0x000000FF);
+        va >>= 8;
+        vb >>= 8;
+        blocksum[gi + 1] = val;
+
+        val = (va&0x000000FF) + (vb&0x000000FF);
+        va >>= 8;
+        vb >>= 8;
+        blocksum[gi + 2] = val;
+
+        val = (va&0x000000FF) + (vb&0x000000FF);
+        blocksum[gi + 3] = val;
+
+        scan_values[bi] = 0;
+    }*/
+
+    if(tid < 8) {
+        uint ai = 32*(2*(tid>>2)+1)-1;
+        uint bi = 32*(2*(tid>>2)+2)-1;
+        uint va = scan_values[ai];
+        uint vb = scan_values[bi];
+
+        uint shift = 8 * (tid&3);
+        uint val = ((va>>shift)&0x000000FF) + ((vb>>shift)&0x000000FF);
+
+        blocksum[8*gl_WorkGroupID.x + tid] = val;
+    }
+
+    barrier();
+
+    if(tid < 2) {
+        uint ai = offset*(tid+tid+1)-1;
+        uint bi = offset*(tid+tid+2)-1;
+        scan_values[bi] = scan_values[ai];
+        scan_values[ai] = 0;
+    }
+
+    for(uint d = 4; d < LOCAL_SIZE+LOCAL_SIZE; d <<= 1) {
+        offset >>= 1;
+        barrier();
+
+        if(tid < d) {
+            uint ai = offset*(tid+tid+1)-1;
+            uint bi = offset*(tid+tid+2)-1;
+            uint t = scan_values[ai];
+            scan_values[ai] = scan_values[bi];
+            scan_values[bi] += t;
+        }
+    }
+    barrier();
+
+    uint sv_ai = scan_values[ai];
+    uint sv_bi = scan_values[bi];
+
+    prefix_sum[thread_offset + 0] = sv_ai;
+    prefix_sum[thread_offset + 1] = values1[0] + sv_ai;
+    prefix_sum[thread_offset + 2] = values1[1] + sv_ai;
+    prefix_sum[thread_offset + 3] = values1[2] + sv_ai;
+
+    prefix_sum[thread_offset2 + 0] = sv_bi;
+    prefix_sum[thread_offset2 + 1] = values2[0] + sv_bi;
+    prefix_sum[thread_offset2 + 2] = values2[1] + sv_bi;
+    prefix_sum[thread_offset2 + 3] = values2[2] + sv_bi;
+}
