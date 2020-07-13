@@ -13,7 +13,7 @@
 #include <cgv/utils/advanced_scan.h>
 #include<iostream>
 
-//test 20200717
+
 
 namespace cgv {
 	namespace reflect {
@@ -568,9 +568,9 @@ void fiber_viewer::prepare_data() {
 
 	//Susu's coolwarm, extended kindlmann
 
-	nifti_image* nii1 = nifti_image_read("C:\\dev\\mycpp\\volume_data\\dti_MD.nii", 1);
+	nifti_image* nii1 = nifti_image_read("C:\\dev\\mycpp\\volume_data\\dti_FA.nii", 1);
 	if (!nii1) {
-		fprintf(stderr, "** failed to read NIfTI from '%s'.\n", "C:\\dev\\mycpp\\volume_data\\dti_MD.nii");
+		fprintf(stderr, "** failed to read NIfTI from '%s'.\n", "C:\\dev\\mycpp\\volume_data\\dti_FA.nii");
 		//return 2;
 	}
 	
@@ -584,32 +584,14 @@ void fiber_viewer::prepare_data() {
 	const int nxyz = nii1->nx * nii1->ny * nii1->nz;
 	const int nr_voxels = size_time * size_z * size_y * size_x;
 	float* ptrdata = (float*)nii1->data;
-	std::cout << "----------------NIINIINIINII--------------" << std::endl;
-	float aaa = 0;
-	for (int i = 0; i < nr_voxels; i++) {		
-		if (*(ptrdata+i) >aaa) {
-			aaa = *(ptrdata + i);	
-		}
-		//std::cout << i << ": " << *(ptrdata + i) << ", ";
-	}
 
-	// Calculate the cube voxel size and the resolution in each dimension
-	//const context& ctx;
-	const box3 bbox;
-	//const float radius;
-	vec3 ext = bbox.get_extent();
-	int max_ext_axis = cgv::math::max_index(ext);
-	float max_ext = ext[max_ext_axis];
-
-	std::cout << "==============BBOX==================" << std::endl;
-	for (int i = 0; i < size_x; i++) {
-		for (int j = 0; j < size_y; j++) {
-			for (int k = 0; k < size_z; k++) {
-				int index_nii = i * j * k;
-				//std::cout << ext[i, j, k] << ", ";
-			}
+	float fa_max = 0;
+	for (int i = 0; i < nr_voxels; i++) {
+		if (ptrdata[i] > fa_max) {
+			fa_max = ptrdata[i];
 		}
 	}
+	//std::cout << "=============MAX=FA===============" << fa_max << std::endl;
 
 	rgba col5[8];
 	col5[0] = rgba(0.3f, 0.3f, 0.8f, 1.0f);
@@ -726,27 +708,36 @@ void fiber_viewer::prepare_data() {
 		int s = tracts[i].size;		
 
 		for (unsigned j = o; j < o + s - 1; ++j) {
-			float alpha = (float)(j - o)/(s - 2);
+			vec3 a = raw_positions[j];
+			vec3 b = raw_positions[j + 1];
+			float fa;
 
-			rgba color = coolwarm_colormap.interpolate(alpha);
-			colors_coolwarm.push_back(color);
-			colors_coolwarm.push_back(color);
+			if (j <= nii1->nvox) {
+				fa = (ptrdata[j + 1] + ptrdata[j]) / 2;
 
-			rgba color2 = extended_kindlmann_colormap.interpolate(alpha);
-			colors_extended_kindlmann.push_back(color2);
-			colors_extended_kindlmann.push_back(color2);
+				float alpha = (float)(fa / fa_max);
+
+				rgba color = coolwarm_colormap.interpolate(alpha);
+				colors_coolwarm.push_back(color);
+				colors_coolwarm.push_back(color);
+
+				rgba color2 = extended_kindlmann_colormap.interpolate(alpha);
+				colors_extended_kindlmann.push_back(color2);
+				colors_extended_kindlmann.push_back(color2);
+
+				rgba color3 = extended_blackbody_colormap.interpolate(alpha);
+				colors_extended_blackbody.push_back(color3);
+				colors_extended_blackbody.push_back(color3);
+
+				rgba color4 = blackbody_colormap.interpolate(alpha);
+				colors_blackbody.push_back(color4);
+				colors_blackbody.push_back(color4);
+
+				rgba color5 = isorainbow_colormap.interpolate(alpha);
+				colors_isorainbow.push_back(color5);
+				colors_isorainbow.push_back(color5);
+			}
 			
-			rgba color3 = extended_blackbody_colormap.interpolate(alpha);
-			colors_extended_blackbody.push_back(color3);
-			colors_extended_blackbody.push_back(color3);
-
-			rgba color4 = blackbody_colormap.interpolate(alpha);
-			colors_blackbody.push_back(color4);
-			colors_blackbody.push_back(color4);
-
-			rgba color5 = isorainbow_colormap.interpolate(alpha);
-			colors_isorainbow.push_back(color5);
-			colors_isorainbow.push_back(color5);
 		}
 	}
 	//end of Susu's coolwarm, extended kindlmann
