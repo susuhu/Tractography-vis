@@ -12,6 +12,7 @@
 #include <cgv/gui/event_handler.h>
 #include <cgv/render/render_types.h>
 #include <cgv/render/shader_program.h>
+#include <cgv_gl/volume_renderer.h>
 #include <random>
 
 
@@ -37,7 +38,8 @@ protected:
 	enum RenderMode {
 		RM_DEFERRED,
 		RM_TRANSPARENT_NAIVE,
-		RM_TRANSPARENT_ATOMIC_LOOP
+		RM_TRANSPARENT_ATOMIC_LOOP,
+		RM_VOLUME
 	} render_mode;
 
 	enum ColorSource {
@@ -108,15 +110,21 @@ protected:
 	std::vector<rgba> colors_boys;
 
 
+	texture tf_tex;
+	std::string resource_path;
+
+
 	// Render members
 	cgv::render::view* view_ptr;
 	tube_renderer tr;
 	tube_render_style tstyle;
+	volume_render_style vstyle;
 	gpu_sorter sorter;
 	util::frame_buffer_container fb;
 	util::color_buffer_container cb;
 
 	util::texture_container<float> density_tex;
+	util::texture_container<float> fa_tex;
 
 	GLuint segment_ibo;
 	GLuint ibo;
@@ -143,7 +151,7 @@ protected:
 	bool read_trk_file(std::string file);
 
 	void set_dataset(context& ctx, bool generate_test = true);
-	void prepare_data();
+	void prepare_data(context& ctx);
 	void create_density_volume(const context& ctx, const box3 bbox, const float radius);
 
 	void set_color_source(const context& ctx);
@@ -157,7 +165,7 @@ public:
 	class fiber_viewer();
 	std::string get_type_name() const { return "fiber_viewer"; }
 
-	void destruct(cgv::render::context& ctx);
+	void clear(cgv::render::context& ctx);
 
 	bool self_reflect(cgv::reflect::reflection_handler& _rh);
 	void stream_help(std::ostream& _os);

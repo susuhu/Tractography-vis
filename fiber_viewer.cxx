@@ -54,13 +54,16 @@ fiber_viewer::fiber_viewer() {
 	disable_clipping = false;
 
 	view_ptr = nullptr;
+
+	// This is the base path for all resource files. Change this to the folder where you put the .nii files.
+	resource_path = "C:\\develop\\fiber_viewer\\res\\";
 }
 
-void fiber_viewer::destruct(cgv::render::context& ctx) {
+void fiber_viewer::clear(cgv::render::context& ctx) {
+
+	cgv::render::ref_volume_renderer(ctx, -1);
 
 	tr.destruct(ctx);
-
-	clear(ctx);
 }
 
 bool fiber_viewer::self_reflect(cgv::reflect::reflection_handler& _rh) {
@@ -460,7 +463,7 @@ void fiber_viewer::set_dataset(context& ctx, bool generate_test) {
 	std::cout << "=====\nPreparing data... ";
 	t.restart();
 
-	prepare_data();
+	prepare_data(ctx);
 
 	t.stop();
 	std::cout << "done in " << t.seconds() << "s" << std::endl;
@@ -503,7 +506,7 @@ void fiber_viewer::set_dataset(context& ctx, bool generate_test) {
 
 	by duplicating position, radius and color where two segments of a connected line meet.
 */
-void fiber_viewer::prepare_data() {
+void fiber_viewer::prepare_data(context& ctx) {
 
 	std::vector<vec3> tposs;
 	
@@ -570,25 +573,25 @@ void fiber_viewer::prepare_data() {
 
 	//read .niidata
 	//read fa data
-	nifti_image* nii1 = nifti_image_read("C:\\dev\\mycpp\\volume_data\\dti_FA.nii", 1);
+	nifti_image* nii1 = nifti_image_read((resource_path + "dti_FA.nii").c_str(), 1);
 	if (!nii1) {
-		fprintf(stderr, "** failed to read NIfTI from '%s'.\n", "C:\\dev\\mycpp\\volume_data\\dti_FA.nii");
+		fprintf(stderr, "** failed to read NIfTI from '%s'.\n", resource_path + "dti_FA.nii");
 		//return 2;
 	}
 	
 	//read md data
-	nifti_image* nii2 = nifti_image_read("C:\\dev\\mycpp\\volume_data\\dti_MD.nii", 1);
+	nifti_image* nii2 = nifti_image_read((resource_path + "dti_MD.nii").c_str(), 1);
 	float* ptrdata_md = (float*)nii2->data;
 	
 	// Get dimensions of input
-	const int size_x = nii1->nx;
-	const int size_y = nii1->ny;
-	const int size_z = nii1->nz;
-	const int size_time = nii1->nt;
-	const int nx = nii1->nx;
-	const int nxy = nii1->nx * nii1->ny;
-	const int nxyz = nii1->nx * nii1->ny * nii1->nz;
-	const int nr_voxels = size_time * size_z * size_y * size_x;
+	int size_x = nii1->nx;
+	int size_y = nii1->ny;
+	int size_z = nii1->nz;
+	int size_time = nii1->nt;
+	int nx = nii1->nx;
+	int nxy = nii1->nx * nii1->ny;
+	int nxyz = nii1->nx * nii1->ny * nii1->nz;
+	int nr_voxels = size_time * size_z * size_y * size_x;
 	float* ptrdata = (float*)nii1->data;
 
 	//check fa data
@@ -618,6 +621,76 @@ void fiber_viewer::prepare_data() {
 
 	std::cout << "=============AVR=FA===============: " << fa_avr << std::endl;
 	std::cout << "=============MAX=FA===============: " << fa_max << std::endl;
+
+
+	// The FA and the other .nii volumes define their up axis as z. This does not
+	// coincide with the OpenGL standard, where the y axis points upwards. To remedy
+	// this we need to flip y and z in the volume data. While flipping we read the
+	// data from the nifti_image object and write it into a vector that we use to
+	// fill a texture (fa_tex) for alter display.
+	fa_tex.texture.clear();
+	fa_tex.data.resize(nr_voxels);
+
+	for(unsigned i = 0; i < nr_voxels; ++i) {
+		uvec3 coord = util::idx2coord(i, ivec3(size_x, size_z, size_y));
+		std::swap(coord[1], coord[2]);
+		unsigned idx = util::coord2idx(coord, ivec3(size_x, size_y, size_z));
+
+		// This creates an outer shell around the volume data to visualize the boundaries.
+		// You can remove this once you have finished trimming off the empty regions.
+		// TODO: remove
+		if(	coord[0] == 0 || coord[0] == size_x - 1 ||
+			coord[1] == 0 || coord[1] == size_y - 1 ||
+			coord[2] == 0 || coord[2] == size_z - 1)
+			fa_tex.data[i] = 0.2f;
+		else
+			fa_tex.data[i] = ptrdata[idx];
+		// end remove
+
+		// TODO: enable
+		//fa_tex.data[i] = ptrdata[idx];
+	}
+
+	// We flipped the values so now we also need to flip the size in y and z direction
+	std::swap(size_y, size_z);
+
+
+
+	// TODO: Trim the empty volume space.
+	// Open the program and load the brain.trk file. Tahke a look at the shape of the brain
+	// and switch the render mdoe to "volume". You should see a rendering of the loaded fa_dti
+	// volume data with a highlighted shell, which shows the bounding box. Notice how the brain
+	// shapes of the tubes and this volume are different. There is lots of empty space around
+	// the brain which needs to be removed in order to align the volume data with the tract geometry
+	// as good as possible. Implement an algorithm which removes this empty space on all coordinate
+	// axes and then remove the code for creating the boundig box shell in the prevoius loop. You
+	// can use a temporary vector to hold the new data and write it back to the texture data once
+	// finished. Make sure to set the size to the new parameters.
+
+	// !implement here!
+
+
+
+	// Set the volume transformation parameters to match the bounding box
+	mat4 vol_transformation = cgv::math::translate4(dataset_bbox.get_min_pnt()) * cgv::math::scale4(dataset_bbox.get_extent());
+	vstyle.transformation_matrix = vol_transformation;
+
+	// Set some texture informations
+	fa_tex.connect(new cgv::data::data_format(size_x, size_y, size_z, cgv::type::info::TypeId::TI_FLT32, cgv::data::ComponentFormat::CF_R));
+	fa_tex.texture.create(ctx, fa_tex.view, 0);
+	fa_tex.texture.set_min_filter(TF_LINEAR_MIPMAP_LINEAR);
+	fa_tex.texture.set_mag_filter(TF_LINEAR);
+	fa_tex.texture.set_wrap_s(TW_CLAMP_TO_BORDER);
+	fa_tex.texture.set_wrap_t(TW_CLAMP_TO_BORDER);
+	fa_tex.texture.set_wrap_r(TW_CLAMP_TO_BORDER);
+	fa_tex.texture.set_border_color(0.0f, 0.0f, 0.0f, 0.0f);
+	fa_tex.texture.generate_mipmaps(ctx);
+
+
+
+
+
+
 
 	rgba col5[8];
 	col5[0] = rgba(0.3f, 0.3f, 0.8f, 1.0f);
@@ -743,8 +816,8 @@ void fiber_viewer::prepare_data() {
 			//ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / 26.9)), int(raw_positions[j+1].y() * (116 / 27.9)), int(raw_positions[j+1].z() * (80 / 32.2)));
 			ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j].y() * (116 / dataset_bbox.ref_max_pnt().y())), int(raw_positions[j].z() * (80 / dataset_bbox.ref_max_pnt().z())));
 			ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j+1].y() * (116 / dataset_bbox.ref_max_pnt().y())), int(raw_positions[j+1].z() * (80 / dataset_bbox.ref_max_pnt().z())));
-			int m = fa_index_b.x() + fa_index_b.y() * 116 + fa_index_b.z()*116*116;
-			int n = fa_index_a.x() + fa_index_a.y() * 116 + fa_index_a.z()*116*116;
+			int m = fa_index_a.x() + fa_index_a.y() * 116 + fa_index_a.z()*116*116;
+			int n = fa_index_b.x() + fa_index_b.y() * 116 + fa_index_b.z()*116*116;
 			fa = (ptrdata[m] + ptrdata[n]) / 2;
 			md = (ptrdata_md[m] + ptrdata_md[n]-2* md_min)/md_scale/2;
 			float alphamd = md*100;//md is very small, and there is negative value. almost -0.001 to 0.003.
@@ -1014,6 +1087,8 @@ void fiber_viewer::create_density_volume(const context& ctx, const box3 bbox, co
 	unsigned resy = static_cast<unsigned>(ceilf(ext.y() / vsize));
 	unsigned resz = static_cast<unsigned>(ceilf(ext.z() / vsize));
 
+	std::cout << "voxel resolution:" << resx << ", " << resy << ", " << resz << std::endl;
+
 	vec3 vres = vec3(resx, resy, resz);
 	vec3 vbox_ext = vsize * vres;
 	vec3 vbox_min = bbox.get_min_pnt() - 0.5f*(vbox_ext - ext);
@@ -1141,6 +1216,8 @@ void fiber_viewer::create_density_volume(const context& ctx, const box3 bbox, co
 
 bool fiber_viewer::init(cgv::render::context& ctx) {
 
+	cgv::render::ref_volume_renderer(ctx, 1);
+
 	view_ptr = find_view_as_node();
 	if(!view_ptr)
 		return false;
@@ -1158,6 +1235,20 @@ bool fiber_viewer::init(cgv::render::context& ctx) {
 	color_map.values.push_back(rgba(1.0f, 0.0f, 0.0f, 1.0f));
 
 	set_dataset(ctx, true);
+
+	cgv::data::data_format format;
+	cgv::media::image::image_reader image(format);
+
+	cgv::data::data_view tf_data;
+
+	if(!image.read_image(resource_path + "inferno.bmp", tf_data))
+		abort();
+
+	tf_tex.create(ctx, tf_data, 0);
+	tf_tex.set_min_filter(cgv::render::TextureFilter::TF_LINEAR);
+	tf_tex.set_mag_filter(cgv::render::TextureFilter::TF_LINEAR);
+	tf_tex.set_wrap_s(cgv::render::TextureWrap::TW_CLAMP_TO_EDGE);
+	tf_tex.set_wrap_t(cgv::render::TextureWrap::TW_CLAMP_TO_EDGE);
 
 	// Load render shaders
 	if(!load_shader(ctx, tube_transparent_naive_prog, "tube_transparent_naive")) return false;
@@ -1303,6 +1394,19 @@ void fiber_viewer::draw(cgv::render::context& ctx) {
 		do_final_blend(ctx);
 
 		glEnable(GL_DEPTH_TEST);
+	}
+	break;
+	case RM_VOLUME:
+	{
+		vstyle.transfer_function_texture_unit = 1;
+		cgv::render::volume_renderer& renderer = cgv::render::ref_volume_renderer(ctx);
+		renderer.set_volume_texture(&fa_tex.texture);
+		renderer.set_eye_position(eye);
+		renderer.set_render_style(vstyle);
+
+		tf_tex.enable(ctx, vstyle.transfer_function_texture_unit);
+		renderer.render(ctx, 0, 0);
+		tf_tex.disable(ctx);
 	}
 	break;
 	//case RM_TRANSPARENT_ATOMIC_LOOP:
@@ -1560,7 +1664,7 @@ void fiber_viewer::create_gui() {
 	//add_member_control(this, "Dataset", dataset, "dropdown", "enums='test,brain_segment,whole_brain'");
 	add_gui("Dataset", dataset_filename, "file_name", "title='select dataset file';filter='tractography files:*.trk|All Files:*.*'");
 	add_member_control(this, "Color mapping", color_source, "dropdown", "enums='attribute,midpoint,segment,coolwarm,e_kindlmann,e_blackbody,blackbody,isorainbow,boysurface'");
-	add_member_control(this, "Render mode", render_mode, "dropdown", "enums='deferred,transparent naive,transparent atomic loop'");
+	add_member_control(this, "Render mode", render_mode, "dropdown", "enums='deferred,transparent naive,transparent atomic loop,volume'");
 	add_member_control(this, "FB format", fb.cf, "dropdown", "enums='flt32,uint8'");
 	add_member_control(this, "Scratch size", alss, "dropdown", "enums='1,2,4,8,16,32'");
 
@@ -1575,6 +1679,13 @@ void fiber_viewer::create_gui() {
 		add_member_control(this, "Alpha scale", alpha_scale, "value_slider", "min=0.0;step=0.0001;max=1.0;ticks=true");
 		align("\b");
 		end_tree_node(tstyle);
+	}
+
+	if(begin_tree_node("Volume rendering", vstyle, false)) {
+		align("\a");
+		add_gui("vstyle", vstyle);
+		align("\b");
+		end_tree_node(vstyle);
 	}
 }
 
