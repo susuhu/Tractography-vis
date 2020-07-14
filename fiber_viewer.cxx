@@ -569,11 +569,16 @@ void fiber_viewer::prepare_data() {
 	//Scalar Colormapping
 
 	//read .niidata
+	//read fa data
 	nifti_image* nii1 = nifti_image_read("C:\\dev\\mycpp\\volume_data\\dti_FA.nii", 1);
 	if (!nii1) {
 		fprintf(stderr, "** failed to read NIfTI from '%s'.\n", "C:\\dev\\mycpp\\volume_data\\dti_FA.nii");
 		//return 2;
 	}
+	
+	//read md data
+	nifti_image* nii2 = nifti_image_read("C:\\dev\\mycpp\\volume_data\\dti_MD.nii", 1);
+	float* ptrdata_md = (float*)nii2->data;
 	
 	// Get dimensions of input
 	const int size_x = nii1->nx;
@@ -596,6 +601,20 @@ void fiber_viewer::prepare_data() {
 		}
 	}
 	fa_avr = fa_avr / nr_voxels;
+	
+	//check md data
+	float md_min = 1;
+	float md_max = 0;
+	float md_scale;
+	for (int i = 0; i < nr_voxels; i++) {
+		if (ptrdata_md[i] > md_max) {
+			md_max = ptrdata_md[i];
+		}
+		if (ptrdata_md[i] < md_min) {
+			md_min = ptrdata_md[i];
+		}
+	}
+	md_scale = md_max - md_min;
 
 	std::cout << "=============AVR=FA===============: " << fa_avr << std::endl;
 	std::cout << "=============MAX=FA===============: " << fa_max << std::endl;
@@ -718,13 +737,18 @@ void fiber_viewer::prepare_data() {
 			vec3 a = raw_positions[j];
 			vec3 b = raw_positions[j + 1];
 			float fa;
+			float md;
+
 			//ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (116 / 26.9)), int(raw_positions[j].y() * (116 / 27.9)), int(raw_positions[j].z() * (80 / 32.2)));
 			//ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / 26.9)), int(raw_positions[j+1].y() * (116 / 27.9)), int(raw_positions[j+1].z() * (80 / 32.2)));
 			ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j].y() * (116 / dataset_bbox.ref_max_pnt().y())), int(raw_positions[j].z() * (80 / dataset_bbox.ref_max_pnt().z())));
 			ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j+1].y() * (116 / dataset_bbox.ref_max_pnt().y())), int(raw_positions[j+1].z() * (80 / dataset_bbox.ref_max_pnt().z())));
 			int m = fa_index_b.x() + fa_index_b.y() * 116 + fa_index_b.z()*116*116;
 			int n = fa_index_a.x() + fa_index_a.y() * 116 + fa_index_a.z()*116*116;
-			fa = (ptr[m] + ptr[n]) / 2;
+			fa = (ptrdata[m] + ptrdata[n]) / 2;
+			md = (ptrdata_md[m] + ptrdata_md[n]+ md_min)/md_scale/2;
+			float alphamd = md*100;//md is very small, and there is negative value. almost -0.001 to 0.003.
+			
 			//if (alpha > 1) {
 			//	alpha = 1;
 			//}
@@ -732,7 +756,7 @@ void fiber_viewer::prepare_data() {
 			//if (j <= nii1->nvox) {
 				//fa = (ptrdata[j + 1] + ptrdata[j]) / 2;
 
-				float alpha = (float)(fa / fa_max);
+				float alpha = (float)(fa / fa_max); //if you want to change to md image: float alpha = alphamd;
 
 				rgba color = coolwarm_colormap.interpolate(alpha);
 				colors_coolwarm.push_back(color);
