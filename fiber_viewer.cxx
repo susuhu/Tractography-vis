@@ -758,25 +758,35 @@ void fiber_viewer::prepare_data() {
 
 				float alpha = (float)(fa / fa_max); //if you want to change to md image: float alpha = alphamd;
 
-				rgba color = coolwarm_colormap.interpolate(alpha);
-				colors_coolwarm.push_back(color);
-				colors_coolwarm.push_back(color);
+				//rgba color = coolwarm_colormap.interpolate(alpha);
+				rgba color_a = coolwarm_colormap.interpolate(ptrdata[m]);
+				rgba color_b = coolwarm_colormap.interpolate(ptrdata[n]);
+				colors_coolwarm.push_back(color_a);
+				colors_coolwarm.push_back(color_b);
 
-				rgba color2 = extended_kindlmann_colormap.interpolate(alpha);
-				colors_extended_kindlmann.push_back(color2);
-				colors_extended_kindlmann.push_back(color2);
+				//rgba color2 = extended_kindlmann_colormap.interpolate(alpha);
+				rgba color_a2 = extended_kindlmann_colormap.interpolate(ptrdata[m]);
+				rgba color_b2 = extended_kindlmann_colormap.interpolate(ptrdata[n]);
+				colors_extended_kindlmann.push_back(color_a2);
+				colors_extended_kindlmann.push_back(color_b2);
 
-				rgba color3 = extended_blackbody_colormap.interpolate(alpha);
-				colors_extended_blackbody.push_back(color3);
-				colors_extended_blackbody.push_back(color3);
+				//rgba color3 = extended_blackbody_colormap.interpolate(alpha);
+				rgba color_a3 = extended_blackbody_colormap.interpolate(ptrdata[m]);
+				rgba color_b3 = extended_blackbody_colormap.interpolate(ptrdata[n]);
+				colors_extended_blackbody.push_back(color_a3);
+				colors_extended_blackbody.push_back(color_b3);
 
-				rgba color4 = blackbody_colormap.interpolate(alpha);
-				colors_blackbody.push_back(color4);
-				colors_blackbody.push_back(color4);
+				//rgba color4 = blackbody_colormap.interpolate(alpha);
+				rgba color_a4 = blackbody_colormap.interpolate(ptrdata[m]);
+				rgba color_b4 = blackbody_colormap.interpolate(ptrdata[n]);
+				colors_blackbody.push_back(color_a4);
+				colors_blackbody.push_back(color_b4);
 
-				rgba color5 = isorainbow_colormap.interpolate(alpha);
-				colors_isorainbow.push_back(color5);
-				colors_isorainbow.push_back(color5);
+				//rgba color5 = isorainbow_colormap.interpolate(alpha);
+				rgba color_a5 = isorainbow_colormap.interpolate(ptrdata[m]);
+				rgba color_b5 = isorainbow_colormap.interpolate(ptrdata[n]);
+				colors_isorainbow.push_back(color_a5);
+				colors_isorainbow.push_back(color_b5);
 			//}
 			
 		}
