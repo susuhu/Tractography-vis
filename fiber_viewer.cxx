@@ -746,7 +746,7 @@ void fiber_viewer::prepare_data() {
 			int m = fa_index_b.x() + fa_index_b.y() * 116 + fa_index_b.z()*116*116;
 			int n = fa_index_a.x() + fa_index_a.y() * 116 + fa_index_a.z()*116*116;
 			fa = (ptrdata[m] + ptrdata[n]) / 2;
-			md = (ptrdata_md[m] + ptrdata_md[n]+ md_min)/md_scale/2;
+			md = (ptrdata_md[m] + ptrdata_md[n]-2* md_min)/md_scale/2;
 			float alphamd = md*100;//md is very small, and there is negative value. almost -0.001 to 0.003.
 			
 			//if (alpha > 1) {
