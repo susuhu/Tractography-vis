@@ -814,8 +814,8 @@ void fiber_viewer::prepare_data(context& ctx) {
 
 			//ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (116 / 26.9)), int(raw_positions[j].y() * (116 / 27.9)), int(raw_positions[j].z() * (80 / 32.2)));
 			//ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / 26.9)), int(raw_positions[j+1].y() * (116 / 27.9)), int(raw_positions[j+1].z() * (80 / 32.2)));
-			ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j].y() * (116 / dataset_bbox.ref_max_pnt().y())), int(raw_positions[j].z() * (80 / dataset_bbox.ref_max_pnt().z())));
-			ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j+1].y() * (116 / dataset_bbox.ref_max_pnt().y())), int(raw_positions[j+1].z() * (80 / dataset_bbox.ref_max_pnt().z())));
+			ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j].z() * (116 / dataset_bbox.ref_max_pnt().z())), int(raw_positions[j].y() * (80 / dataset_bbox.ref_max_pnt().y())));
+			ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j+1].z() * (116 / dataset_bbox.ref_max_pnt().z())), int(raw_positions[j+1].y() * (80 / dataset_bbox.ref_max_pnt().y())));
 			int m = fa_index_a.x() + fa_index_a.y() * 116 + fa_index_a.z()*116*116;
 			int n = fa_index_b.x() + fa_index_b.y() * 116 + fa_index_b.z()*116*116;
 			fa = (ptrdata[m] + ptrdata[n]) / 2;
