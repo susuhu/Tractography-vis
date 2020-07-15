@@ -56,7 +56,7 @@ fiber_viewer::fiber_viewer() {
 	view_ptr = nullptr;
 
 	// This is the base path for all resource files. Change this to the folder where you put the .nii files.
-	resource_path = "C:\\develop\\fiber_viewer\\res\\";
+	resource_path = "C:\\dev\\mycpp\\volume_data\\";
 }
 
 void fiber_viewer::clear(cgv::render::context& ctx) {
