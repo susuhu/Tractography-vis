@@ -639,9 +639,13 @@ void fiber_viewer::prepare_data(context& ctx) {
 		// This creates an outer shell around the volume data to visualize the boundaries.
 		// You can remove this once you have finished trimming off the empty regions.
 		// TODO: remove
-		if(	coord[0] == 0 || coord[0] == size_x - 1 ||
-			coord[1] == 0 || coord[1] == size_y - 1 ||
-			coord[2] == 0 || coord[2] == size_z - 1)
+		//if(	coord[0] == 0 || coord[0] == size_x - 1 ||
+		//	coord[1] == 0 || coord[1] == size_y - 1 ||
+		//	coord[2] == 0 || coord[2] == size_z - 1)
+		//show the cutting box, all the data get from following cutting algorithm
+		if (coord[0] == 24 || coord[0] == 93 ||
+			coord[1] == 11 || coord[1] == 92 ||
+			coord[2] == 1 || coord[2] == 76)
 			fa_tex.data[i] = 0.2f;
 		else
 			fa_tex.data[i] = ptrdata[idx];
@@ -653,8 +657,6 @@ void fiber_viewer::prepare_data(context& ctx) {
 
 	// We flipped the values so now we also need to flip the size in y and z direction
 	std::swap(size_y, size_z);
-
-
 
 	// TODO: Trim the empty volume space.
 	// Open the program and load the brain.trk file. Tahke a look at the shape of the brain
@@ -668,6 +670,63 @@ void fiber_viewer::prepare_data(context& ctx) {
 	// finished. Make sure to set the size to the new parameters.
 
 	// !implement here!
+	float max_x_coor = 0;
+	unsigned max_x_idx;
+	float min_x_coor = 116;
+	unsigned min_x_idx;
+	float max_y_coor = 0;
+	unsigned max_y_idx;
+	float min_y_coor = 116;
+	unsigned min_y_idx;
+	float max_z_coor = 0;
+	unsigned max_z_idx;
+	float min_z_coor = 80;
+	unsigned min_z_idx;
+	for (unsigned i = 0; i < nr_voxels; ++i) {
+		if (ptrdata[i] != 0) {
+			uvec3 coord_fa = util::idx2coord(i, ivec3(size_x, size_z, size_y));//116,116,80
+			if (coord_fa[0]> max_x_coor) {
+				max_x_coor = coord_fa[0];
+				max_x_idx = i;
+			}
+			if (coord_fa[1] > max_y_coor) {
+				max_y_coor = coord_fa[1];
+				max_y_idx = i;
+			}
+			if (coord_fa[2] > max_z_coor) {
+				max_z_coor = coord_fa[2];
+				max_z_idx = i;
+			}
+			if (coord_fa[0] < min_x_coor) {
+				min_x_coor = coord_fa[0];
+				min_x_idx = i;
+			}
+			if (coord_fa[1] < min_y_coor) {
+				min_y_coor = coord_fa[1];
+				min_y_idx = i;
+			}
+			if (coord_fa[2] < min_z_coor) {
+				min_z_coor = coord_fa[2];
+				min_z_idx = i;
+			}
+		}
+
+	}
+	std::cout << "min_x_coor:" << min_x_coor <<"," << "min_x_idx:" << min_x_idx << "," << "max_x_coor:" << max_x_coor << "," << "max_x_idx:" << max_x_idx <<  std::endl;
+	std::cout << "min_y_coor:" << min_y_coor << "," << "min_y_idx:" << min_y_idx << "," << "max_y_coor:" << max_y_coor << "," << "max_y_idx:" << max_y_idx << std::endl;
+	std::cout << "min_z_coor:" << min_z_coor << "," << "min_z_idx:" << min_z_idx << "," << "max_z_coor:" << max_z_coor << "," << "max_z_idx:" << max_z_idx << std::endl;
+	
+	//cut box
+	std::vector<float> fa_new;
+	for (unsigned i = 0; i < nr_voxels; ++i) {
+		uvec3 coord = util::idx2coord(i, ivec3(size_x, size_z, size_y));//(116,116,80)
+		if (coord[0] >= 24 && coord[0] <= 93 &&
+			coord[1] >= 11 && coord[1] <= 92 &&
+			coord[2] >= 1 && coord[2] <= 76) {
+			fa_new.push_back(ptrdata[i]);
+		}
+	}
+	//std::cout << "fa_new size:" << fa_new.size() << std::endl;
 
 
 
@@ -814,10 +873,14 @@ void fiber_viewer::prepare_data(context& ctx) {
 
 			//ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (116 / 26.9)), int(raw_positions[j].y() * (116 / 27.9)), int(raw_positions[j].z() * (80 / 32.2)));
 			//ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / 26.9)), int(raw_positions[j+1].y() * (116 / 27.9)), int(raw_positions[j+1].z() * (80 / 32.2)));
-			ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j].z() * (116 / dataset_bbox.ref_max_pnt().z())), int(raw_positions[j].y() * (80 / dataset_bbox.ref_max_pnt().y())));
-			ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j+1].z() * (116 / dataset_bbox.ref_max_pnt().z())), int(raw_positions[j+1].y() * (80 / dataset_bbox.ref_max_pnt().y())));
-			int m = fa_index_a.x() + fa_index_a.y() * 116 + fa_index_a.z()*116*116;
-			int n = fa_index_b.x() + fa_index_b.y() * 116 + fa_index_b.z()*116*116;
+			//ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j].z() * (116 / dataset_bbox.ref_max_pnt().z())), int(raw_positions[j].y() * (80 / dataset_bbox.ref_max_pnt().y())));
+			//ivec3 fa_index_b = ivec3(int(raw_positions[j+1].x() * (116 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j+1].z() * (116 / dataset_bbox.ref_max_pnt().z())), int(raw_positions[j+1].y() * (80 / dataset_bbox.ref_max_pnt().y())));
+			//int m = fa_index_a.x() + fa_index_a.y() * 116 + fa_index_a.z()*116*116;
+			//int n = fa_index_b.x() + fa_index_b.y() * 116 + fa_index_b.z()*116*116;
+			ivec3 fa_index_a = ivec3(int(raw_positions[j].x() * (70 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j].z() * (82 / dataset_bbox.ref_max_pnt().z())), int(raw_positions[j].y() * (76 / dataset_bbox.ref_max_pnt().y())));
+			ivec3 fa_index_b = ivec3(int(raw_positions[j + 1].x() * (70 / dataset_bbox.ref_max_pnt().x())), int(raw_positions[j + 1].z() * (82 / dataset_bbox.ref_max_pnt().z())), int(raw_positions[j + 1].y() * (76 / dataset_bbox.ref_max_pnt().y())));
+			int m = fa_index_a.x() + fa_index_a.y() * 70 + fa_index_a.z() * 70 * 82;
+			int n = fa_index_b.x() + fa_index_b.y() * 70 + fa_index_b.z() * 70 * 82;
 			fa = (ptrdata[m] + ptrdata[n]) / 2;
 			md = (ptrdata_md[m] + ptrdata_md[n]-2* md_min)/md_scale/2;
 			float alphamd = md*100;//md is very small, and there is negative value. almost -0.001 to 0.003.
@@ -832,32 +895,32 @@ void fiber_viewer::prepare_data(context& ctx) {
 				float alpha = (float)(fa / fa_max); //if you want to change to md image: float alpha = alphamd;
 
 				//rgba color = coolwarm_colormap.interpolate(alpha);
-				rgba color_a = coolwarm_colormap.interpolate(ptrdata[m]);
-				rgba color_b = coolwarm_colormap.interpolate(ptrdata[n]);
+				rgba color_a = coolwarm_colormap.interpolate(fa_new[m]);
+				rgba color_b = coolwarm_colormap.interpolate(fa_new[n]);
 				colors_coolwarm.push_back(color_a);
 				colors_coolwarm.push_back(color_b);
 
 				//rgba color2 = extended_kindlmann_colormap.interpolate(alpha);
-				rgba color_a2 = extended_kindlmann_colormap.interpolate(ptrdata[m]);
-				rgba color_b2 = extended_kindlmann_colormap.interpolate(ptrdata[n]);
+				rgba color_a2 = extended_kindlmann_colormap.interpolate(fa_new[m]);
+				rgba color_b2 = extended_kindlmann_colormap.interpolate(fa_new[n]);
 				colors_extended_kindlmann.push_back(color_a2);
 				colors_extended_kindlmann.push_back(color_b2);
 
 				//rgba color3 = extended_blackbody_colormap.interpolate(alpha);
-				rgba color_a3 = extended_blackbody_colormap.interpolate(ptrdata[m]);
-				rgba color_b3 = extended_blackbody_colormap.interpolate(ptrdata[n]);
+				rgba color_a3 = extended_blackbody_colormap.interpolate(fa_new[m]);
+				rgba color_b3 = extended_blackbody_colormap.interpolate(fa_new[n]);
 				colors_extended_blackbody.push_back(color_a3);
 				colors_extended_blackbody.push_back(color_b3);
 
 				//rgba color4 = blackbody_colormap.interpolate(alpha);
-				rgba color_a4 = blackbody_colormap.interpolate(ptrdata[m]);
-				rgba color_b4 = blackbody_colormap.interpolate(ptrdata[n]);
+				rgba color_a4 = blackbody_colormap.interpolate(fa_new[m]);
+				rgba color_b4 = blackbody_colormap.interpolate(fa_new[n]);
 				colors_blackbody.push_back(color_a4);
 				colors_blackbody.push_back(color_b4);
 
 				//rgba color5 = isorainbow_colormap.interpolate(alpha);
-				rgba color_a5 = isorainbow_colormap.interpolate(ptrdata[m]);
-				rgba color_b5 = isorainbow_colormap.interpolate(ptrdata[n]);
+				rgba color_a5 = isorainbow_colormap.interpolate(fa_new[m]);
+				rgba color_b5 = isorainbow_colormap.interpolate(fa_new[n]);
 				colors_isorainbow.push_back(color_a5);
 				colors_isorainbow.push_back(color_b5);
 			//}
