@@ -723,7 +723,7 @@ void fiber_viewer::prepare_data(context& ctx) {
 		if (coord[0] >= 24 && coord[0] <= 93 &&
 			coord[1] >= 11 && coord[1] <= 92 &&
 			coord[2] >= 1 && coord[2] <= 76) {
-			fa_new.push_back(ptrdata[i]);
+			fa_new.push_back(ptrdata[i]);//md: change "ptrdata[i]" to "(ptrdata_md[i]-md_min)/md_scale"
 		}
 	}
 	//std::cout << "fa_new size:" << fa_new.size() << std::endl;
