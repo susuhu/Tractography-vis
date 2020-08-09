@@ -1,0 +1,14 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Ralated work}{}% 2
+\BOOKMARK [0][-]{chapter.3}{Basics}{}% 3
+\BOOKMARK [1][-]{section.3.1}{Tractography}{chapter.3}% 4
+\BOOKMARK [1][-]{section.3.2}{Fractional Anisotropy and Mean Diffusivity }{chapter.3}% 5
+\BOOKMARK [1][-]{section.3.3}{ Color mapping interpolation }{chapter.3}% 6
+\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 7
+\BOOKMARK [1][-]{section.4.1}{The colormap choosing and implement}{chapter.4}% 8
+\BOOKMARK [1][-]{section.4.2}{Data acquirement}{chapter.4}% 9
+\BOOKMARK [1][-]{section.4.3}{Rendering}{chapter.4}% 10
+\BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 11
+\BOOKMARK [1][-]{section.5.1}{Participants }{chapter.5}% 12
+\BOOKMARK [1][-]{section.5.2}{Enviornment}{chapter.5}% 13
+\BOOKMARK [1][-]{section.5.3}{Procedure}{chapter.5}% 14

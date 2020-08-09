@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper, 12pt]{report}
 
 \usepackage{color}
 \usepackage{graphicx}
@@ -14,6 +14,9 @@
 \usepackage{epstopdf}
 %\usepackage{natbib}
 \usepackage{hyperref}
+\usepackage{multirow}
+
+\usepackage[left=2.5cm, right=2.5cm, top=3cm, bottom=3.5cm]{geometry}
 
 \graphicspath{ {figures/} }
 
@@ -27,11 +30,9 @@
 \newcommand{\prob}[1]{\mathrm{Pr}\! \left(#1\right)}
 \newcommand{\probC}[1]{\mathrm{Pr}_\epsilon\! \left(#1\right)}
 
-\newcommand{\saeed}[1]{{\color{red}[\textit{#1}]}}
+\newcommand{\comment}[1]{{\color{red}[\textit{#1}]}}
 
-%\newcommand{\saeed}[1]{}
-\newcommand{\saeedlong}[1]{[\textit{#1}]}
-%\newcommand{\saeedlong}[1]{}
+%\newcommand{\comment}[1]{}
 
 \newcommand{\eqn}[1]{(\ref{#1})}
 
@@ -53,14 +54,82 @@
 
 \begin{document}
 \maketitle
-\section{Introduction}
-\section{Ralated work}
-\section{Basics}
-\section{Implementation}
+\tableofcontents
+\chapter{Introduction}
+\chapter{Ralated work}
+\chapter{Basics}
+
+\section{Tractography}
+Tractography is a method to visualize the brain fiber tracts, which utilizes the directional diffusion in voxels. It is a tool to visualize white matter trajectories in vivo and noninvasively, so that we can study the human brain anatomy, such as brain connectivity.
+
+Tractography visualization is built on the Diffusion Magnetic Resonance Imaging (dMRI) data, which is analyzed from the diffusion of free water in the brain. The diffusion of free water is termed as isotropic and it becomes anisotropic when there are barriers. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{iso_ani_diff}
+	\caption{Isotropic and anisotropic diffusion with  being eigenvalues. From
+https://neoreviews.aappublications.org/content/14/10/e483/tab-figures-data \comment{biblio}}
+	\label{fig:iso_ani_diff}
+\end{figure}
+
+The diffusion in brain is anisotropic so it is represented as an ellipsoid as in the right figure in Figure~\ref{fig:iso_ani_diff}. The three eigenvalues  $\lambda_1, \lambda_2, \lambda_3$ represent the three axes of the ellipsoid. The vector associated with the latest eigenvalue is assumed as the local fiber direction [Takagi et al 2008]. \comment{biblio}
+
+Using dMRI, the apparent diffusion coefficient at each voxel of the image can be calculated and the whole diffusion tensor can be constructed by multilinear regression across multiple images.
+
+\section{Fractional Anisotropy and Mean Diffusivity }
+One way to measure the anisotropic diffusion is fractional anisotropy (FA), which is a scalar ratio from 0 to 1, with 0 representing isotropic and 1 as an ideal linear diffusion. It represents the degree of alignment of cellular structures within fiber tracts and their structural integrity [Cercignani et al 2001]. \comment{biblio}
+
+Another often used measurement is mean diffusivity (MD), which describes the average mobility of water molecules. It is equal to one third of the trace of the diffusion tensor. MD is affected by cellular size and integrity and independent of any tissue directionality [Cercignani et al 2001]. \comment{biblio}
+
+Here is the formula of FA and MD $\lambda_1, \lambda_2, \lambda_3$  are Eigenvalues of the diffusion tensor.
+
+\begin{equation*}
+	FA=\sqrt{\frac{3 \sum_{i=1}^{3}(\lambda_i-\bar{l\lambda})^2}{2\sum_{i=1}^3}\lambda_i^2}, \quad FA\text{ in } [0,1]
+\end{equation*}
+
+\begin{equation*}
+	MD=\frac{D_{xx}+D_{yy}+D_{zz}}{3}= \frac{\lambda_1+\lambda_2+\lambda_3}{3}
+\end{equation*}
+
+\section{ Color mapping interpolation }
+With the known discrete voxel FA/MD value, a simple linear interpolation method is used to construct new data points in between, thus obtaining a fiber track with continuous colormapping.
+
+\begin{table}[h]
+\caption{coolwarm colormap example}
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+colormap bar     & FA value & RGB\_r & RGB\_g & RGB\_b   \\ \hline
+\multirow{8}{*}{\includegraphics{coolwarm_bar} } & 0.0      & 85     & 72     & 193      \\ [5pt] \cline{2-5}
+	& 0.1      & 125    & 135    & 239      \\ [6pt] \cline{2-5}
+	& 0.3      & 166    & 185    & 255      \\ [6pt] \cline{2-5}
+	& 0.4      & 205    & 215    & 240      \\ [6pt] \cline{2-5}
+	& 0.6      & 235    & 209    & 194      \\ [6pt] \cline{2-5}
+	& 0.7      & 243    & 168    & 137      \\ [6pt] \cline{2-5}
+	& 0.9      & 222    & 106    & 83       \\ [6pt] \cline{2-5}
+	& 1        & 177    & 1      & 39      \\ [6pt] \hline
+\end{tabular}
+\label{tbl:coolwarm}
+\end{table}
+
+Here is the linear interpolation formula:
+\begin{equation*}
+ \frac{(y-y_0)}{(x-x_0)} = \frac{(y_1-y_0)}{(x_1-x_0)}
+\end{equation*}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{interp}
+	\caption{ linear interpolation 
+Source: wiki \comment{biblio}}
+	\label{fig:interp}
+\end{figure}
+
+\chapter{Implementation}
 
 We use the CGV framework for task solutions implement. This framework is a set of highly coupled C++ libraries designed to use OpenGL to quickly develop prototypes of performance-intensive applications in the field of visualization and computer graphics research. It is very suitable for window and graphics context creation, event processing, GUI creation, interaction, and many common computer graphics algorithms and data structures required in our task.
 
-\subsection{The colormap choosing and implement}
+\section{The colormap choosing and implement}
 Generally, methods are defining a function or using numeric values to map to colors. This report defines the colormap by selecting colors that are continuously mapped to a series of values. 
 There are two categories of color mapping methods:
 \begin{itemize}
@@ -70,7 +139,7 @@ There are two categories of color mapping methods:
 
 In this report, we examine 5 scalar and two spherical color mappings. 
 
-\subsubsection*{Scalar colormappings}
+\subsection*{Scalar colormappings}
 
 These colormaps are recommended by Moreland et al., including: coolwarm, extended kindlmann, isoRainbow, black body, extended black body. The reason for choosing these pictures is that their popularity is relatively high. Figure~\ref{fig:1} shows those five different colormaps.
 
@@ -92,7 +161,7 @@ These colormaps are recommended by Moreland et al., including: coolwarm, extende
     \label{fig:1}
 \end{figure}	
 
-\subsubsection*{Spherical colormappings}
+\subsection*{Spherical colormappings}
 The spherical color mappings are
 \begin{itemize}
 	\item Absolute value method [cite] is a commonly used color mapping which maps the major axes, to major color components Red, Greed and Blue. The mapping is defined as 
@@ -128,7 +197,7 @@ The functions $h_j$ are the spherical harmonics, a similar concept to harmonics 
 		\caption{Boy's surface method, colored sphere.}
 	\end{figure}
 
-\subsection{Data acquirement}
+\section{Data acquirement}
 We converted Digital Imaging and Communications in Medicine (DICOM) file of brain scans, which is presented in 55-slice into Neuroimaging Informatics Technology Initiative (NIFTI) file. Figure~\ref{fig:2} is the presentation of 55 slices of brain scan.
 
 \begin{figure}[ht]
@@ -146,7 +215,7 @@ Our first step is brain extraction, using the suitable threshold, which removes 
     \label{fig:3}
 \end{figure}	
 
-\subsection{Rendering}
+\section{Rendering}
 
 The brain map read by CGV framework is a TrackVis (trk) file. The data of position is stored in TrackVis file one by one according to the order of the tracts.  Each tract stores two kinds of information, including the offset and the number of points on the current tract, as “Tract (offset, size)”. The Figure~\ref{fig:4} shows the storage mode of TrackVis file. The data read from the NIFTI file with a pointer is in the order of the directory. The storage mode is based on Random Access Storage, i.e., the first dimension to be filled is “x-dimension”, from left to right, then “y-dimension” from posterior to anterior, then “z-dimension”, from inferior to superior. We got the brain data as (116, 116, 80, 55). The first three dimensions are the size of the full volume data in the xyz direction, and the fourth dimension is assumed to refer to time, which also represents the number of slices. The calculated FA and MD data are both with (116, 116, 80, 1). The stored data type is float. The number of voxels is 1,076,480.
 
@@ -191,17 +260,17 @@ After mapping FA and MD to different color map values and mapping them to the co
     \label{fig:8}
 \end{figure}
 
-\section{Evaluation}
+\chapter{Evaluation}
 
-\subsection{Participants }
+\section{Participants }
 In our study, we selected 15 participants ( ...male and ... female) of mean age .... with standard deviation ..... 
 The program ran on a ..........Their majors were: ....in ..., ....in ....,.  All participants have normal vision. 
 
-\subsection{Enviornment}
+\section{Enviornment}
 The room had natural light and the display was a ......... The stereo rendering was ........
 Participants sat on a normal chair.
 
-\subsection{Procedure}
+\section{Procedure}
 All participants first tested for normal vision with the Ishihara Color vision test. This test is online and is well-known as the Color Blind test and it is the most widely used color vision test all around the world. There are some numbers surrounded with dots and the user should distinguish the numbers out of the dots (Figure~\ref{fig: Ishihara}). If the person can get the normal color vision score it means that the user can see up to one million distinct shades of color.
 \begin{figure}[ht]
     \centering
