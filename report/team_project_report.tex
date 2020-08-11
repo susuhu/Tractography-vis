@@ -72,19 +72,18 @@ https://neoreviews.aappublications.org/content/14/10/e483/tab-figures-data \comm
 	\label{fig:iso_ani_diff}
 \end{figure}
 
-The diffusion in brain is anisotropic so it is represented as an ellipsoid as in the right figure in Figure~\ref{fig:iso_ani_diff}. The three eigenvalues  $\lambda_1, \lambda_2, \lambda_3$ represent the three axes of the ellipsoid. The vector associated with the latest eigenvalue is assumed as the local fiber direction [Takagi et al 2008]. \comment{biblio}
-
+The diffusion in brain is anisotropic so it is represented as an ellipsoid as in the right figure in Figure~\ref{fig:iso_ani_diff}. The three eigenvalues  $\lambda_1, \lambda_2, \lambda_3$ represent the three axes of the ellipsoid. The vector associated with the latest eigenvalue is assumed as the local fiber direction.\cite{tak}
 Using dMRI, the apparent diffusion coefficient at each voxel of the image can be calculated and the whole diffusion tensor can be constructed by multilinear regression across multiple images.
 
 \section{Fractional Anisotropy and Mean Diffusivity }
-One way to measure the anisotropic diffusion is fractional anisotropy (FA), which is a scalar ratio from 0 to 1, with 0 representing isotropic and 1 as an ideal linear diffusion. It represents the degree of alignment of cellular structures within fiber tracts and their structural integrity [Cercignani et al 2001]. \comment{biblio}
+One way to measure the anisotropic diffusion is fractional anisotropy (FA), which is a scalar ratio from 0 to 1, with 0 representing isotropic and 1 as an ideal linear diffusion. It represents the degree of alignment of cellular structures within fiber tracts and their structural integrity \cite{cer}.
 
-Another often used measurement is mean diffusivity (MD), which describes the average mobility of water molecules. It is equal to one third of the trace of the diffusion tensor. MD is affected by cellular size and integrity and independent of any tissue directionality [Cercignani et al 2001]. \comment{biblio}
+Another often used measurement is mean diffusivity (MD), which describes the average mobility of water molecules. It is equal to one third of the trace of the diffusion tensor. MD is affected by cellular size and integrity and independent of any tissue directionality. \cite{cer}
 
 Here is the formula of FA and MD $\lambda_1, \lambda_2, \lambda_3$  are Eigenvalues of the diffusion tensor.
 
 \begin{equation*}
-	FA=\sqrt{\frac{3 \sum_{i=1}^{3}(\lambda_i-\bar{l\lambda})^2}{2\sum_{i=1}^3}\lambda_i^2}, \quad FA\text{ in } [0,1]
+	FA=\sqrt{\frac{3 \sum_{i=1}^{3}(\lambda_i-\bar{l\lambda})^2}{2\sum_{i=1}^3\lambda_i^2}}, \quad FA\text{ in } [0,1]
 \end{equation*}
 
 \begin{equation*}
@@ -263,8 +262,8 @@ After mapping FA and MD to different color map values and mapping them to the co
 \chapter{Evaluation}
 
 \section{Participants }
-In our study, we selected 15 participants ( ...male and ... female) of mean age .... with standard deviation ..... 
-The program ran on a ..........Their majors were: ....in ..., ....in ....,.  All participants have normal vision. 
+In our study, we selected 15 participants (7 male and 8 female) of mean age 30.5 with standard deviation ..... 
+The program ran on a ..........Their majors were: 4 medical scientist, 5 computer science PHD and Master students, and 6 from other diciplines (PHD and Master student in Communication Engineering, Management and sport science). All participants had normal vision. 
 
 \section{Enviornment}
 The room had natural light and the display was a ......... The stereo rendering was ........
@@ -284,9 +283,16 @@ For understanding the tasks each participants received general information about
 All participants were told to finish the test as soon as possible. But they could take a break at anytime. The questionnaire time was started when the user started the test until the final task was answered. 
 All of them examined all colormaps.
 
-\subsection{Task Characteristics}
+\section{Task Characteristics}
 
-Chen et al. identified four major task types in \cite{chen}: A)Ensemble identification, B) Ensemble comparison, C) Ensemble localization, and D) Ensemble association (Figure~\ref{fig:task-types}). They chose to study the first \emph{identification} task type because it is very common in DMRI visualization challenges. 
+Chen et al. identified four major task types in \cite{chen}: 
+\begin{enumerate}
+	\item Ensemble identification, 
+	\item Ensemble comparison, 
+	\item Ensemble localization and
+	\item Ensemble association.
+\end{enumerate}
+See Figure~\ref{fig:task-types} for an illustration of the tasks as implemented in \cite{chen}. We follow \cite{chen} in chosing to study the first \emph{identification} task type as it is most common in DMRI visualization challenges. 
 
 \begin{figure}[ht]
     \centering
@@ -295,22 +301,24 @@ Chen et al. identified four major task types in \cite{chen}: A)Ensemble identifi
     \label{fig:task-types}
 \end{figure}
 
-According to \cite{chen} we have some expectation for the results: (1)
-(2) 
-(3) having color might be more better than noncolor representation
+According to \cite{chen}, the following expectations are reasonable and should be verified by a user study.
+\begin{enumerate}
+	\item A spherical color mapping with higher spatial resolution should help with identification of the orientation of the tracts. Among the colormaps implemented in this work, Boy's surface has higher spatial resolution and is expected to help the user follow the tracts better.
+	\item Scalar color mapping based on FA and MD should affect the user's ability to estimate the average over a region.
+\end{enumerate}
 
-\subsection{Task presentation}
-These tasks are inspired by Chen et al. \cite{chen} ,Henan et al. \cite{henan} and Borgo et al. \cite{borgo}.
+\section{Task presentation}
+These following tasks are inspired by Chen et al. \cite{chen}, Henan et al. \cite{henan} and Borgo et al. \cite{borgo}.
 
 \paragraph{A. Ensemble Average}
 
 \begin{itemize}
-	\item{Task 1:} Base question is: ``What is the average FA and MD values of the tracts?"
-	In this task the participants were asked to estimate the average FA and MD. There were put some pictures for each scalar colormaps. Then the participants indicate their answers for each scalar colormaps by choosing the labels(A to E) on the color-bar. It was done in several regions of the brain to increase reliability. 
+	\item{Task 1:} The base question is: ``What is the average FA and MD values of the tracts?"
+	In this task, the participants were asked to estimate the average FA and MD. There were put some pictures for each scalar colormaps. Then the participants indicate their answers for each scalar colormaps by choosing the labels(A to E) on the color-bar. It was done in several regions of the brain to increase reliability. 
 	
 	
-	\item{Task 2:} Base question is:``Which average FA is greater?"
-	In this task the participants were asked to choose the greater average FA between two pictures that was divided from the whole brain and write their answers in the blank. 
+	\item{Task 2:} The base question is: ``Which average FA is greater?"
+	In this task, the participants were asked to choose the greater average FA between two pictures that were divided from the whole brain and write their answers in the blank. 
 	
 \end{itemize}
 
@@ -318,8 +326,8 @@ These tasks are inspired by Chen et al. \cite{chen} ,Henan et al. \cite{henan} a
 \paragraph{B. Ensemble orientation}
 
 \begin{itemize}
-\item{Task 3:} Base question is:``Follow the tracts and make solve the puzzle."
-In this task we took the zoomed pictures from two spherical colormaps then the pictures were divided into nine parts like a puzzle. The participants were asked to order them by following the tracts as soon as possible and the time duration was recorded.  
+\item{Task 3:} The base question is: ``Follow the tracts and make solve the puzzle."
+This task is designed to figure out which spherical colormap is better in detecting tracts and how visible and recognizable these tracts are. In this task, we took the zoomed random pictures from two spherical colormaps of the same region of the brain. Then the pictures were divided into nine parts like a puzzle. For guidance, a yellow/black dot was placed in the upper left corner of the image and the participants were told first place this box at the top and left the puzzle, to begin with. They were asked to order them by following the tracts as soon as possible and the time duration was recorded. 
 
 \end{itemize}
 

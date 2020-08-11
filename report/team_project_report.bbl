@@ -7,12 +7,27 @@ R.~{Borgo}, J.~{Dearden}, and M.~W. {Jones}.
 \newblock {\em IEEE Transactions on Visualization and Computer Graphics},
   20(12):2261--2270, 2014.
 
+\bibitem{cer}
+Mara Cercignani, Matilde Inglese, Elisabetta Pagani, Giancarlo Comi, and
+  Massimo Filippi.
+\newblock Mean diffusivity and fractional anisotropy histograms of patients
+  with multiple sclerosis.
+\newblock {\em American Journal of Neuroradiology}, 22(5):952--958, 2001.
+
 \bibitem{chen}
 J.~{Chen}, G.~{Zhang}, W.~{Chiou}, D.~H. {Laidlaw}, and A.~P. {Auchus}.
 \newblock Measuring the effects of scalar and spherical colormaps on ensembles
   of dmri tubes.
 \newblock {\em IEEE Transactions on Visualization and Computer Graphics},
   26(9):2818--2833, 2020.
+
+\bibitem{tak}
+Takehiko Takagi, Masaya Nakamura, Masayuki Yamada, Keigo Hikishima, Suketaka
+  Momoshima, Kanehiro Fujiyoshi, Shinsuke Shibata, Hirotaka~James Okano,
+  Yoshiaki Toyama, and Hideyuki Okano.
+\newblock Visualization of peripheral nerve degeneration and regeneration:
+  Monitoring with diffusion tensor tractography.
+\newblock {\em NeuroImage}, 44(3):884 -- 892, 2009.
 
 \bibitem{henan}
 H.~{Zhao}, G.~W. {Bryant}, W.~{Griffin}, J.~E. {Terrill}, and J.~{Chen}.
