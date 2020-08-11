@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{borgo}
+R.~{Borgo}, J.~{Dearden}, and M.~W. {Jones}.
+\newblock Order of magnitude markers: An empirical study on large magnitude
+  number detection.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  20(12):2261--2270, 2014.
+
+\bibitem{chen}
+J.~{Chen}, G.~{Zhang}, W.~{Chiou}, D.~H. {Laidlaw}, and A.~P. {Auchus}.
+\newblock Measuring the effects of scalar and spherical colormaps on ensembles
+  of dmri tubes.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  26(9):2818--2833, 2020.
+
+\bibitem{henan}
+H.~{Zhao}, G.~W. {Bryant}, W.~{Griffin}, J.~E. {Terrill}, and J.~{Chen}.
+\newblock Validation of splitvectors encoding for quantitative visualization of
+  large-magnitude-range vector fields.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  23(6):1691--1705, 2017.
+
+\end{thebibliography}
