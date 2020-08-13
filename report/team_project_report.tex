@@ -260,29 +260,6 @@ After mapping FA and MD to different color map values and mapping them to the co
 \end{figure}
 
 \chapter{Evaluation}
-
-\section{Participants }
-In our study, we selected 15 participants (7 male and 8 female) of mean age 30.5 with standard deviation ..... 
-The program ran on a ..........Their majors were: 4 medical scientist, 5 computer science PHD and Master students, and 6 from other diciplines (PHD and Master student in Communication Engineering, Management and sport science). All participants had normal vision. 
-
-\section{Enviornment}
-The room had natural light and the display was a ......... The stereo rendering was ........
-Participants sat on a normal chair.
-
-\section{Procedure}
-All participants first tested for normal vision with the Ishihara Color vision test. This test is online and is well-known as the Color Blind test and it is the most widely used color vision test all around the world. There are some numbers surrounded with dots and the user should distinguish the numbers out of the dots (Figure~\ref{fig: Ishihara}). If the person can get the normal color vision score it means that the user can see up to one million distinct shades of color.
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.6\columnwidth]{Ishihara}
-    \caption{Ishihara color blindness test. Source:  \cite{www.color-blindness.com}}
-    \label{fig:Ishihara}
-\end{figure}
-
-For understanding the tasks each participants received general information about the test structure, DMRI techniques and their medical applications. These information took about 10 minutes. 
-
-All participants were told to finish the test as soon as possible. But they could take a break at anytime. The questionnaire time was started when the user started the test until the final task was answered. 
-All of them examined all colormaps.
-
 \section{Task Characteristics}
 
 Chen et al. identified four major task types in \cite{chen}: 
@@ -327,11 +304,49 @@ These following tasks are inspired by Chen et al. \cite{chen}, Henan et al. \cit
 
 \begin{itemize}
 \item{Task 3:} The base question is: ``Follow the tracts and make solve the puzzle."
-This task is designed to figure out which spherical colormap is better in detecting tracts and how visible and recognizable these tracts are. In this task, we took the zoomed random pictures from two spherical colormaps of the same region of the brain. Then the pictures were divided into nine parts like a puzzle. For guidance, a yellow/black dot was placed in the upper left corner of the image and the participants were told first place this box at the top and left the puzzle, to begin with. They were asked to order them by following the tracts as soon as possible and the time duration was recorded. 
+This task is designed to figure out which spherical colormap is better in detecting tracts and how visible and recognizable these tracts are. In this task, we took the zoomed random pictures from two spherical colormaps of the same region of the brain. (see Figure~\ref{fig:absolute-zoomed})
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.49 \columnwidth]{absolute-zoomed}
+    \includegraphics[width = 0.45 \columnwidth]{boy's-zoomed}
+    \caption{Zoomed random pictures of the same region of the brain. Left:  Absolute value colormaps. Right: Boy's surface colormaps.}
+    \label{fig:absolute-zoomed}
+\end{figure}
+
+Then the pictures were divided into nine parts like a puzzle. For guidance, a yellow/black dot was placed in the upper left corner of the image and the participants were told first place this box at the top and left the puzzle, to begin with.(see Figure~\ref{fig:absolute-puzzle}) They were asked to order them by following the tracts as soon as possible and the time duration was recorded. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.49 \columnwidth]{absolute-puzzle}
+    \includegraphics[width = 0.48 \columnwidth]{boy's-puzzle}
+    \caption{ Left:  Absolute value puzzle, Right: Boy's surface puzzle}
+    \label{fig:absolute-puzzle}
+\end{figure}
+
+
 
 \end{itemize}
 
+\section{Procedure}
+All participants first tested for normal vision with the Ishihara Color vision test. This test is online and is well-known as the Color Blind test and it is the most widely used color vision test all around the world. There are some numbers surrounded with dots and the user should distinguish the numbers out of the dots (Figure~\ref{fig:Ishihara}). If the person can get the normal color vision score it means that the user can see up to one million distinct shades of color.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6\columnwidth]{Ishihara}
+    \caption{Ishihara color blindness test. Source:  \cite{www.color-blindness.com}}
+    \label{fig:Ishihara}
+\end{figure}
+
+For understanding the tasks each participants received general information about the test structure, DMRI techniques and their medical applications. These information took about 10 minutes. 
+
+All participants were told to finish the test as soon as possible. But they could take a break at anytime. The questionnaire time was started when the user started the test until the final task was answered. 
+All of them examined all colormaps.
+
 \chapter{Results}
+\section{Participants }
+In our study, we selected 15 participants (7 male and 8 female) of mean age 30.5 with standard deviation 3.
+The program ran on a computer with 13.3-inch (diagonal) LED-backlit display with IPS technology; 2560-by-1600 native resolution at 227 pixels per inch with support for millions of colors. As there was no interaction between the user and the GUI, I.E. no real-time rendering, the specification of the CPU, GPU and operating system is not mentioned. Their majors were: 4 medical scientist, 5 computer science PHD and Master students, and 6 from other disciplines (PHD and Master student in Communication Engineering, Management and sport science). All participants had normal vision. 
+
 \bibliography{biblio}
 \bibliographystyle{plain}
 

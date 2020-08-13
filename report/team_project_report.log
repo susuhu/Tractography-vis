@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.17)  12 AUG 2020 00:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.17)  13 AUG 2020 17:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -785,7 +785,7 @@ Chapter 2.
 
 ]
 Chapter 3.
-<figures/iso_ani_diff.png, id=112, 411.939pt x 121.8954pt>
+<figures/iso_ani_diff.png, id=107, 411.939pt x 121.8954pt>
 File: figures/iso_ani_diff.png Graphic file (type png)
 <use figures/iso_ani_diff.png>
 Package pdftex.def Info: figures/iso_ani_diff.png  used on input line 69.
@@ -799,7 +799,7 @@ ng eigen-val-ues. From
 [4
 
  <./figures/iso_ani_diff.png>]
-<figures/coolwarm_bar.png, id=129, 19.7538pt x 159.9576pt>
+<figures/coolwarm_bar.png, id=124, 19.7538pt x 159.9576pt>
 File: figures/coolwarm_bar.png Graphic file (type png)
 <use figures/coolwarm_bar.png>
 Package pdftex.def Info: figures/coolwarm_bar.png  used on input line 102.
@@ -808,7 +808,7 @@ Package pdftex.def Info: figures/coolwarm_bar.png  used on input line 102.
 Overfull \vbox (48.30736pt too high) detected at line 102
  []
 
-<figures/interp.png, id=130, 146.4672pt x 146.4672pt>
+<figures/interp.png, id=125, 146.4672pt x 146.4672pt>
 File: figures/interp.png Graphic file (type png)
 <use figures/interp.png>
 Package pdftex.def Info: figures/interp.png  used on input line 121.
@@ -828,7 +828,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
  [7
 
 ]
-<figures/1.png, id=154, 516.93124pt x 150.5625pt>
+<figures/1.png, id=149, 516.93124pt x 150.5625pt>
 File: figures/1.png Graphic file (type png)
 <use figures/1.png>
 Package pdftex.def Info: figures/1.png  used on input line 158.
@@ -837,38 +837,38 @@ Package pdftex.def Info: figures/1.png  used on input line 158.
 
 LaTeX Warning: Citation `???' on page 8 undefined on input line 159.
 
-<figures/absolute.png, id=155, 1124.2pt x 843.15pt>
+<figures/absolute.png, id=150, 1124.2pt x 843.15pt>
 File: figures/absolute.png Graphic file (type png)
 <use figures/absolute.png>
 Package pdftex.def Info: figures/absolute.png  used on input line 173.
 (pdftex.def)             Requested size: 159.33821pt x 119.49399pt.
-<figures/absolute_top.png, id=156, 1124.2pt x 843.15pt>
+<figures/absolute_top.png, id=151, 1124.2pt x 843.15pt>
 File: figures/absolute_top.png Graphic file (type png)
 <use figures/absolute_top.png>
 Package pdftex.def Info: figures/absolute_top.png  used on input line 174.
 (pdftex.def)             Requested size: 136.57462pt x 102.42157pt.
-<figures/absolute_octant.png, id=157, 562.14015pt x 421.575pt>
+<figures/absolute_octant.png, id=152, 562.14015pt x 421.575pt>
 File: figures/absolute_octant.png Graphic file (type png)
 <use figures/absolute_octant.png>
 Package pdftex.def Info: figures/absolute_octant.png  used on input line 175.
 (pdftex.def)             Requested size: 136.57462pt x 102.42157pt.
-<figures/boys.png, id=158, 562.14015pt x 421.575pt>
+<figures/boys.png, id=153, 562.14015pt x 421.575pt>
 File: figures/boys.png Graphic file (type png)
 <use figures/boys.png>
 Package pdftex.def Info: figures/boys.png  used on input line 193.
 (pdftex.def)             Requested size: 150.23138pt x 112.66245pt.
-<figures/boys_zIn_yRight.png, id=159, 562.14015pt x 421.575pt>
+<figures/boys_zIn_yRight.png, id=154, 562.14015pt x 421.575pt>
 File: figures/boys_zIn_yRight.png Graphic file (type png)
 <use figures/boys_zIn_yRight.png>
 Package pdftex.def Info: figures/boys_zIn_yRight.png  used on input line 194.
 (pdftex.def)             Requested size: 136.57462pt x 102.42157pt.
-<figures/boys_zOut_yRight.png, id=160, 562.14015pt x 421.575pt>
+<figures/boys_zOut_yRight.png, id=155, 562.14015pt x 421.575pt>
 File: figures/boys_zOut_yRight.png Graphic file (type png)
 <use figures/boys_zOut_yRight.png>
 Package pdftex.def Info: figures/boys_zOut_yRight.png  used on input line 195.
 (pdftex.def)             Requested size: 136.57462pt x 102.42157pt.
 [8 <./figures/1.png>]
-<figures/2.png, id=174, 439.6425pt x 463.7325pt>
+<figures/2.png, id=168, 439.6425pt x 463.7325pt>
 File: figures/2.png Graphic file (type png)
 <use figures/2.png>
 Package pdftex.def Info: figures/2.png  used on input line 204.
@@ -877,7 +877,7 @@ Package pdftex.def Info: figures/2.png  used on input line 204.
 
 LaTeX Warning: Citation `???' on page 9 undefined on input line 205.
 
-<figures/3.png, id=176, 615.29875pt x 288.07625pt>
+<figures/3.png, id=170, 615.29875pt x 288.07625pt>
 File: figures/3.png Graphic file (type png)
 <use figures/3.png>
 Package pdftex.def Info: figures/3.png  used on input line 212.
@@ -889,7 +889,7 @@ LaTeX Warning: Citation `???' on page 9 undefined on input line 213.
 <./figures/absolute_octant.png (PNG copy)> <./figures/boys.png (PNG copy)> <./f
 igures/boys_zIn_yRight.png (PNG copy)> <./figures/boys_zOut_yRight.png (PNG cop
 y)>]
-<figures/4.png, id=187, 555.07375pt x 166.6225pt>
+<figures/4.png, id=182, 555.07375pt x 166.6225pt>
 File: figures/4.png Graphic file (type png)
 <use figures/4.png>
 Package pdftex.def Info: figures/4.png  used on input line 223.
@@ -898,7 +898,7 @@ Package pdftex.def Info: figures/4.png  used on input line 223.
 
 LaTeX Warning: Citation `???' on page 10 undefined on input line 224.
 
-<figures/5.png, id=189, 677.53125pt x 354.32375pt>
+<figures/5.png, id=184, 677.53125pt x 354.32375pt>
 File: figures/5.png Graphic file (type png)
 <use figures/5.png>
 Package pdftex.def Info: figures/5.png  used on input line 232.
@@ -906,7 +906,7 @@ Package pdftex.def Info: figures/5.png  used on input line 232.
 
 LaTeX Warning: Citation `???' on page 10 undefined on input line 233.
 
-<figures/6.png, id=191, 630.355pt x 322.20375pt>
+<figures/6.png, id=186, 630.355pt x 322.20375pt>
 File: figures/6.png Graphic file (type png)
 <use figures/6.png>
 Package pdftex.def Info: figures/6.png  used on input line 241.
@@ -917,7 +917,7 @@ LaTeX Warning: Citation `???' on page 10 undefined on input line 242.
 
 LaTeX Warning: Citation `???' on page 10 undefined on input line 242.
 
-<figures/7.png, id=194, 963.6pt x 212.795pt>
+<figures/7.png, id=189, 963.6pt x 212.795pt>
 File: figures/7.png Graphic file (type png)
 <use figures/7.png>
 Package pdftex.def Info: figures/7.png  used on input line 250.
@@ -925,7 +925,7 @@ Package pdftex.def Info: figures/7.png  used on input line 250.
 
 LaTeX Warning: Citation `???' on page 10 undefined on input line 251.
 
-<figures/8.png, id=195, 956.57375pt x 214.8025pt>
+<figures/8.png, id=190, 956.57375pt x 214.8025pt>
 File: figures/8.png Graphic file (type png)
 <use figures/8.png>
 Package pdftex.def Info: figures/8.png  used on input line 257.
@@ -936,55 +936,77 @@ LaTeX Warning: Citation `???' on page 10 undefined on input line 258.
 [10 <./figures/2.png>] [11 <./figures/3.png> <./figures/4.png> <./figures/5.png
 >] [12 <./figures/6.png> <./figures/7.png> <./figures/8.png>]
 Chapter 5.
-
-LaTeX Warning: Reference `fig: Ishihara' on page 13 undefined on input line 273
-.
-
-<figures/Ishihara.jpg, id=220, 237.13594pt x 219.82124pt>
-File: figures/Ishihara.jpg Graphic file (type jpg)
-<use figures/Ishihara.jpg>
-Package pdftex.def Info: figures/Ishihara.jpg  used on input line 276.
-(pdftex.def)             Requested size: 273.14923pt x 253.21507pt.
-
-LaTeX Warning: Citation `www.color-blindness.com' on page 13 undefined on input
- line 277.
-
-[13
-
-]
-<figures/task-types.jpg, id=230, 822.07124pt x 467.7475pt>
+<figures/task-types.jpg, id=219, 822.07124pt x 467.7475pt>
 File: figures/task-types.jpg Graphic file (type jpg)
 <use figures/task-types.jpg>
-Package pdftex.def Info: figures/task-types.jpg  used on input line 299.
+Package pdftex.def Info: figures/task-types.jpg  used on input line 276.
 (pdftex.def)             Requested size: 409.71692pt x 233.12375pt.
- [14 <./figures/Ishihara.jpg>] [15 <./figures/task-types.jpg>]
-Chapter 6.
-(./team_project_report.bbl [16
+[13
 
-]) [17
+ <./figures/task-types.jpg>]
+<figures/absolute-zoomed.png, id=237, 785.93625pt x 515.9275pt>
+File: figures/absolute-zoomed.png Graphic file (type png)
+<use figures/absolute-zoomed.png>
+Package pdftex.def Info: figures/absolute-zoomed.png  used on input line 311.
+(pdftex.def)             Requested size: 223.07211pt x 146.43468pt.
+<figures/boy's-zoomed.png, id=238, 711.65875pt x 482.80376pt>
+File: figures/boy's-zoomed.png Graphic file (type png)
+<use figures/boy's-zoomed.png>
+Package pdftex.def Info: figures/boy's-zoomed.png  used on input line 312.
+(pdftex.def)             Requested size: 204.85846pt x 138.97812pt.
+<figures/absolute-puzzle.png, id=240, 469.755pt x 201.75375pt>
+File: figures/absolute-puzzle.png Graphic file (type png)
+<use figures/absolute-puzzle.png>
+Package pdftex.def Info: figures/absolute-puzzle.png  used on input line 321.
+(pdftex.def)             Requested size: 223.07211pt x 95.8063pt.
+<figures/boy's-puzzle.png, id=241, 458.71375pt x 202.7575pt>
+File: figures/boy's-puzzle.png Graphic file (type png)
+<use figures/boy's-puzzle.png>
+Package pdftex.def Info: figures/boy's-puzzle.png  used on input line 322.
+(pdftex.def)             Requested size: 218.51521pt x 96.58615pt.
+<figures/Ishihara.jpg, id=243, 237.13594pt x 219.82124pt>
+File: figures/Ishihara.jpg Graphic file (type jpg)
+<use figures/Ishihara.jpg>
+Package pdftex.def Info: figures/Ishihara.jpg  used on input line 335.
+(pdftex.def)             Requested size: 273.14923pt x 253.21507pt.
+
+
+LaTeX Warning: Citation `www.color-blindness.com' on page 14 undefined on input
+ line 336.
+
+[14] [15 <./figures/absolute-zoomed.png> <./figures/boy's-zoomed.png> <./figure
+s/absolute-puzzle.png> <./figures/boy's-puzzle.png>] [16 <./figures/Ishihara.jp
+g>]
+Chapter 6.
+(./team_project_report.bbl [17
+
+]) [18
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 338.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 338.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 353.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 353.
  (./team_project_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 338.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 338.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 353.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 353.
 Package rerunfilecheck Info: File `team_project_report.out' has not changed.
-(rerunfilecheck)             Checksum: AB2C5312BC3FF1383FB965DA2E4F2808;999.
+(rerunfilecheck)             Checksum: 1EFC483E5369B0169C07EFF04BD0BB9B;941.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 338.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 353.
  ) 
 Here is how much of TeX's memory you used:
- 17481 strings out of 492616
- 326729 string characters out of 6129480
- 399783 words of memory out of 5000000
- 20973 multiletter control sequences out of 15000+600000
+ 17503 strings out of 492616
+ 327313 string characters out of 6129480
+ 400079 words of memory out of 5000000
+ 20989 multiletter control sequences out of 15000+600000
  13977 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,14n,48p,1090b,406s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,14n,48p,1090b,387s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
@@ -996,10 +1018,10 @@ l/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
 /texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/te
 xlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on team_project_report.pdf (18 pages, 8243947 bytes).
+Output written on team_project_report.pdf (19 pages, 14558280 bytes).
 PDF statistics:
- 320 PDF objects out of 1000 (max. 8388607)
- 255 compressed objects within 3 object streams
- 70 named destinations out of 1000 (max. 500000)
- 244 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 333 PDF objects out of 1000 (max. 8388607)
+ 259 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
+ 256 words of extra memory for PDF output out of 10000 (max. 10000000)
 

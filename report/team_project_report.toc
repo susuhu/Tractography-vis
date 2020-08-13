@@ -9,11 +9,10 @@
 \contentsline {section}{\numberline {4.2}Data acquirement}{9}{section.4.2}% 
 \contentsline {section}{\numberline {4.3}Rendering}{9}{section.4.3}% 
 \contentsline {chapter}{\numberline {5}Evaluation}{13}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Participants }{13}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Enviornment}{13}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Procedure}{13}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}Task Characteristics}{13}{section.5.4}% 
-\contentsline {section}{\numberline {5.5}Task presentation}{14}{section.5.5}% 
-\contentsline {paragraph}{A. Ensemble Average}{15}{section*.4}% 
-\contentsline {paragraph}{B. Ensemble orientation}{15}{section*.5}% 
-\contentsline {chapter}{\numberline {6}Results}{16}{chapter.6}% 
+\contentsline {section}{\numberline {5.1}Task Characteristics}{13}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Task presentation}{14}{section.5.2}% 
+\contentsline {paragraph}{A. Ensemble Average}{14}{section*.4}% 
+\contentsline {paragraph}{B. Ensemble orientation}{14}{section*.5}% 
+\contentsline {section}{\numberline {5.3}Procedure}{14}{section.5.3}% 
+\contentsline {chapter}{\numberline {6}Results}{17}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Participants }{17}{section.6.1}% 
