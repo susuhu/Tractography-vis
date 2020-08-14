@@ -1,10 +1,10 @@
-\documentclass[a4paper, 12pt]{report}
+\documentclass[hyperref, plainreport, noproblem]{cgvpub1}
 
 \usepackage{color}
 \usepackage{graphicx}
 
-\usepackage[cmex10]{amsmath}
-\interdisplaylinepenalty=2500
+\usepackage{amsmath}
+
 
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -52,12 +52,22 @@
 %\SetWatermarkText{DRAFT}
 %\SetWatermarkScale{0.5}
 
-\title{Visualization of Brain Tractography Tubes}
-\date{\today}
+
+
+\author{alaleh}
+\title{The title of the thesis}
+\birthday{1. Januar 1234}
+\placeofbirth{Dresden}
+\matno{123456, 123}
+\betreuer{Dr. B. Spline}
+%\bibfiles{literature-example}
+%\problem{Write down your task...}
+\copyrighterklaerung{If the author used resources from third parties (texts, images, code) he or she should state the consents of the copyright owners here or cite the given general conditions (e.g. CC/(L)GPL/BSD copyright notices)}
+
 
 \begin{document}
-\maketitle
-\tableofcontents
+
+
 \chapter{Introduction}
 
 Tractography is a kind of scientific visualization technique used to visualize the nerve tract data. The data we use here is diffusion magnetic resonance imaging(DMRI). To show the 3D DMRI brain data we basically use two kinds of colormaps. The first scalar colormap is to compute the scalar values such as fractional anisotropy which represent the characteristics of diffusion and map it to the tracts. The second one is to use spherical colormaps to present orientation of tracts. After implementation we will compare the advantages and disadvantages of these colormaps and do the evaluation.
@@ -89,6 +99,7 @@ Isoluminant rainbow is a multihued colormap where the luminance is equal. Isolum
 In spherical color mapping, the colors on the sphere can be used to represent the orientation. In this project we focus on two spherical color maps: absolute colormap and Boy’s surface colormap.
 
 
+\subsubsection*{Absolute value}
 Pajevic and Pierpaoli use the absolute value method to solve the symmetry issues \cite{pajevic}. In absolute colormap, it is mirror and rotational symmetric at the same time. The unit value of the eigenvectors will be directly mapped to the RGB values of the colors. The sign of the eigenvector does not affect the results and only the absolute values will be considered. The advantage of this colormap is that it can show the direction change in all dimensions in 3D. Absolute colormap is a good choice for default spherical colormap \cite{moreland2019}.
 
 \subsubsection*{Boy’s Surface}  
@@ -122,13 +133,13 @@ Another often used measurement is mean diffusivity (MD), which describes the ave
 
 Here is the formula of FA and MD $\lambda_1, \lambda_2, \lambda_3$  are Eigenvalues of the diffusion tensor.
 
-\begin{equation*}
+\begin{equation}
 	FA=\sqrt{\frac{3 \sum_{i=1}^{3}(\lambda_i-\bar{l\lambda})^2}{2\sum_{i=1}^3\lambda_i^2}}, \quad FA\text{ in } [0,1]
-\end{equation*}
+\end{equation}
 
-\begin{equation*}
+\begin{equation}
 	MD=\frac{D_{xx}+D_{yy}+D_{zz}}{3}= \frac{\lambda_1+\lambda_2+\lambda_3}{3}
-\end{equation*}
+\end{equation}
 
 \section{ Color mapping interpolation }
 With the known discrete voxel FA/MD value, a simple linear interpolation method is used to construct new data points in between, thus obtaining a fiber track with continuous colormapping.
@@ -152,9 +163,9 @@ colormap bar     & FA value & RGB\_r & RGB\_g & RGB\_b   \\ \hline
 \end{table}
 
 Here is the linear interpolation formula:
-\begin{equation*}
+\begin{equation}
  \frac{(y-y_0)}{(x-x_0)} = \frac{(y_1-y_0)}{(x_1-x_0)}
-\end{equation*}
+\end{equation}
 
 \begin{figure}[h]
 	\centering
@@ -196,7 +207,7 @@ These colormaps are recommended by Moreland et al., including: coolwarm, extende
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.8\columnwidth]{1}
-    \caption{ Five Scalar colosmaps. Source:  \cite{???}}
+    \caption{ Five Scalar colosmaps.}
     \label{fig:1}
 \end{figure}	
 
@@ -250,7 +261,7 @@ Our first step is brain extraction, using the suitable threshold, which removes 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.7\columnwidth]{3}
-    \caption{ Fractional Anisotropy image and Mean Diffusivity image. Source:  \cite{???}}
+    \caption{ Fractional Anisotropy image and Mean Diffusivity image.}
     \label{fig:3}
 \end{figure}	
 
@@ -261,7 +272,7 @@ The brain map read by CGV framework is a TrackVis (trk) file. The data of positi
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.8\columnwidth]{4}
-    \caption{Storage mode of TrackVis file. Source:  \cite{???}}
+    \caption{Storage mode of TrackVis file.}
     \label{fig:4}
 \end{figure}	
 
@@ -270,16 +281,17 @@ In order to access a one-to-one correspondence between the FA/MD data and the br
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.8\columnwidth]{5}
-    \caption{Sketch of size cutting. Source:  \cite{???}}
+    \caption{Sketch of size cutting.}
     \label{fig:5}
 \end{figure}	
+
 
 Since the dimensional order of data rendering in Opengl is in xzy-oder, and the storage order of FA/MD data are in xyz-order, we have transformed the data through the corresponding between coordinate and index. As it shown in Figure~\ref{fig:6}, we mapped the FA/MD value on tractography volume with size matching and dimension swapping.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.8\columnwidth]{6}
-    \caption{Sketch of size matching and dimension swapping between FA/MD and Tractography. Source:  \cite{???}}
+    \caption{Sketch of size matching and dimension swapping between FA/MD and Tractography.}
     \label{fig:6}
 \end{figure}	
 
@@ -288,14 +300,14 @@ After mapping FA and MD to different color map values and mapping them to the co
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.9\columnwidth]{7}
-    \caption{Tractography of FA in different colormap. Source:  \cite{???}}
+    \caption{Tractography of FA in different colormap.}
     \label{fig:7}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.9\columnwidth]{8}
-    \caption{Tractography of MD in different colormap. Source:  \cite{???}}
+    \caption{Tractography of MD in different colormap.}
     \label{fig:8}
 \end{figure}
 
@@ -401,13 +413,14 @@ As discussed in Section~\comment{??}, FA and MA are the actual quantities that c
 	\item{Task 2:} The base question is: ``Which average FA/MD is greater?" 
 	In this task, the participants were asked to choose the greater average FA/MD between two regions marked on the whole brain image (Figure~\ref{fig:task2}) Similar to Task 1, a number of questions are generated from this base question. 
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.40 \columnwidth]{isorainbow-fa-task2}
-    \includegraphics[width = 0.44 \columnwidth]{isorainbow-md-task2}
-    \caption{Illustration of the questions for left side of the brain, based on Task2 for Isoluminant-rainbow colormap. a)Fa and b)MD }
-    \label{fig:task2}
-\end{figure}	
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.8\columnwidth]{isorainbow-fa-task2}
+	\includegraphics[width=0.8\columnwidth]{isorainbow-md-task2}
+	\caption{Illustration of the questions for left side of the brain, based on Task2 for Isoluminant-rainbow colormap. top:Fa and buttom:MD}
+	\label{fig:task2}
+\end{figure}
+
 	
 	
 Please note that Task 2 is basically the same as Task 1. However, Task 1 asks for estimate of the absolute average value  while Task 2 asks for estimate of the relation between two averages. Task 2 is clearly closer to intuition. Considerable difference in the statistical information gathered from these two tasks could lead to important conclusions.
@@ -445,6 +458,7 @@ The statistical information should reveal which color map leads to faster identi
 \end{itemize}
 
 \section{Procedure}
+\label{procedure}
 All participants first tested for normal vision with the Ishihara Color vision test. This test is online and is well-known as the Color Blind test and it is the most widely used color vision test all around the world. There are some numbers surrounded with dots and the user should distinguish the numbers out of the dots (Figure~\ref{fig:Ishihara}). If the person can get the normal color vision score it means that the user can see up to one million distinct shades of color.
 \begin{figure}[ht]
     \centering
@@ -460,7 +474,7 @@ All of them examined all colormaps.
 
 \section{Results}
 \subsection{Practical considerations }
-\paragraph{Particpants} In our study, we selected 15 participants (7 male and 8 female). The  mean age was 30.5 years with standard deviation of 3 years. Their majors were: 4 medical students, 5 computer science PhD and Master students, and 6 from other disciplines (PhD and Master student in Communication Engineering, Management and sport science). All participants had normal vision by Ishihara\comment{correct?} test as explained in Section~\comment{??}. The cooperation of the participants was completely voluntary.
+\paragraph{Particpants} In our study, we selected 15 participants (7 male and 8 female). The  mean age was 30.5 years with standard deviation of 3 years. Their majors were: 4 medical students, 5 computer science PhD and Master students, and 6 from other disciplines (PhD and Master student in Communication Engineering, Management and sport science). All participants had normal vision by Ishihara color blindness test test as explained in Section \ref{procedure}. The cooperation of the participants was completely voluntary.
 
 \paragraph{Hardware and Software} The program ran on a computer with 13.3-inch (diagonal) LED-backlit display with IPS technology, 2560-by-1600 native resolution at 227 pixels per inch. As there was no interaction between the user and the GUI, i.e. no real-time rendering, the specification of the CPU, GPU and operating system is not mentioned. 
 
