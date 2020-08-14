@@ -1,32 +1,40 @@
-\begin{thebibliography}{1}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{TNY{\etalchar{+}}09}
 
-\bibitem{borgo}
+\bibitem[BDJ14]{borgo}
 R.~{Borgo}, J.~{Dearden}, and M.~W. {Jones}.
 \newblock Order of magnitude markers: An empirical study on large magnitude
   number detection.
 \newblock {\em IEEE Transactions on Visualization and Computer Graphics},
   20(12):2261--2270, 2014.
 
-\bibitem{cer}
+\bibitem[CIP{\etalchar{+}}01]{cer}
 Mara Cercignani, Matilde Inglese, Elisabetta Pagani, Giancarlo Comi, and
   Massimo Filippi.
 \newblock Mean diffusivity and fractional anisotropy histograms of patients
   with multiple sclerosis.
 \newblock {\em American Journal of Neuroradiology}, 22(5):952--958, 2001.
 
-\bibitem{chen}
+\bibitem[CZC{\etalchar{+}}20]{chen}
 J.~{Chen}, G.~{Zhang}, W.~{Chiou}, D.~H. {Laidlaw}, and A.~P. {Auchus}.
 \newblock Measuring the effects of scalar and spherical colormaps on ensembles
   of dmri tubes.
 \newblock {\em IEEE Transactions on Visualization and Computer Graphics},
   26(9):2818--2833, 2020.
 
-\bibitem{kindlmann}
+\bibitem[DHL09]{demiralp}
+Ç. {Demiralp}, J.~F. {Hughes}, and D.~H. {Laidlaw}.
+\newblock Coloring 3d line fields using boy’s real projective plane
+  immersion.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  15(6):1457--1464, 2009.
+
+\bibitem[KRC02]{kindlmann}
 G.~{Kindlmann}, E.~{Reinhard}, and S.~{Creem}.
 \newblock Face-based luminance matching for perceptual colormap generation.
 \newblock In {\em IEEE Visualization, 2002. VIS 2002.}, pages 299--306, 2002.
 
-\bibitem{moreland2019}
+\bibitem[Mor09]{moreland2019}
 Kenneth Moreland.
 \newblock Diverging color maps for scientific visualization.
 \newblock In George Bebis, Richard Boyle, Bahram Parvin, Darko Koracin,
@@ -35,19 +43,19 @@ Kenneth Moreland.
   Coming, editors, {\em Advances in Visual Computing}, pages 92--103, Berlin,
   Heidelberg, 2009. Springer Berlin Heidelberg.
 
-\bibitem{moreland2016}
+\bibitem[Mor16]{moreland2016}
 Kenneth Moreland.
 \newblock Why we use bad color maps and what you can do about it.
 \newblock {\em Electronic Imaging}, 2016:1--6, 02 2016.
 
-\bibitem{pajevic}
+\bibitem[PP99]{pajevic}
 Sinisa Pajevic and Carlo Pierpaoli.
 \newblock Color schemes to represent the orientation of anisotropic tissues
   from diffusion tensor data: Application to white matter fiber tract mapping
   in the human brain.
 \newblock {\em Magnetic Resonance in Medicine}, 42(3):526--540, 1999.
 
-\bibitem{tak}
+\bibitem[TNY{\etalchar{+}}09]{tak}
 Takehiko Takagi, Masaya Nakamura, Masayuki Yamada, Keigo Hikishima, Suketaka
   Momoshima, Kanehiro Fujiyoshi, Shinsuke Shibata, Hirotaka~James Okano,
   Yoshiaki Toyama, and Hideyuki Okano.
@@ -55,7 +63,7 @@ Takehiko Takagi, Masaya Nakamura, Masayuki Yamada, Keigo Hikishima, Suketaka
   Monitoring with diffusion tensor tractography.
 \newblock {\em NeuroImage}, 44(3):884 -- 892, 2009.
 
-\bibitem{henan}
+\bibitem[ZBG{\etalchar{+}}17]{henan}
 H.~{Zhao}, G.~W. {Bryant}, W.~{Griffin}, J.~E. {Terrill}, and J.~{Chen}.
 \newblock Validation of splitvectors encoding for quantitative visualization of
   large-magnitude-range vector fields.

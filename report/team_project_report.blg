@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2019)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: team_project_report.aux
+The style file: alpha.bst
+Illegal, another \bibstyle command---line 158 of file team_project_report.aux
+ : \bibstyle
+ :          {plain}
+I'm skipping whatever remains of this command
+Database file #1: biblio.bib
+Warning--I didn't find a database entry for "www.color-blindness.com"
+You've used 10 entries,
+            2543 wiz_defined-function locations,
+            628 strings with 6722 characters,
+and the built_in function-call counts, 5091 in all, are:
+= -- 480
+> -- 313
+< -- 4
++ -- 111
+- -- 111
+* -- 438
+:= -- 860
+add.period$ -- 31
+call.type$ -- 10
+change.case$ -- 78
+chr.to.int$ -- 10
+cite$ -- 10
+duplicate$ -- 164
+empty$ -- 331
+format.name$ -- 119
+if$ -- 1023
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 10
+newline$ -- 54
+num.names$ -- 32
+pop$ -- 59
+preamble$ -- 1
+purify$ -- 88
+quote$ -- 0
+skip$ -- 135
+stack$ -- 0
+substring$ -- 315
+swap$ -- 27
+text.length$ -- 4
+text.prefix$ -- 2
+top$ -- 0
+type$ -- 80
+warning$ -- 0
+while$ -- 43
+width$ -- 12
+write$ -- 135
+(There was 1 error message)

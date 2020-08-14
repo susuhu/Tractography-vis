@@ -54,8 +54,8 @@
 
 
 
-\author{alaleh}
-\title{The title of the thesis}
+\author{Susu Hu, Alaleh Kamel, Yu Kong, Zihan Zhang\\\small\textit{(In alphabetical order)}}
+\title{Visualization Of Brain Tractography Tubes}
 \birthday{1. Januar 1234}
 \placeofbirth{Dresden}
 \matno{123456, 123}
@@ -82,16 +82,24 @@ The report includes several parts as below: the literature review on related wor
 \chapter{Ralated work}
 
 
-\subsubsection*{Coolwarm colormap}
+\section{Measuring methods}
+In the study conducted by Chen et al, they tested six ensemble scalar color maps for fractional anisotropy and four spherical colormaps for ensemble orientation of tracts. The evaluation process is explicitly given and they also discuss the results of different visualizations. There are four types of tasks: ensemble identification, ensemble localization, ensemble comparison and ensemble association. In conclusion, the scalar color maps of blackbody, extended blackbody and coolwarm are the best choices to present the ensemble average. The number of hues have more impacts than the luminance. Spherical colormaps such as absolute and Boy’s surface can show the ensemble orientation of tracts better than the other ones \cite{moreland2019}. The evaluation methods in our project are inspired by the study.
+
+
+\section{Scalar colormaps}
+
+In our project, we use scalar colormaps to map the FA and MD value to the tracts. We choose 5 scalar colormaps which have different luminance and number of hues to compare which one to be the best choice for mapping ensemble values.
+
+\subsection{Coolwarm colormap}
 Coolwarm colormap is a diverging colormap mentioned by Kenneth Moreland. It is double-ended, monotonic on each side, with smooth transition in the middle.
 
-\subsubsection*{Kindlmann colormap}
+\subsection{Kindlmann colormap}
 Kindlmann colormap was introduced by Gordon Kindlmann, which samples the standard rainbow colors (going from magenta through blue and green to red), and matching against lightness increasing linearly from 0.0 to 1.0, \cite{kindlmann} making it much more perceptually viable. Extended Kindlmann colormap uses the colors from Kindlmann, but also adding more hues.
 
-\subsubsection*{Blackbody colormap and extended blackbody colormap}
+\subsection{Blackbody colormap and extended blackbody colormap}
 K. Moreland mentioned in his paper \cite{moreland2016} that the disadvantages of rainbow colormap in the area of visualization. Among them, he applied pseudocoloring on the 2D scalar field. In order to reduce the problem of color map contrast, he proposed two examples, blackbody and extended blackbody colormap. The blackbody colormap is based on the radiation of blackbody. It is inspired by the color of light emitted by objects kept at different temperatures. The color distribution is modified to pursue linear perception. The extended blackbody adds purple and blue hues to the blackbody colormap to improve the inconsistency of the yellow-white transition. 
 
-\subsubsection*{Isoluminant rainbow colormap}
+\subsection{Isoluminant rainbow colormap}
 Isoluminant rainbow is a multihued colormap where the luminance is equal. Isoluminant colormaps are invariant in contrast of lightness. In Kindlmann’s work, an isoluminant rainbow colormap is generated. There are 6 color points: red, yellow, green, cyan, blue and magenta which represented by RGB value and they are evenly spaced \cite{kindlmann}. Isoluminant rainbow colormap is poor at showing quantitative characteristics because it is not perceived ordered \cite{moreland2019}. 
 
 \section{Spherical colormaps}
@@ -99,14 +107,13 @@ Isoluminant rainbow is a multihued colormap where the luminance is equal. Isolum
 In spherical color mapping, the colors on the sphere can be used to represent the orientation. In this project we focus on two spherical color maps: absolute colormap and Boy’s surface colormap.
 
 
-\subsubsection*{Absolute value}
+\subsection{Absolute value}
 Pajevic and Pierpaoli use the absolute value method to solve the symmetry issues \cite{pajevic}. In absolute colormap, it is mirror and rotational symmetric at the same time. The unit value of the eigenvectors will be directly mapped to the RGB values of the colors. The sign of the eigenvector does not affect the results and only the absolute values will be considered. The advantage of this colormap is that it can show the direction change in all dimensions in 3D. Absolute colormap is a good choice for default spherical colormap \cite{moreland2019}.
 
-\subsubsection*{Boy’s Surface}  
-To be done…
+\subsection{Boy’s Surface}  
+Boy's surface is another color mapping method. It covers ...a
+Demiralp et al. introduced the advantages of Boy’s surface approach in \cite{demiralp}: (1) good locality and contrast by the finest details: meaning that, lines with similar direction map to similar colors. (2) smoothness: meaning that, the color changes smoothly as a line change smoothly and (3) angular uniformity \cite{chen}: meaning that with increasing the difference in tract orientation, the perceptual difference in their colors will increase as well.
 
-\section{Measuring methods}
-In the study conducted by Chen et al, they tested six ensemble scalar color maps for fractional anisotropy and four spherical colormaps for ensemble orientation of tracts. The evaluation process is explicitly given and they also discuss the results of different visualizations. There are four types of tasks: ensemble identification, ensemble localization, ensemble comparison and ensemble association. In conclusion, the scalar color maps of blackbody, extended blackbody and coolwarm are the best choices to present the ensemble average. The number of hues have more impacts than the luminance. Spherical colormaps such as absolute and Boy’s surface can show the ensemble orientation of tracts better than the other ones \cite{moreland2019}. The evaluation methods in our project are inspired by the study.
 
 \chapter{Basics}
 
@@ -118,8 +125,7 @@ Tractography visualization is built on the Diffusion Magnetic Resonance Imaging 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{iso_ani_diff}
-	\caption{Isotropic and anisotropic diffusion with  being eigenvalues. From
-https://neoreviews.aappublications.org/content/14/10/e483/tab-figures-data \comment{biblio}}
+	\caption{Isotropic and anisotropic diffusion with  being eigenvalues. (Source:https://neoreviews.aappublications.org/content/14/10/e483/tab-figures-data)}
 	\label{fig:iso_ani_diff}
 \end{figure}
 
@@ -175,6 +181,7 @@ Source: wiki \comment{biblio}}
 	\label{fig:interp}
 \end{figure}
 
+\clearpage
 \chapter{Implementation}
 
 We use the CGV framework for task solutions implement. This framework is a set of highly coupled C++ libraries designed to use OpenGL to quickly develop prototypes of performance-intensive applications in the field of visualization and computer graphics research. It is very suitable for window and graphics context creation, event processing, GUI creation, interaction, and many common computer graphics algorithms and data structures required in our task.
@@ -253,7 +260,7 @@ We converted Digital Imaging and Communications in Medicine (DICOM) file of brai
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.6\columnwidth]{2}
-    \caption{ Slice of DICOM  Source:  \cite{???}}
+    \caption{ Slice of DICOM}
     \label{fig:2}
 \end{figure}	
 
@@ -290,13 +297,13 @@ Since the dimensional order of data rendering in Opengl is in xzy-oder, and the 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.8\columnwidth]{6}
+    \includegraphics[width = 0.6\columnwidth]{6}
     \caption{Sketch of size matching and dimension swapping between FA/MD and Tractography.}
     \label{fig:6}
 \end{figure}	
 
 After mapping FA and MD to different color map values and mapping them to the corresponding tract positions, we get ten different brain maps. As it shown in the Figure~\ref{fig:7} and \ref{fig:8}.
-
+\clearpage
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.9\columnwidth]{7}
@@ -352,7 +359,7 @@ As discussed in Section~\comment{??}, FA and MA are the actual quantities that c
 \begin{itemize}
 	\item{Task 1:} The base question is: ``What is the average FA/MD values of the tracts?"
 	In this task, the participants will be asked to estimate the average FA and MD. The user does the estimation by an image of a small region in brain. Then he/she indicates the answer by choose from a finite number of labels on the colorbar. The instances of this question should include scalar color mappings and the choice of MD or FA (Figure~\ref{fig:task1-fa} and \ref{fig:task1-md}). Each combination should be repeated for several regions to increase reliability. 
-     	
+
 \begin{figure}[ht]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -494,6 +501,27 @@ The data collected for Task 3 was
 	\item Number of steps: the number of swaps done by the participant to finish the puzzle.
 \end{itemize}
 The users were asked to solve the puzzle by following the tracts instead of trial and error. However, not all followed this requirement. The resulting data points were therefore left out. The original data is gathered is shown in Figure~\ref{fig:rawData}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.9\columnwidth]{orig_data}
+    \caption{Original data from user study on Task 3.}
+    \label{fig:orig_data}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width = \columnwidth]{time_avg}
+	 \caption{ }
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width = \columnwidth]{move_avg}
+	 \caption{}
+    \end{subfigure}
+    \caption{Mean and standard deviation (STD) of a) duration and b) number of moves of the data from Figure~\ref{fig:orig_data} after removal of invalid data points.}
+    \label{fig:avg_data}
+\end{figure}
 
 \bibliography{biblio}
 \bibliographystyle{plain}

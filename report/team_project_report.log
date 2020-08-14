@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.17)  14 AUG 2020 18:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.17)  14 AUG 2020 21:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1164,23 +1164,23 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <17.28> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 68.
 
-(./team_project_report.toc)
+(./team_project_report.tocpdfTeX warning (ext4): destination with the same iden
+tifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.31 ...berline {5.4.2}Data}{21}{subsection.5.4.2}
+                                                  % [1
+
+
+
+
+
+
+])
 \tf@toc=\write6
 \openout6 = `team_project_report.toc'.
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.68 \begin{document}
-                      [1
-
-
-
-
-
-
-]
+ [2]
 chapter 1.
 
 Class scrreprt Warning: \float@addtolists detected!
@@ -1197,274 +1197,286 @@ Class scrreprt Warning: \float@addtolists detected!
 (scrreprt)              a package that still implements the
 (scrreprt)              deprecated \float@addtolist interface .
 
-[2
+[3
 
 
 ]
 chapter 2.
-[3
-
-]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 97.
- [4]
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 85.
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 93.
+[4
+
+] [5] [6]
 chapter 3.
-<figures/iso_ani_diff.png, id=87, 411.939pt x 121.8954pt>
+<figures/iso_ani_diff.png, id=110, 411.939pt x 121.8954pt>
 File: figures/iso_ani_diff.png Graphic file (type png)
 <use figures/iso_ani_diff.png>
-Package pdftex.def Info: figures/iso_ani_diff.png  used on input line 120.
+Package pdftex.def Info: figures/iso_ani_diff.png  used on input line 127.
 (pdftex.def)             Requested size: 318.66953pt x 94.29497pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--122
+Underfull \hbox (badness 10000) in paragraph at lines 128--128
 [][][]|\OT1/ptm/m/n/10.95 Isotropic and anisotropic dif-fu-sion with be-ing eig
-en-val-ues. From
+en-val-ues.
  []
 
-[5
+[7
 
  <./figures/iso_ani_diff.png>]
-<figures/coolwarm_bar.png, id=103, 19.7538pt x 159.9576pt>
+<figures/coolwarm_bar.png, id=124, 19.7538pt x 159.9576pt>
 File: figures/coolwarm_bar.png Graphic file (type png)
 <use figures/coolwarm_bar.png>
-Package pdftex.def Info: figures/coolwarm_bar.png  used on input line 153.
+Package pdftex.def Info: figures/coolwarm_bar.png  used on input line 159.
 (pdftex.def)             Requested size: 19.75374pt x 159.9572pt.
 
-Overfull \vbox (2.8773pt too high) detected at line 153
+Overfull \vbox (2.8773pt too high) detected at line 159
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/interp.png, id=104, 146.4672pt x 146.4672pt>
+<figures/interp.png, id=125, 146.4672pt x 146.4672pt>
 File: figures/interp.png Graphic file (type png)
 <use figures/interp.png>
-Package pdftex.def Info: figures/interp.png  used on input line 172.
+Package pdftex.def Info: figures/interp.png  used on input line 178.
 (pdftex.def)             Requested size: 182.09488pt x 182.11134pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6] [7 <./figures/coolwarm_bar.png> <./figures/interp.png>]
+[8] [9 <./figures/coolwarm_bar.png> <./figures/interp.png>]
 chapter 4.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 186.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 193.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 186.
-LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 192.
- [8
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 193.
+ [10
+
 
 ]
-<figures/1.png, id=133, 516.93124pt x 150.5625pt>
+<figures/1.png, id=154, 516.93124pt x 150.5625pt>
 File: figures/1.png Graphic file (type png)
 <use figures/1.png>
-Package pdftex.def Info: figures/1.png  used on input line 209.
+Package pdftex.def Info: figures/1.png  used on input line 216.
 (pdftex.def)             Requested size: 364.19672pt x 106.07994pt.
-<figures/absolute.png, id=134, 1124.2pt x 843.15pt>
+<figures/absolute.png, id=155, 1124.2pt x 843.15pt>
 File: figures/absolute.png Graphic file (type png)
 <use figures/absolute.png>
-Package pdftex.def Info: figures/absolute.png  used on input line 224.
+Package pdftex.def Info: figures/absolute.png  used on input line 231.
 (pdftex.def)             Requested size: 159.33823pt x 119.49399pt.
-<figures/absolute_top.png, id=135, 1124.2pt x 843.15pt>
+<figures/absolute_top.png, id=156, 1124.2pt x 843.15pt>
 File: figures/absolute_top.png Graphic file (type png)
 <use figures/absolute_top.png>
-Package pdftex.def Info: figures/absolute_top.png  used on input line 225.
+Package pdftex.def Info: figures/absolute_top.png  used on input line 232.
 (pdftex.def)             Requested size: 136.57463pt x 102.42157pt.
-<figures/absolute_octant.png, id=136, 562.14015pt x 421.575pt>
+<figures/absolute_octant.png, id=157, 562.14015pt x 421.575pt>
 File: figures/absolute_octant.png Graphic file (type png)
 <use figures/absolute_octant.png>
-Package pdftex.def Info: figures/absolute_octant.png  used on input line 226.
+Package pdftex.def Info: figures/absolute_octant.png  used on input line 233.
 (pdftex.def)             Requested size: 136.57463pt x 102.42157pt.
- [9 <./figures/1.png>]
-<figures/boys.png, id=149, 562.14015pt x 421.575pt>
+ [11 <./figures/1.png>]
+<figures/boys.png, id=170, 562.14015pt x 421.575pt>
 File: figures/boys.png Graphic file (type png)
 <use figures/boys.png>
-Package pdftex.def Info: figures/boys.png  used on input line 244.
+Package pdftex.def Info: figures/boys.png  used on input line 251.
 (pdftex.def)             Requested size: 150.2314pt x 112.66245pt.
-<figures/boys_zIn_yRight.png, id=150, 562.14015pt x 421.575pt>
+<figures/boys_zIn_yRight.png, id=171, 562.14015pt x 421.575pt>
 File: figures/boys_zIn_yRight.png Graphic file (type png)
 <use figures/boys_zIn_yRight.png>
-Package pdftex.def Info: figures/boys_zIn_yRight.png  used on input line 245.
+Package pdftex.def Info: figures/boys_zIn_yRight.png  used on input line 252.
 (pdftex.def)             Requested size: 136.57463pt x 102.42157pt.
-<figures/boys_zOut_yRight.png, id=151, 562.14015pt x 421.575pt>
+<figures/boys_zOut_yRight.png, id=172, 562.14015pt x 421.575pt>
 File: figures/boys_zOut_yRight.png Graphic file (type png)
 <use figures/boys_zOut_yRight.png>
-Package pdftex.def Info: figures/boys_zOut_yRight.png  used on input line 246.
+Package pdftex.def Info: figures/boys_zOut_yRight.png  used on input line 253.
 (pdftex.def)             Requested size: 136.57463pt x 102.42157pt.
-<figures/2.png, id=153, 439.6425pt x 463.7325pt>
+<figures/2.png, id=174, 439.6425pt x 463.7325pt>
 File: figures/2.png Graphic file (type png)
 <use figures/2.png>
-Package pdftex.def Info: figures/2.png  used on input line 255.
+Package pdftex.def Info: figures/2.png  used on input line 262.
 (pdftex.def)             Requested size: 273.14928pt x 288.12677pt.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 256.
-
-
-LaTeX Warning: Citation `???' on page 10 undefined on input line 256.
-
-
-LaTeX Warning: Citation `???' on page 10 undefined on input line 256.
-
-<figures/3.png, id=155, 615.29875pt x 288.07625pt>
+<figures/3.png, id=176, 615.29875pt x 288.07625pt>
 File: figures/3.png Graphic file (type png)
 <use figures/3.png>
-Package pdftex.def Info: figures/3.png  used on input line 263.
+Package pdftex.def Info: figures/3.png  used on input line 270.
 (pdftex.def)             Requested size: 318.66953pt x 149.19829pt.
-[10 <./figures/absolute.png (PNG copy)> <./figures/absolute_top.png (PNG copy)>
- <./figures/absolute_octant.png (PNG copy)> <./figures/boys.png (PNG copy)> <./
-figures/boys_zIn_yRight.png (PNG copy)> <./figures/boys_zOut_yRight.png (PNG co
-py)>]
-<figures/4.png, id=166, 555.07375pt x 166.6225pt>
+ [12 <./figures/absolute.png (PNG copy)> <./figures/absolute_top.png (PNG copy)
+> <./figures/absolute_octant.png (PNG copy)> <./figures/boys.png (PNG copy)> <.
+/figures/boys_zIn_yRight.png (PNG copy)> <./figures/boys_zOut_yRight.png (PNG c
+opy)>]
+<figures/4.png, id=187, 555.07375pt x 166.6225pt>
 File: figures/4.png Graphic file (type png)
 <use figures/4.png>
-Package pdftex.def Info: figures/4.png  used on input line 274.
+Package pdftex.def Info: figures/4.png  used on input line 281.
 (pdftex.def)             Requested size: 364.19672pt x 109.3254pt.
-<figures/5.png, id=168, 677.53125pt x 354.32375pt>
+<figures/5.png, id=189, 677.53125pt x 354.32375pt>
 File: figures/5.png Graphic file (type png)
 <use figures/5.png>
-Package pdftex.def Info: figures/5.png  used on input line 283.
+Package pdftex.def Info: figures/5.png  used on input line 290.
 (pdftex.def)             Requested size: 364.19672pt x 190.46692pt.
- [11 <./figures/2.png>]
-<figures/6.png, id=178, 630.355pt x 322.20375pt>
+ [13 <./figures/2.png>]
+<figures/6.png, id=198, 630.355pt x 322.20375pt>
 File: figures/6.png Graphic file (type png)
 <use figures/6.png>
-Package pdftex.def Info: figures/6.png  used on input line 293.
-(pdftex.def)             Requested size: 364.19672pt x 186.16049pt.
-<figures/7.png, id=181, 963.6pt x 212.795pt>
+Package pdftex.def Info: figures/6.png  used on input line 300.
+(pdftex.def)             Requested size: 273.14928pt x 139.61668pt.
+ [14 <./figures/3.png> <./figures/4.png>] [15 <./figures/5.png> <./figures/6.pn
+g>]
+<figures/7.png, id=216, 963.6pt x 212.795pt>
 File: figures/7.png Graphic file (type png)
 <use figures/7.png>
-Package pdftex.def Info: figures/7.png  used on input line 302.
+Package pdftex.def Info: figures/7.png  used on input line 309.
 (pdftex.def)             Requested size: 409.71696pt x 90.47725pt.
-<figures/8.png, id=182, 956.57375pt x 214.8025pt>
+<figures/8.png, id=217, 956.57375pt x 214.8025pt>
 File: figures/8.png Graphic file (type png)
 <use figures/8.png>
-Package pdftex.def Info: figures/8.png  used on input line 309.
+Package pdftex.def Info: figures/8.png  used on input line 316.
 (pdftex.def)             Requested size: 409.71696pt x 92.00273pt.
- [12 <./figures/3.png> <./figures/4.png>] [13 <./figures/5.png> <./figures/6.pn
-g> <./figures/7.png>] [14 <./figures/8.png>]
+ [16
+
+ <./figures/7.png> <./figures/8.png>]
 chapter 5.
-<figures/task-types.jpg, id=209, 822.07124pt x 467.7475pt>
+<figures/task-types.jpg, id=228, 822.07124pt x 467.7475pt>
 File: figures/task-types.jpg Graphic file (type jpg)
 <use figures/task-types.jpg>
-Package pdftex.def Info: figures/task-types.jpg  used on input line 333.
+Package pdftex.def Info: figures/task-types.jpg  used on input line 340.
 (pdftex.def)             Requested size: 409.71696pt x 233.12375pt.
-[15
+[17
 
-] [16 <./figures/task-types.jpg>]
-<figures/blackbody-fa.png, id=237, 616.3025pt x 501.875pt>
+] [18 <./figures/task-types.jpg>]
+<figures/blackbody-fa.png, id=256, 616.3025pt x 501.875pt>
 File: figures/blackbody-fa.png Graphic file (type png)
 <use figures/blackbody-fa.png>
-Package pdftex.def Info: figures/blackbody-fa.png  used on input line 359.
+Package pdftex.def Info: figures/blackbody-fa.png  used on input line 366.
 (pdftex.def)             Requested size: 204.85847pt x 166.82156pt.
-<figures/coolwarm-fa.png, id=238, 482.80376pt x 396.48125pt>
+<figures/coolwarm-fa.png, id=257, 482.80376pt x 396.48125pt>
 File: figures/coolwarm-fa.png Graphic file (type png)
 <use figures/coolwarm-fa.png>
-Package pdftex.def Info: figures/coolwarm-fa.png  used on input line 364.
+Package pdftex.def Info: figures/coolwarm-fa.png  used on input line 371.
 (pdftex.def)             Requested size: 204.85847pt x 168.22702pt.
-<figures/ekindlmann-fa.png, id=239, 434.62375pt x 365.365pt>
+<figures/ekindlmann-fa.png, id=258, 434.62375pt x 365.365pt>
 File: figures/ekindlmann-fa.png Graphic file (type png)
 <use figures/ekindlmann-fa.png>
-Package pdftex.def Info: figures/ekindlmann-fa.png  used on input line 368.
+Package pdftex.def Info: figures/ekindlmann-fa.png  used on input line 375.
 (pdftex.def)             Requested size: 204.85847pt x 172.21774pt.
-<figures/eblackbody-fa.png, id=240, 440.64626pt x 368.37625pt>
+<figures/eblackbody-fa.png, id=259, 440.64626pt x 368.37625pt>
 File: figures/eblackbody-fa.png Graphic file (type png)
 <use figures/eblackbody-fa.png>
-Package pdftex.def Info: figures/eblackbody-fa.png  used on input line 373.
+Package pdftex.def Info: figures/eblackbody-fa.png  used on input line 380.
 (pdftex.def)             Requested size: 204.85847pt x 171.25945pt.
-<figures/isorainbow-fa.png, id=241, 448.67625pt x 365.365pt>
+<figures/isorainbow-fa.png, id=260, 448.67625pt x 365.365pt>
 File: figures/isorainbow-fa.png Graphic file (type png)
 <use figures/isorainbow-fa.png>
-Package pdftex.def Info: figures/isorainbow-fa.png  used on input line 377.
+Package pdftex.def Info: figures/isorainbow-fa.png  used on input line 384.
 (pdftex.def)             Requested size: 204.85847pt x 166.81555pt.
-<figures/blackbody-md.png, id=242, 440.64626pt x 358.33875pt>
+<figures/blackbody-md.png, id=261, 440.64626pt x 358.33875pt>
 File: figures/blackbody-md.png Graphic file (type png)
 <use figures/blackbody-md.png>
-Package pdftex.def Info: figures/blackbody-md.png  used on input line 387.
+Package pdftex.def Info: figures/blackbody-md.png  used on input line 394.
 (pdftex.def)             Requested size: 204.85847pt x 166.59299pt.
-<figures/coolwarm-md.png, id=243, 445.665pt x 364.36125pt>
+<figures/coolwarm-md.png, id=262, 445.665pt x 364.36125pt>
 File: figures/coolwarm-md.png Graphic file (type png)
 <use figures/coolwarm-md.png>
-Package pdftex.def Info: figures/coolwarm-md.png  used on input line 392.
+Package pdftex.def Info: figures/coolwarm-md.png  used on input line 399.
 (pdftex.def)             Requested size: 204.85847pt x 167.48589pt.
-<figures/ekindlmann-md.png, id=244, 541.02126pt x 437.635pt>
+<figures/ekindlmann-md.png, id=263, 541.02126pt x 437.635pt>
 File: figures/ekindlmann-md.png Graphic file (type png)
 <use figures/ekindlmann-md.png>
-Package pdftex.def Info: figures/ekindlmann-md.png  used on input line 396.
+Package pdftex.def Info: figures/ekindlmann-md.png  used on input line 403.
 (pdftex.def)             Requested size: 204.85847pt x 165.7087pt.
-<figures/eblackbody-md.png, id=245, 549.05125pt x 441.65pt>
+<figures/eblackbody-md.png, id=264, 549.05125pt x 441.65pt>
 File: figures/eblackbody-md.png Graphic file (type png)
 <use figures/eblackbody-md.png>
-Package pdftex.def Info: figures/eblackbody-md.png  used on input line 401.
+Package pdftex.def Info: figures/eblackbody-md.png  used on input line 408.
 (pdftex.def)             Requested size: 204.85847pt x 164.7827pt.
-<figures/isorainbow-md.png, id=246, 338.26375pt x 265.99374pt>
+<figures/isorainbow-md.png, id=265, 338.26375pt x 265.99374pt>
 File: figures/isorainbow-md.png Graphic file (type png)
 <use figures/isorainbow-md.png>
-Package pdftex.def Info: figures/isorainbow-md.png  used on input line 405.
+Package pdftex.def Info: figures/isorainbow-md.png  used on input line 412.
 (pdftex.def)             Requested size: 204.85847pt x 161.09514pt.
-<figures/isorainbow-fa-task2.png, id=248, 652.4375pt x 531.9875pt>
+<figures/isorainbow-fa-task2.png, id=267, 652.4375pt x 531.9875pt>
 File: figures/isorainbow-fa-task2.png Graphic file (type png)
 <use figures/isorainbow-fa-task2.png>
-Package pdftex.def Info: figures/isorainbow-fa-task2.png  used on input line 41
-8.
+Package pdftex.def Info: figures/isorainbow-fa-task2.png  used on input line 42
+5.
 (pdftex.def)             Requested size: 364.19672pt x 296.96935pt.
-<figures/isorainbow-md-task2.png, id=249, 609.27625pt x 452.69125pt>
+<figures/isorainbow-md-task2.png, id=268, 609.27625pt x 452.69125pt>
 File: figures/isorainbow-md-task2.png Graphic file (type png)
 <use figures/isorainbow-md-task2.png>
-Package pdftex.def Info: figures/isorainbow-md-task2.png  used on input line 41
-9.
+Package pdftex.def Info: figures/isorainbow-md-task2.png  used on input line 42
+6.
 (pdftex.def)             Requested size: 364.19672pt x 270.60834pt.
-<figures/absolute-zoomed.png, id=251, 785.93625pt x 515.9275pt>
+<figures/absolute-zoomed.png, id=270, 785.93625pt x 515.9275pt>
 File: figures/absolute-zoomed.png Graphic file (type png)
 <use figures/absolute-zoomed.png>
-Package pdftex.def Info: figures/absolute-zoomed.png  used on input line 439.
+Package pdftex.def Info: figures/absolute-zoomed.png  used on input line 446.
 (pdftex.def)             Requested size: 223.07214pt x 146.43468pt.
-<figures/boy's-zoomed.png, id=252, 711.65875pt x 482.80376pt>
+<figures/boy's-zoomed.png, id=271, 711.65875pt x 482.80376pt>
 File: figures/boy's-zoomed.png Graphic file (type png)
 <use figures/boy's-zoomed.png>
-Package pdftex.def Info: figures/boy's-zoomed.png  used on input line 440.
+Package pdftex.def Info: figures/boy's-zoomed.png  used on input line 447.
 (pdftex.def)             Requested size: 204.85847pt x 138.97812pt.
-<figures/absolute-puzzle.png, id=254, 469.755pt x 201.75375pt>
+<figures/absolute-puzzle.png, id=273, 469.755pt x 201.75375pt>
 File: figures/absolute-puzzle.png Graphic file (type png)
 <use figures/absolute-puzzle.png>
-Package pdftex.def Info: figures/absolute-puzzle.png  used on input line 449.
+Package pdftex.def Info: figures/absolute-puzzle.png  used on input line 456.
 (pdftex.def)             Requested size: 223.07214pt x 95.8063pt.
-<figures/boy's-puzzle.png, id=255, 458.71375pt x 202.7575pt>
+<figures/boy's-puzzle.png, id=274, 458.71375pt x 202.7575pt>
 File: figures/boy's-puzzle.png Graphic file (type png)
 <use figures/boy's-puzzle.png>
-Package pdftex.def Info: figures/boy's-puzzle.png  used on input line 450.
+Package pdftex.def Info: figures/boy's-puzzle.png  used on input line 457.
 (pdftex.def)             Requested size: 218.51524pt x 96.58615pt.
-<figures/Ishihara.jpg, id=257, 237.13594pt x 219.82124pt>
+<figures/Ishihara.jpg, id=276, 237.13594pt x 219.82124pt>
 File: figures/Ishihara.jpg Graphic file (type jpg)
 <use figures/Ishihara.jpg>
-Package pdftex.def Info: figures/Ishihara.jpg  used on input line 465.
+Package pdftex.def Info: figures/Ishihara.jpg  used on input line 472.
 (pdftex.def)             Requested size: 273.14928pt x 253.21507pt.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 473.
 
 
-LaTeX Warning: Citation `www.color-blindness.com' on page 17 undefined on input
- line 466.
+LaTeX Warning: Citation `www.color-blindness.com' on page 19 undefined on input
+ line 473.
 
 
-LaTeX Warning: Citation `www.color-blindness.com' on page 17 undefined on input
- line 466.
+LaTeX Warning: Citation `www.color-blindness.com' on page 19 undefined on input
+ line 473.
 
-[17] [18]
+[19] [20]
 
-LaTeX Warning: Reference `fig:rawData' on page 19 undefined on input line 496.
+LaTeX Warning: Reference `fig:rawData' on page 21 undefined on input line 503.
 
-(./team_project_report.bbl [19] [20 <./figures/blackbody-fa.png> <./figures/coo
+<figures/orig_data.pdf, id=296, 386.44376pt x 271.0125pt>
+File: figures/orig_data.pdf Graphic file (type pdf)
+<use figures/orig_data.pdf>
+Package pdftex.def Info: figures/orig_data.pdf  used on input line 507.
+(pdftex.def)             Requested size: 409.71696pt x 287.3339pt.
+<figures/time_avg.pdf, id=297, 234.8775pt x 151.56625pt>
+File: figures/time_avg.pdf Graphic file (type pdf)
+<use figures/time_avg.pdf>
+Package pdftex.def Info: figures/time_avg.pdf  used on input line 515.
+(pdftex.def)             Requested size: 204.85847pt x 132.1946pt.
+<figures/move_avg.pdf, id=298, 234.8775pt x 151.56625pt>
+File: figures/move_avg.pdf Graphic file (type pdf)
+<use figures/move_avg.pdf>
+Package pdftex.def Info: figures/move_avg.pdf  used on input line 519.
+(pdftex.def)             Requested size: 204.85847pt x 132.1946pt.
+(./team_project_report.bbl [21] [22 <./figures/blackbody-fa.png> <./figures/coo
 lwarm-fa.png> <./figures/ekindlmann-fa.png> <./figures/eblackbody-fa.png> <./fi
-gures/isorainbow-fa.png>] [21 <./figures/blackbody-md.png> <./figures/coolwarm-
+gures/isorainbow-fa.png>] [23 <./figures/blackbody-md.png> <./figures/coolwarm-
 md.png> <./figures/ekindlmann-md.png> <./figures/eblackbody-md.png> <./figures/
-isorainbow-md.png>] [22 <./figures/isorainbow-fa-task2.png> <./figures/isorainb
-ow-md-task2.png>] [23 <./figures/absolute-zoomed.png> <./figures/boy's-zoomed.p
+isorainbow-md.png>] [24 <./figures/isorainbow-fa-task2.png> <./figures/isorainb
+ow-md-task2.png>] [25 <./figures/absolute-zoomed.png> <./figures/boy's-zoomed.p
 ng> <./figures/absolute-puzzle.png> <./figures/boy's-puzzle.png> <./figures/Ish
-ihara.jpg>]
+ihara.jpg>] [26 <./figures/orig_data.pdf> <./figures/time_avg.pdf> <./figures/m
+ove_avg.pdf>]
 chapter without number
-[24
+[27
 
-]) [25] [26
+]) [28] [29
 
 
 
@@ -1473,34 +1485,31 @@ chapter without number
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 501.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 501.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 529.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 529.
  (./team_project_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 501.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 501.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 529.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 529.
 Package rerunfilecheck Info: File `team_project_report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 501.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 529.
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 68 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 23510 strings out of 492616
- 432964 string characters out of 6129480
- 637969 words of memory out of 5000000
- 26879 multiletter control sequences out of 15000+600000
- 36157 words of font info for 85 fonts, out of 8000000 for 9000
+ 23545 strings out of 492616
+ 433586 string characters out of 6129480
+ 638361 words of memory out of 5000000
+ 26903 multiletter control sequences out of 15000+600000
+ 37841 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,14n,68p,9106b,2001s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,14n,68p,9106b,1998s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -1515,10 +1524,10 @@ cal/texlive/2019/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/tex
 live/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/
 texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on team_project_report.pdf (27 pages, 29783907 bytes).
+Output written on team_project_report.pdf (30 pages, 29838371 bytes).
 PDF statistics:
- 457 PDF objects out of 1000 (max. 8388607)
- 347 compressed objects within 4 object streams
- 103 named destinations out of 1000 (max. 500000)
- 348 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 549 PDF objects out of 1000 (max. 8388607)
+ 420 compressed objects within 5 object streams
+ 110 named destinations out of 1000 (max. 500000)
+ 419 words of extra memory for PDF output out of 10000 (max. 10000000)
 
