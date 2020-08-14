@@ -33,9 +33,9 @@
 \newcommand{\prob}[1]{\mathrm{Pr}\! \left(#1\right)}
 \newcommand{\probC}[1]{\mathrm{Pr}_\epsilon\! \left(#1\right)}
 
-\newcommand{\comment}[1]{{\color{red}[\textit{#1}]}}
+%\newcommand{\comment}[1]{{\color{red}[\textit{#1}]}}
 
-%\newcommand{\comment}[1]{}
+\newcommand{\comment}[1]{}
 
 \newcommand{\eqn}[1]{(\ref{#1})}
 
@@ -67,6 +67,8 @@
 
 \begin{document}
 
+\chapter*{Acknowledgment}
+The authors would like to express their appreciation for the guidelines given by Professor Gumhold, the mentorship and supervision of Nishant Kumar and essential help of David Gro{\ss}.
 
 \chapter{Introduction}
 
@@ -111,8 +113,13 @@ In spherical color mapping, the colors on the sphere can be used to represent th
 Pajevic and Pierpaoli use the absolute value method to solve the symmetry issues \cite{pajevic}. In absolute colormap, it is mirror and rotational symmetric at the same time. The unit value of the eigenvectors will be directly mapped to the RGB values of the colors. The sign of the eigenvector does not affect the results and only the absolute values will be considered. The advantage of this colormap is that it can show the direction change in all dimensions in 3D. Absolute colormap is a good choice for default spherical colormap \cite{moreland2019}.
 
 \subsection{Boy’s Surface}  
-Boy's surface is another color mapping method. It covers ...a
-Demiralp et al. introduced the advantages of Boy’s surface approach in \cite{demiralp}: (1) good locality and contrast by the finest details: meaning that, lines with similar direction map to similar colors. (2) smoothness: meaning that, the color changes smoothly as a line change smoothly and (3) angular uniformity \cite{chen}: meaning that with increasing the difference in tract orientation, the perceptual difference in their colors will increase as well.
+Boy's surface is another color mapping method. It is based on rather complex mathematical concepts from the field topology. 
+Demiralp et al. \cite{demiralp} introduced the advantages of Boy’s surface approach as 
+\begin{enumerate}
+	\item good locality and contrast by the finest details: meaning that lines with similar direction map to similar colors.
+	\item smoothness: meaning that, the color changes smoothly as a line change smoothly and 
+	\item angular uniformity \cite{chen}: meaning that with increasing the difference in tract orientation, the perceptual difference in their colors will increase as well.
+\end{enumerate}
 
 
 \chapter{Basics}
@@ -125,7 +132,7 @@ Tractography visualization is built on the Diffusion Magnetic Resonance Imaging 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{iso_ani_diff}
-	\caption{Isotropic and anisotropic diffusion with  being eigenvalues. (Source:https://neoreviews.aappublications.org/content/14/10/e483/tab-figures-data)}
+	\caption{Isotropic and anisotropic diffusion with  being eigenvalues. \\ (Source: https://neoreviews.aappublications.org/content/14/10/e483/tab-figures-data)}
 	\label{fig:iso_ani_diff}
 \end{figure}
 
@@ -135,22 +142,8 @@ Using dMRI, the apparent diffusion coefficient at each voxel of the image can be
 \section{Fractional Anisotropy and Mean Diffusivity }
 One way to measure the anisotropic diffusion is fractional anisotropy (FA), which is a scalar ratio from 0 to 1, with 0 representing isotropic and 1 as an ideal linear diffusion. It represents the degree of alignment of cellular structures within fiber tracts and their structural integrity \cite{cer}.
 
-Another often used measurement is mean diffusivity (MD), which describes the average mobility of water molecules. It is equal to one third of the trace of the diffusion tensor. MD is affected by cellular size and integrity and independent of any tissue directionality. \cite{cer}
 
-Here is the formula of FA and MD $\lambda_1, \lambda_2, \lambda_3$  are Eigenvalues of the diffusion tensor.
-
-\begin{equation}
-	FA=\sqrt{\frac{3 \sum_{i=1}^{3}(\lambda_i-\bar{l\lambda})^2}{2\sum_{i=1}^3\lambda_i^2}}, \quad FA\text{ in } [0,1]
-\end{equation}
-
-\begin{equation}
-	MD=\frac{D_{xx}+D_{yy}+D_{zz}}{3}= \frac{\lambda_1+\lambda_2+\lambda_3}{3}
-\end{equation}
-
-\section{ Color mapping interpolation }
-With the known discrete voxel FA/MD value, a simple linear interpolation method is used to construct new data points in between, thus obtaining a fiber track with continuous colormapping.
-
-\begin{table}[h]
+\begin{table}[ht]
 \caption{coolwarm colormap example}
 \centering
 \begin{tabular}{|c|c|c|c|c|}
@@ -168,20 +161,38 @@ colormap bar     & FA value & RGB\_r & RGB\_g & RGB\_b   \\ \hline
 \label{tbl:coolwarm}
 \end{table}
 
+Another often used measurement is mean diffusivity (MD), which describes the average mobility of water molecules. It is equal to one third of the trace of the diffusion tensor. MD is affected by cellular size and integrity and independent of any tissue directionality. \cite{cer}
+
+Here is the formula of FA and MD $\lambda_1, \lambda_2, \lambda_3$  are Eigenvalues of the diffusion tensor.
+
+\begin{equation}
+	FA=\sqrt{\frac{3 \sum_{i=1}^{3}(\lambda_i-\bar{l\lambda})^2}{2\sum_{i=1}^3\lambda_i^2}}, \quad FA\text{ in } [0,1]
+\end{equation}
+
+\begin{equation}
+	MD=\frac{D_{xx}+D_{yy}+D_{zz}}{3}= \frac{\lambda_1+\lambda_2+\lambda_3}{3}
+\end{equation}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.35\textwidth]{interp}
+	\caption{ linear interpolation.}
+	\label{fig:interp}
+\end{figure}
+
+
+
+\section{ Color mapping interpolation }
+With the known discrete voxel FA/MD value, a simple linear interpolation method is used to construct new data points in between, thus obtaining a fiber track with continuous colormapping.
+
+
+
 Here is the linear interpolation formula:
 \begin{equation}
  \frac{(y-y_0)}{(x-x_0)} = \frac{(y_1-y_0)}{(x_1-x_0)}
 \end{equation}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.4\textwidth]{interp}
-	\caption{ linear interpolation 
-Source: wiki \comment{biblio}}
-	\label{fig:interp}
-\end{figure}
 
-\clearpage
 \chapter{Implementation}
 
 We use the CGV framework for task solutions implement. This framework is a set of highly coupled C++ libraries designed to use OpenGL to quickly develop prototypes of performance-intensive applications in the field of visualization and computer graphics research. It is very suitable for window and graphics context creation, event processing, GUI creation, interaction, and many common computer graphics algorithms and data structures required in our task.
@@ -221,7 +232,7 @@ These colormaps are recommended by Moreland et al., including: coolwarm, extende
 \subsection*{Spherical colormappings}
 The spherical color mappings are
 \begin{itemize}
-	\item Absolute value method [cite] is a commonly used color mapping which maps the major axes, to major color components Red, Greed and Blue. The mapping is defined as 
+	\item Absolute value method \cite{Pierpaoli1997OhNO} is a commonly used color mapping which maps the major axes, to major color components Red, Greed and Blue. The mapping is defined as 
 	\begin{equation}
 		f(\mathbf{s})=[|s_x|, \ |s_y|, \ |s_z|]^T
 	\end{equation}
@@ -231,7 +242,7 @@ The spherical color mappings are
 		\includegraphics[width=0.35\textwidth]{absolute}
 		\includegraphics[width=0.3\textwidth]{absolute_top}
 		\includegraphics[width=0.3\textwidth]{absolute_octant}
-		\caption{Absolute value method, colored sphere.}
+		\caption{Colored unit sphere by Absolute Value method. Left: overall 3D view, middle: top view, right: one octant. Notice the symmetry in the color mapping.}
 	\end{figure}
 	
 	\item Boy's surface method is a more complicated color mapping scheme based on the immersion of Real Projective Plane in $\mathbb{R}^2$. The mapping is defined as 
@@ -251,7 +262,7 @@ The functions $h_j$ are the spherical harmonics, a similar concept to harmonics 
 		\includegraphics[width=0.33\textwidth]{boys}
 		\includegraphics[width=0.3\textwidth]{boys_zIn_yRight}
 		\includegraphics[width=0.3\textwidth]{boys_zOut_yRight}
-		\caption{Boy's surface method, colored sphere.}
+		\caption{Colored unit sphere by Boy's Surface method. Left: overall 3D view, middle: bottom view, right: top view.}
 	\end{figure}
 
 \section{Data acquirement}
@@ -303,7 +314,7 @@ Since the dimensional order of data rendering in Opengl is in xzy-oder, and the 
 \end{figure}	
 
 After mapping FA and MD to different color map values and mapping them to the corresponding tract positions, we get ten different brain maps. As it shown in the Figure~\ref{fig:7} and \ref{fig:8}.
-\clearpage
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.9\columnwidth]{7}
@@ -348,18 +359,6 @@ As a starting point for design of the user study, i.e. the questionnaire, the fo
 	\item Scalar color mapping based on FA and MD should affect the user's ability to estimate the average over a region.
 \end{enumerate}
 
-\section{Task presentation}
-He we formulate the specific tasks according to the expectations mentioned in the previous section. The following tasks are inspired by the works of Chen et al. \cite{chen}, Henan et al. \cite{henan} and Borgo et al. \cite{borgo}.
-
-By ``Base Question" we refer to a basic question from which several questions are implemented in the questionnaire.
-
-\paragraph{A. Ensemble Average}
-
-As discussed in Section~\comment{??}, FA and MA are the actual quantities that can be related the state of a region in brain. Clearly, the quantity in a voxel or very small part of the brain does not reveal much. The user likely intends to compare larger regions by estimating a gross or average value of the quantity.
-\begin{itemize}
-	\item{Task 1:} The base question is: ``What is the average FA/MD values of the tracts?"
-	In this task, the participants will be asked to estimate the average FA and MD. The user does the estimation by an image of a small region in brain. Then he/she indicates the answer by choose from a finite number of labels on the colorbar. The instances of this question should include scalar color mappings and the choice of MD or FA (Figure~\ref{fig:task1-fa} and \ref{fig:task1-md}). Each combination should be repeated for several regions to increase reliability. 
-
 \begin{figure}[ht]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -384,7 +383,7 @@ As discussed in Section~\comment{??}, FA and MA are the actual quantities that c
     	\includegraphics[width =  \columnwidth]{isorainbow-fa}
 	\caption{ }
     \end{subfigure}	
-    \caption{Illustration of the questions for back of the brain, based on Task 1 for average FA and a)Blackbody b)Coolwarm c)Extended Kindlmann d)Extended Blackbody e)Isoluminant-rainbow }
+    \caption{Illustration of the questions for back of the brain, based on Task 1 for average FA and a) Blackbody b) Coolwarm c) Extended Kindlmann d) Extended Blackbody e) Isoluminant-rainbow }
     \label{fig:task1-fa}
 \end{figure}
 
@@ -412,21 +411,25 @@ As discussed in Section~\comment{??}, FA and MA are the actual quantities that c
     	\includegraphics[width =  \columnwidth]{isorainbow-md}
 	\caption{ }
     \end{subfigure}	
-    \caption{Illustration of the questions for back of the brain, based on Task 1 for average MD and a)Blackbody b)Coolwarm c)Extended Kindlmann d)Extended Blackbody e)Isoluminant-rainbow }
+    \caption{Illustration of the questions for back of the brain, based on Task 1 for average MD and a) Blackbody b) Coolwarm c) Extended Kindlmann d) Extended Blackbody e) Isoluminant-rainbow }
     \label{fig:task1-md}
 \end{figure}
 
+\section{Task presentation}
+He we formulate the specific tasks according to the expectations mentioned in the previous section. The following tasks are inspired by the works of Chen et al. \cite{chen}, Henan et al. \cite{henan} and Borgo et al. \cite{borgo}.
+
+By ``Base Question" we refer to a basic question from which several questions are implemented in the questionnaire.
+
+\paragraph{A. Ensemble Average}
+
+As discussed in before, FA and MA are the actual quantities that can be related to the state of a region in brain. Clearly, the quantity in a voxel or very small part of the brain does not reveal much. The user likely intends to compare larger regions by estimating a gross or average value of the quantity.
+\begin{itemize}
+	\item{Task 1:} The base question is: ``What is the average FA/MD values of the tracts?"
+	In this task, the participants will be asked to estimate the average FA and MD. The user does the estimation by an image of a small region in brain. Then he/she indicates the answer by choose from a finite number of labels on the colorbar. The instances of this question should include scalar color mappings and the choice of MD or FA (Figure~\ref{fig:task1-fa} and \ref{fig:task1-md}). Each combination should be repeated for several regions to increase reliability. 	
 	
 	\item{Task 2:} The base question is: ``Which average FA/MD is greater?" 
 	In this task, the participants were asked to choose the greater average FA/MD between two regions marked on the whole brain image (Figure~\ref{fig:task2}) Similar to Task 1, a number of questions are generated from this base question. 
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=0.8\columnwidth]{isorainbow-fa-task2}
-	\includegraphics[width=0.8\columnwidth]{isorainbow-md-task2}
-	\caption{Illustration of the questions for left side of the brain, based on Task2 for Isoluminant-rainbow colormap. top:Fa and buttom:MD}
-	\label{fig:task2}
-\end{figure}
 
 	
 	
@@ -434,18 +437,27 @@ Please note that Task 2 is basically the same as Task 1. However, Task 1 asks fo
 	
 \end{itemize}
 
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.8\columnwidth]{isorainbow-fa-task2}
+	\includegraphics[width=0.8\columnwidth]{isorainbow-md-task2}
+	\caption{Illustration of the questions for left side of the brain, based on Task 2 for Isoluminant-rainbow colormap. Top: Fa, bottom: MD}
+	\label{fig:task2}
+\end{figure}
+
 
 \paragraph{B. Ensemble orientation}
 
 \begin{itemize}
 \item{Task 3:} The base question is: ``Follow the tracts and solve the puzzle."
 This task is designed to determine which spherical colormap is better in detecting tracts and effect of color mapping on visibility of the tracts. In this task, we took a number of random zoomed pictures from two spherical colormaps of the same region of the brain. see Figure~\ref{fig:absolute-zoomed}.
+\end{itemize}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.49 \columnwidth]{absolute-zoomed}
+    \includegraphics[width = 0.49 \columnwidth]{absolute-zoomed}\\
     \includegraphics[width = 0.45 \columnwidth]{boy's-zoomed}
-    \caption{Zoomed random pictures of the same region of the brain for Task 3. Left:  Absolute value colormap. Right: Boy's surface colormap.}
+    \caption{Zoomed random pictures of the same region of the brain for Task 3. Top:  Absolute value colormap. Bottom: Boy's surface colormap.}
     \label{fig:absolute-zoomed}
 \end{figure}
 
@@ -453,16 +465,16 @@ Then the pictures were divided into nine parts like a puzzle. For guidance, a ye
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.49 \columnwidth]{absolute-puzzle}
+    \includegraphics[width = 0.49 \columnwidth]{absolute-puzzle}\\
     \includegraphics[width = 0.48 \columnwidth]{boy's-puzzle}
-    \caption{ Samples of the puzzle for Task 3. Left:  Absolute value puzzle, Right: Boy's surface puzzle}
+    \caption{ Samples of the swap puzzle for Task 3. Top:  Absolute value puzzle, Bottom: Boy's surface puzzle}
     \label{fig:absolute-puzzle}
 \end{figure}
 
 The statistical information should reveal which color map leads to faster identification of the orientation of the tracts. This task is designed in this particular to avoid the need for the user to interact with a GUI. This firstly removes the need for real-time rendering and makes the questionnaire available with less hardware and software requirements and secondly eliminates the role of users familiarity with complex GUIs.
 
+\clearpage
 
-\end{itemize}
 
 \section{Procedure}
 \label{procedure}
@@ -485,6 +497,8 @@ All of them examined all colormaps.
 
 \paragraph{Hardware and Software} The program ran on a computer with 13.3-inch (diagonal) LED-backlit display with IPS technology, 2560-by-1600 native resolution at 227 pixels per inch. As there was no interaction between the user and the GUI, i.e. no real-time rendering, the specification of the CPU, GPU and operating system is not mentioned. 
 
+
+
 \paragraph{Implementation of Tasks} The following practical limitations were taken into account in carrying out the user study:
 \begin{itemize}
 	\item Participation was voluntary so considerable effort from the participant's side could not be expected.
@@ -493,21 +507,22 @@ All of them examined all colormaps.
 \end{itemize}
 As a conclusion, Task 3 was chosen for the actual questionnaire, which as described before does not conflict with the above constraints.
 
-\subsection{Data}
-
-The data collected for Task 3 was 
-\begin{itemize}
-	\item Duration: the amount of time it took for the user to finish the puzzle.
-	\item Number of steps: the number of swaps done by the participant to finish the puzzle.
-\end{itemize}
-The users were asked to solve the puzzle by following the tracts instead of trial and error. However, not all followed this requirement. The resulting data points were therefore left out. The original data is gathered is shown in Figure~\ref{fig:rawData}.
-
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.9\columnwidth]{orig_data}
     \caption{Original data from user study on Task 3.}
     \label{fig:orig_data}
 \end{figure}
+
+\subsection{Outcome and Discussion}
+
+The data collected for Task 3 was 
+\begin{itemize}
+	\item Duration: the amount of time it took for the user to finish the puzzle.
+	\item Number of steps: the number of swaps done by the participant to finish the puzzle.
+\end{itemize}
+
+The original data is gathered is shown in Figure~\ref{fig:orig_data}. The users were asked to solve the puzzle by following the tracts instead of trial and error. However, not all followed this requirement as it is evident in the figure. For instance, see user with index 9 with 66 moves. Therefore, all the data points with number of moves greater than 20 were considered invalid and omitted. 
 
 \begin{figure}[ht]
     \centering
@@ -522,6 +537,24 @@ The users were asked to solve the puzzle by following the tracts instead of tria
     \caption{Mean and standard deviation (STD) of a) duration and b) number of moves of the data from Figure~\ref{fig:orig_data} after removal of invalid data points.}
     \label{fig:avg_data}
 \end{figure}
+
+The mean (average) and standard deviation (STD) of the data are presented in Figure~\ref{fig:avg_data} for both color mappings Absolute Value and Boy's surface. It can be seen that users have on average performed better in terms of duration in detecting the orientation of tracts for the Absolute Value color mapping. The difference however is not considerably high. The standard deviation is almost half the average values for both methods which could suggest that 
+\begin{enumerate}
+	\item the number of samples (users) is not high enough, or 
+	\item the standard deviation is truely high which implies that the test itself should be more carefully examined.
+\end{enumerate}
+The first point is indeed the case for this work as a proper study was out of the scope. However, this does not eliminate the possibility of the second point being true. 
+
+It was intuitively expected by the authors that Boy's surface did provide a better visualization as spatial resolution of the color mapping is visibly higher.  Even after neglecting the ambiguity regarding high standard deviation, the result from user study contradicts with the intuition. It must be taken into account that the puzzle solving task itself might not be a good candidate. Nonetheless, a single task cannot provide enough evidence for evaluating the initial expectations. 
+
+\chapter{Conclusion}
+
+In this work, five well-known scalar and two spherical color mapping methods were studied. The implementation of these methods was done in the CGV framework developed in Chair of Computer Graphics And Visualization in Dresden University of Technology. 
+
+Two main quantities often used in the study of brain by medical and research community, Fractional Anisotropy and Mean Diffusivity, were extracted from available tractography data. The input was imported in CGV and used as input to scalar color mappings.
+
+As the final step, a user study was designed which could potentially evaluate effect of scalar and spherical color mappings on some of the common tasks that the users of such information need to perform. The user study was partly implemented and carried out. Clearly, further work is required to obtain enough data to be able to provide reliable comparisons. 
+
 
 \bibliography{biblio}
 \bibliographystyle{plain}

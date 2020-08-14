@@ -48,6 +48,12 @@ Kenneth Moreland.
 \newblock Why we use bad color maps and what you can do about it.
 \newblock {\em Electronic Imaging}, 2016:1--6, 02 2016.
 
+\bibitem[Pie97]{Pierpaoli1997OhNO}
+C.~Pierpaoli.
+\newblock Oh no! one more method for color mapping of fiber tract direction
+  using diffusion mr imaging data.
+\newblock 1997.
+
 \bibitem[PP99]{pajevic}
 Sinisa Pajevic and Carlo Pierpaoli.
 \newblock Color schemes to represent the orientation of anisotropic tissues

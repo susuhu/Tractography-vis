@@ -1,32 +1,33 @@
-\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}% 
-\contentsline {chapter}{\numberline {2}Ralated work}{4}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}Measuring methods}{4}{section.2.1}% 
-\contentsline {section}{\numberline {2.2}Scalar colormaps}{4}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}Coolwarm colormap}{4}{subsection.2.2.1}% 
-\contentsline {subsection}{\numberline {2.2.2}Kindlmann colormap}{4}{subsection.2.2.2}% 
-\contentsline {subsection}{\numberline {2.2.3}Blackbody colormap and extended blackbody colormap}{5}{subsection.2.2.3}% 
-\contentsline {subsection}{\numberline {2.2.4}Isoluminant rainbow colormap}{5}{subsection.2.2.4}% 
-\contentsline {section}{\numberline {2.3}Spherical colormaps}{5}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}Absolute value}{5}{subsection.2.3.1}% 
-\contentsline {subsection}{\numberline {2.3.2}Boy\IeC {\textquoteright }s Surface}{6}{subsection.2.3.2}% 
-\contentsline {chapter}{\numberline {3}Basics}{7}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Tractography}{7}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Fractional Anisotropy and Mean Diffusivity}{8}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Color mapping interpolation}{8}{section.3.3}% 
-\contentsline {chapter}{\numberline {4}Implementation}{10}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}The colormap choosing and implement}{10}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}Data acquirement}{12}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Rendering}{13}{section.4.3}% 
+\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}% 
+\contentsline {chapter}{\numberline {2}Ralated work}{5}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Measuring methods}{5}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Scalar colormaps}{5}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Coolwarm colormap}{5}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.2.2}Kindlmann colormap}{5}{subsection.2.2.2}% 
+\contentsline {subsection}{\numberline {2.2.3}Blackbody colormap and extended blackbody colormap}{6}{subsection.2.2.3}% 
+\contentsline {subsection}{\numberline {2.2.4}Isoluminant rainbow colormap}{6}{subsection.2.2.4}% 
+\contentsline {section}{\numberline {2.3}Spherical colormaps}{6}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Absolute value}{6}{subsection.2.3.1}% 
+\contentsline {subsection}{\numberline {2.3.2}Boy\IeC {\textquoteright }s Surface}{7}{subsection.2.3.2}% 
+\contentsline {chapter}{\numberline {3}Basics}{8}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Tractography}{8}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Fractional Anisotropy and Mean Diffusivity}{9}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}Color mapping interpolation}{10}{section.3.3}% 
+\contentsline {chapter}{\numberline {4}Implementation}{11}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}The colormap choosing and implement}{11}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Data acquirement}{13}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Rendering}{14}{section.4.3}% 
 \contentsline {chapter}{\numberline {5}Evaluation}{17}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Task Characteristics}{17}{section.5.1}% 
 \contentsline {section}{\numberline {5.2}Task presentation}{18}{section.5.2}% 
-\contentsline {paragraph}{\nonumberline A. Ensemble Average}{18}{section*.18}% 
-\contentsline {paragraph}{\nonumberline B. Ensemble orientation}{19}{section*.22}% 
-\contentsline {section}{\numberline {5.3}Procedure}{20}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}Results}{20}{section.5.4}% 
-\contentsline {subsection}{\numberline {5.4.1}Practical considerations}{20}{subsection.5.4.1}% 
-\contentsline {paragraph}{\nonumberline Particpants}{20}{section*.26}% 
-\contentsline {paragraph}{\nonumberline Hardware and Software}{20}{section*.27}% 
-\contentsline {paragraph}{\nonumberline Implementation of Tasks}{20}{section*.28}% 
-\contentsline {subsection}{\numberline {5.4.2}Data}{21}{subsection.5.4.2}% 
-\contentsline {chapter}{\nonumberline Bibliography}{27}{chapter*.31}% 
+\contentsline {paragraph}{\nonumberline A. Ensemble Average}{18}{section*.21}% 
+\contentsline {paragraph}{\nonumberline B. Ensemble orientation}{19}{section*.23}% 
+\contentsline {section}{\numberline {5.3}Procedure}{24}{section.5.3}% 
+\contentsline {section}{\numberline {5.4}Results}{25}{section.5.4}% 
+\contentsline {subsection}{\numberline {5.4.1}Practical considerations}{25}{subsection.5.4.1}% 
+\contentsline {paragraph}{\nonumberline Particpants}{25}{section*.27}% 
+\contentsline {paragraph}{\nonumberline Hardware and Software}{25}{section*.28}% 
+\contentsline {paragraph}{\nonumberline Implementation of Tasks}{25}{section*.29}% 
+\contentsline {subsection}{\numberline {5.4.2}Outcome and Discussion}{25}{subsection.5.4.2}% 
+\contentsline {chapter}{\numberline {6}Conclusion}{28}{chapter.6}% 
+\contentsline {chapter}{\nonumberline Bibliography}{29}{chapter*.32}% 
