@@ -18,6 +18,9 @@
 
 \usepackage[left=2.5cm, right=2.5cm, top=3cm, bottom=3.5cm]{geometry}
 
+\usepackage{caption}
+\usepackage{subcaption}
+
 \graphicspath{ {figures/} }
 
 \newtheorem{theorem}{Theorem}
@@ -336,11 +339,76 @@ By ``Base Question" we refer to a basic question from which several questions ar
 As discussed in Section~\comment{??}, FA and MA are the actual quantities that can be related the state of a region in brain. Clearly, the quantity in a voxel or very small part of the brain does not reveal much. The user likely intends to compare larger regions by estimating a gross or average value of the quantity.
 \begin{itemize}
 	\item{Task 1:} The base question is: ``What is the average FA/MD values of the tracts?"
-	In this task, the participants will be asked to estimate the average FA and MD. The user does the estimation by an image of a small region in brain. Then he/she indicates the answer by choose from a finite number of labels on the colorbar. The instances of this question should include scalar color mappings and the choice of MD or FA. Each combination should be repeated for several regions to increase reliability. 
-	
+	In this task, the participants will be asked to estimate the average FA and MD. The user does the estimation by an image of a small region in brain. Then he/she indicates the answer by choose from a finite number of labels on the colorbar. The instances of this question should include scalar color mappings and the choice of MD or FA (Figure~\ref{fig:task1-fa} and \ref{fig:task1-md}). Each combination should be repeated for several regions to increase reliability. 
+     	
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{blackbody-fa}
+	\caption{ }
+    \end{subfigure}
+    \hspace{0.3cm}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{coolwarm-fa}
+	\caption{ }
+    \end{subfigure}	
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{ekindlmann-fa}
+	\caption{ }
+    \end{subfigure}	
+    \hspace{0.3cm}	
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{eblackbody-fa}
+	\caption{ }
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{isorainbow-fa}
+	\caption{ }
+    \end{subfigure}	
+    \caption{Illustration of the questions for back of the brain, based on Task 1 for average FA and a)Blackbody b)Coolwarm c)Extended Kindlmann d)Extended Blackbody e)Isoluminant-rainbow }
+    \label{fig:task1-fa}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{blackbody-md}
+	\caption{ }
+    \end{subfigure}
+    \hspace{0.3cm}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{coolwarm-md}
+	\caption{ }
+    \end{subfigure}	
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{ekindlmann-md}
+	\caption{ }
+    \end{subfigure}	
+    \hspace{0.3cm}	
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{eblackbody-md}
+	\caption{ }
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\includegraphics[width =  \columnwidth]{isorainbow-md}
+	\caption{ }
+    \end{subfigure}	
+    \caption{Illustration of the questions for back of the brain, based on Task 1 for average MD and a)Blackbody b)Coolwarm c)Extended Kindlmann d)Extended Blackbody e)Isoluminant-rainbow }
+    \label{fig:task1-md}
+\end{figure}
+
 	
 	\item{Task 2:} The base question is: ``Which average FA/MD is greater?" 
-	In this task, the participants were asked to choose the greater average FA/MD between two regions marked on the whole brain image. Similar to Task 1, a number of questions are generated from this base question. 
+	In this task, the participants were asked to choose the greater average FA/MD between two regions marked on the whole brain image (Figure~\ref{fig:task2}) Similar to Task 1, a number of questions are generated from this base question. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.40 \columnwidth]{isorainbow-fa-task2}
+    \includegraphics[width = 0.44 \columnwidth]{isorainbow-md-task2}
+    \caption{Illustration of the questions for left side of the brain, based on Task2 for Isoluminant-rainbow colormap. a)Fa and b)MD }
+    \label{fig:task2}
+\end{figure}	
+	
 	
 Please note that Task 2 is basically the same as Task 1. However, Task 1 asks for estimate of the absolute average value  while Task 2 asks for estimate of the relation between two averages. Task 2 is clearly closer to intuition. Considerable difference in the statistical information gathered from these two tasks could lead to important conclusions.
 	
@@ -390,10 +458,28 @@ For understanding the tasks each participants received general information about
 All participants were told to finish the test as soon as possible. But they could take a break at anytime. The questionnaire time was started when the user started the test until the final task was answered. 
 All of them examined all colormaps.
 
-\chapter{Results}
-\section{Participants }
-In our study, we selected 15 participants (7 male and 8 female) of mean age 30.5 with standard deviation 3.
-The program ran on a computer with 13.3-inch (diagonal) LED-backlit display with IPS technology; 2560-by-1600 native resolution at 227 pixels per inch with support for millions of colors. As there was no interaction between the user and the GUI, I.E. no real-time rendering, the specification of the CPU, GPU and operating system is not mentioned. Their majors were: 4 medical scientist, 5 computer science PHD and Master students, and 6 from other disciplines (PHD and Master student in Communication Engineering, Management and sport science). All participants had normal vision. 
+\section{Results}
+\subsection{Practical considerations }
+\paragraph{Particpants} In our study, we selected 15 participants (7 male and 8 female). The  mean age was 30.5 years with standard deviation of 3 years. Their majors were: 4 medical students, 5 computer science PhD and Master students, and 6 from other disciplines (PhD and Master student in Communication Engineering, Management and sport science). All participants had normal vision by Ishihara\comment{correct?} test as explained in Section~\comment{??}. The cooperation of the participants was completely voluntary.
+
+\paragraph{Hardware and Software} The program ran on a computer with 13.3-inch (diagonal) LED-backlit display with IPS technology, 2560-by-1600 native resolution at 227 pixels per inch. As there was no interaction between the user and the GUI, i.e. no real-time rendering, the specification of the CPU, GPU and operating system is not mentioned. 
+
+\paragraph{Implementation of Tasks} The following practical limitations were taken into account in carrying out the user study:
+\begin{itemize}
+	\item Participation was voluntary so considerable effort from the participant's side could not be expected.
+	\item Interactive GUI would require suitable hardware and software which was not available to all members of the team.
+	\item Some questions require manipulation of the tractography data and insertion of 3D objects into the final rendering which was beyond the resources of the work.
+\end{itemize}
+As a conclusion, Task 3 was chosen for the actual questionnaire, which as described before does not conflict with the above constraints.
+
+\subsection{Data}
+
+The data collected for Task 3 was 
+\begin{itemize}
+	\item Duration: the amount of time it took for the user to finish the puzzle.
+	\item Number of steps: the number of swaps done by the participant to finish the puzzle.
+\end{itemize}
+The users were asked to solve the puzzle by following the tracts instead of trial and error. However, not all followed this requirement. The resulting data points were therefore left out. The original data is gathered is shown in Figure~\ref{fig:rawData}.
 
 \bibliography{biblio}
 \bibliographystyle{plain}

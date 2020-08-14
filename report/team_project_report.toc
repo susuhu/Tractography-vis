@@ -13,8 +13,12 @@
 \contentsline {chapter}{\numberline {5}Evaluation}{14}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Task Characteristics}{14}{section.5.1}% 
 \contentsline {section}{\numberline {5.2}Task presentation}{15}{section.5.2}% 
-\contentsline {paragraph}{A. Ensemble Average}{15}{section*.9}% 
-\contentsline {paragraph}{B. Ensemble orientation}{16}{section*.10}% 
-\contentsline {section}{\numberline {5.3}Procedure}{17}{section.5.3}% 
-\contentsline {chapter}{\numberline {6}Results}{18}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Participants }{18}{section.6.1}% 
+\contentsline {paragraph}{A. Ensemble Average}{15}{section*.23}% 
+\contentsline {paragraph}{B. Ensemble orientation}{16}{section*.27}% 
+\contentsline {section}{\numberline {5.3}Procedure}{16}{section.5.3}% 
+\contentsline {section}{\numberline {5.4}Results}{17}{section.5.4}% 
+\contentsline {subsection}{\numberline {5.4.1}Practical considerations }{17}{subsection.5.4.1}% 
+\contentsline {paragraph}{Particpants}{17}{section*.31}% 
+\contentsline {paragraph}{Hardware and Software}{17}{section*.32}% 
+\contentsline {paragraph}{Implementation of Tasks}{17}{section*.33}% 
+\contentsline {subsection}{\numberline {5.4.2}Data}{17}{subsection.5.4.2}% 
