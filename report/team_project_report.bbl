@@ -21,6 +21,32 @@ J.~{Chen}, G.~{Zhang}, W.~{Chiou}, D.~H. {Laidlaw}, and A.~P. {Auchus}.
 \newblock {\em IEEE Transactions on Visualization and Computer Graphics},
   26(9):2818--2833, 2020.
 
+\bibitem{kindlmann}
+G.~{Kindlmann}, E.~{Reinhard}, and S.~{Creem}.
+\newblock Face-based luminance matching for perceptual colormap generation.
+\newblock In {\em IEEE Visualization, 2002. VIS 2002.}, pages 299--306, 2002.
+
+\bibitem{moreland2019}
+Kenneth Moreland.
+\newblock Diverging color maps for scientific visualization.
+\newblock In George Bebis, Richard Boyle, Bahram Parvin, Darko Koracin,
+  Yoshinori Kuno, Junxian Wang, Renato Pajarola, Peter Lindstrom, Andr{\'e}
+  Hinkenjann, Miguel~L. Encarna{\c{c}}{\~a}o, Cl{\'a}udio~T. Silva, and Daniel
+  Coming, editors, {\em Advances in Visual Computing}, pages 92--103, Berlin,
+  Heidelberg, 2009. Springer Berlin Heidelberg.
+
+\bibitem{moreland2016}
+Kenneth Moreland.
+\newblock Why we use bad color maps and what you can do about it.
+\newblock {\em Electronic Imaging}, 2016:1--6, 02 2016.
+
+\bibitem{pajevic}
+Sinisa Pajevic and Carlo Pierpaoli.
+\newblock Color schemes to represent the orientation of anisotropic tissues
+  from diffusion tensor data: Application to white matter fiber tract mapping
+  in the human brain.
+\newblock {\em Magnetic Resonance in Medicine}, 42(3):526--540, 1999.
+
 \bibitem{tak}
 Takehiko Takagi, Masaya Nakamura, Masayuki Yamada, Keigo Hikishima, Suketaka
   Momoshima, Kanehiro Fujiyoshi, Shinsuke Shibata, Hirotaka~James Okano,

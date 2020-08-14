@@ -56,7 +56,44 @@
 \maketitle
 \tableofcontents
 \chapter{Introduction}
+
+Tractography is a kind of scientific visualization technique used to visualize the nerve tract data. The data we use here is diffusion magnetic resonance imaging(DMRI). To show the 3D DMRI brain data we basically use two kinds of colormaps. The first scalar colormap is to compute the scalar values such as fractional anisotropy which represent the characteristics of diffusion and map it to the tracts. The second one is to use spherical colormaps to present orientation of tracts. After implementation we will compare the advantages and disadvantages of these colormaps and do the evaluation.
+
+The aim of the project is to implement the visualization of tractography. The goals include: (1)Literature review on real-time tube rendering with color mapping specific to tractography data. (2) Study and implementation of ensemble scalar and orientation colormaps to visualize fiber tracts. (3) Study and implementation of ensemble comparison and localization based on the chosen colormaps. (4) Selection of viewpoints to conduct robust visualization of DMRI fiber tube characteristics. (5) Evaluation of the ensemble colormaps for accuracy and effectiveness of tract visualization effects. (6) Study of transparency effects to better visualize the eloquent crossing fiber tracts (optional).
+
+In this project, we implement the scalar color mapping and spherical color mapping. The scalar colormaps include coolwarm, extended Kindlmann, isoluminant rainbow, black body and extended black body. We map the fractional anisotropy (FA) and mean diffusivity(MD) value to the tract positions. Besides, we also implement the spherical colormaps of absolute value method and boy’s surface method. To compare the colormaps we evaluate the effects of different colormaps and draw some conclusions.
+
+The report includes several parts as below: the literature review on related work, basic knowledge about this project, the process of implementation and evaluation.
+
+
 \chapter{Ralated work}
+
+
+\subsubsection*{Coolwarm colormap}
+Coolwarm colormap is a diverging colormap mentioned by Kenneth Moreland. It is double-ended, monotonic on each side, with smooth transition in the middle.
+
+\subsubsection*{Kindlmann colormap}
+Kindlmann colormap was introduced by Gordon Kindlmann, which samples the standard rainbow colors (going from magenta through blue and green to red), and matching against lightness increasing linearly from 0.0 to 1.0, \cite{kindlmann} making it much more perceptually viable. Extended Kindlmann colormap uses the colors from Kindlmann, but also adding more hues.
+
+\subsubsection*{Blackbody colormap and extended blackbody colormap}
+K. Moreland mentioned in his paper \cite{moreland2016} that the disadvantages of rainbow colormap in the area of visualization. Among them, he applied pseudocoloring on the 2D scalar field. In order to reduce the problem of color map contrast, he proposed two examples, blackbody and extended blackbody colormap. The blackbody colormap is based on the radiation of blackbody. It is inspired by the color of light emitted by objects kept at different temperatures. The color distribution is modified to pursue linear perception. The extended blackbody adds purple and blue hues to the blackbody colormap to improve the inconsistency of the yellow-white transition. 
+
+\subsubsection*{Isoluminant rainbow colormap}
+Isoluminant rainbow is a multihued colormap where the luminance is equal. Isoluminant colormaps are invariant in contrast of lightness. In Kindlmann’s work, an isoluminant rainbow colormap is generated. There are 6 color points: red, yellow, green, cyan, blue and magenta which represented by RGB value and they are evenly spaced \cite{kindlmann}. Isoluminant rainbow colormap is poor at showing quantitative characteristics because it is not perceived ordered \cite{moreland2019}. 
+
+\section{Spherical colormaps}
+
+In spherical color mapping, the colors on the sphere can be used to represent the orientation. In this project we focus on two spherical color maps: absolute colormap and Boy’s surface colormap.
+
+
+Pajevic and Pierpaoli use the absolute value method to solve the symmetry issues \cite{pajevic}. In absolute colormap, it is mirror and rotational symmetric at the same time. The unit value of the eigenvectors will be directly mapped to the RGB values of the colors. The sign of the eigenvector does not affect the results and only the absolute values will be considered. The advantage of this colormap is that it can show the direction change in all dimensions in 3D. Absolute colormap is a good choice for default spherical colormap \cite{moreland2019}.
+
+\subsubsection*{Boy’s Surface}  
+To be done…
+
+\section{Measuring methods}
+In the study conducted by Chen et al, they tested six ensemble scalar color maps for fractional anisotropy and four spherical colormaps for ensemble orientation of tracts. The evaluation process is explicitly given and they also discuss the results of different visualizations. There are four types of tasks: ensemble identification, ensemble localization, ensemble comparison and ensemble association. In conclusion, the scalar color maps of blackbody, extended blackbody and coolwarm are the best choices to present the ensemble average. The number of hues have more impacts than the luminance. Spherical colormaps such as absolute and Boy’s surface can show the ensemble orientation of tracts better than the other ones \cite{moreland2019}. The evaluation methods in our project are inspired by the study.
+
 \chapter{Basics}
 
 \section{Tractography}
@@ -260,42 +297,52 @@ After mapping FA and MD to different color map values and mapping them to the co
 \end{figure}
 
 \chapter{Evaluation}
+
+The first objective of this chapter is to discuss what users would want to achieve when using the tractography images. Users of such visualizations range from medical doctors and researchers to biologists and neuroscientists. In addition to different viewpoints, users from different categories have different capabilities and resources. For instance, it can be expected that medical doctors have more critical time constraints than researchers. As another example, it is likely that neuroscientists are more acquainted with computer tools, data processing and complex user interfaces.
+
+The second objective is to discuss how we can compare the effect of color mapping as well as the choice of attribute (FA or MD) on user's success in retrieving information. To this end, we design a user study through a questionnaire. The questionnaire should provide statistical information about how each combination of the alternatives affect user's success. 
+
 \section{Task Characteristics}
 
-Chen et al. identified four major task types in \cite{chen}: 
+The term ``task" refers to a specific objective of a user. Chen et al. \cite{chen} identified four major task types : 
 \begin{enumerate}
 	\item Ensemble identification, 
 	\item Ensemble comparison, 
 	\item Ensemble localization and
 	\item Ensemble association.
 \end{enumerate}
-See Figure~\ref{fig:task-types} for an illustration of the tasks as implemented in \cite{chen}. We follow \cite{chen} in chosing to study the first \emph{identification} task type as it is most common in DMRI visualization challenges. 
+See Figure~\ref{fig:task-types} for an illustration of the tasks as implemented in \cite{chen}. Following \cite{chen}, we study the first \emph{identification} task type as it is most common in DMRI visualization challenges. 
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.9\columnwidth]{task-types}
-    \caption{Four task types and some methods. Source:  \cite{chen}}
+    \caption{Illustration of the four task types by example tasks. Source:  \cite{chen}}
     \label{fig:task-types}
 \end{figure}
 
-According to \cite{chen}, the following expectations are reasonable and should be verified by a user study.
+As a starting point for design of the user study, i.e. the questionnaire, the following expectations are considered which are intuitively reasonable and can be verified by a user study.
 \begin{enumerate}
 	\item A spherical color mapping with higher spatial resolution should help with identification of the orientation of the tracts. Among the colormaps implemented in this work, Boy's surface has higher spatial resolution and is expected to help the user follow the tracts better.
 	\item Scalar color mapping based on FA and MD should affect the user's ability to estimate the average over a region.
 \end{enumerate}
 
 \section{Task presentation}
-These following tasks are inspired by Chen et al. \cite{chen}, Henan et al. \cite{henan} and Borgo et al. \cite{borgo}.
+He we formulate the specific tasks according to the expectations mentioned in the previous section. The following tasks are inspired by the works of Chen et al. \cite{chen}, Henan et al. \cite{henan} and Borgo et al. \cite{borgo}.
+
+By ``Base Question" we refer to a basic question from which several questions are implemented in the questionnaire.
 
 \paragraph{A. Ensemble Average}
 
+As discussed in Section~\comment{??}, FA and MA are the actual quantities that can be related the state of a region in brain. Clearly, the quantity in a voxel or very small part of the brain does not reveal much. The user likely intends to compare larger regions by estimating a gross or average value of the quantity.
 \begin{itemize}
-	\item{Task 1:} The base question is: ``What is the average FA and MD values of the tracts?"
-	In this task, the participants were asked to estimate the average FA and MD. There were put some pictures for each scalar colormaps. Then the participants indicate their answers for each scalar colormaps by choosing the labels(A to E) on the color-bar. It was done in several regions of the brain to increase reliability. 
+	\item{Task 1:} The base question is: ``What is the average FA/MD values of the tracts?"
+	In this task, the participants will be asked to estimate the average FA and MD. The user does the estimation by an image of a small region in brain. Then he/she indicates the answer by choose from a finite number of labels on the colorbar. The instances of this question should include scalar color mappings and the choice of MD or FA. Each combination should be repeated for several regions to increase reliability. 
 	
 	
-	\item{Task 2:} The base question is: ``Which average FA is greater?"
-	In this task, the participants were asked to choose the greater average FA between two pictures that were divided from the whole brain and write their answers in the blank. 
+	\item{Task 2:} The base question is: ``Which average FA/MD is greater?" 
+	In this task, the participants were asked to choose the greater average FA/MD between two regions marked on the whole brain image. Similar to Task 1, a number of questions are generated from this base question. 
+	
+Please note that Task 2 is basically the same as Task 1. However, Task 1 asks for estimate of the absolute average value  while Task 2 asks for estimate of the relation between two averages. Task 2 is clearly closer to intuition. Considerable difference in the statistical information gathered from these two tasks could lead to important conclusions.
 	
 \end{itemize}
 
@@ -303,27 +350,28 @@ These following tasks are inspired by Chen et al. \cite{chen}, Henan et al. \cit
 \paragraph{B. Ensemble orientation}
 
 \begin{itemize}
-\item{Task 3:} The base question is: ``Follow the tracts and make solve the puzzle."
-This task is designed to figure out which spherical colormap is better in detecting tracts and how visible and recognizable these tracts are. In this task, we took the zoomed random pictures from two spherical colormaps of the same region of the brain. (see Figure~\ref{fig:absolute-zoomed})
+\item{Task 3:} The base question is: ``Follow the tracts and solve the puzzle."
+This task is designed to determine which spherical colormap is better in detecting tracts and effect of color mapping on visibility of the tracts. In this task, we took a number of random zoomed pictures from two spherical colormaps of the same region of the brain. see Figure~\ref{fig:absolute-zoomed}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.49 \columnwidth]{absolute-zoomed}
     \includegraphics[width = 0.45 \columnwidth]{boy's-zoomed}
-    \caption{Zoomed random pictures of the same region of the brain. Left:  Absolute value colormaps. Right: Boy's surface colormaps.}
+    \caption{Zoomed random pictures of the same region of the brain for Task 3. Left:  Absolute value colormap. Right: Boy's surface colormap.}
     \label{fig:absolute-zoomed}
 \end{figure}
 
-Then the pictures were divided into nine parts like a puzzle. For guidance, a yellow/black dot was placed in the upper left corner of the image and the participants were told first place this box at the top and left the puzzle, to begin with.(see Figure~\ref{fig:absolute-puzzle}) They were asked to order them by following the tracts as soon as possible and the time duration was recorded. 
+Then the pictures were divided into nine parts like a puzzle. For guidance, a yellow/black dot is placed in the upper left corner of the image and the participants were told to firstly place this piece at the top left corner of the puzzle. see Figure~\ref{fig:absolute-puzzle}. The users are asked to solve the puzzles by following the tracts as fast as they can. The duration is recorded. 
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.49 \columnwidth]{absolute-puzzle}
     \includegraphics[width = 0.48 \columnwidth]{boy's-puzzle}
-    \caption{ Left:  Absolute value puzzle, Right: Boy's surface puzzle}
+    \caption{ Samples of the puzzle for Task 3. Left:  Absolute value puzzle, Right: Boy's surface puzzle}
     \label{fig:absolute-puzzle}
 \end{figure}
 
+The statistical information should reveal which color map leads to faster identification of the orientation of the tracts. This task is designed in this particular to avoid the need for the user to interact with a GUI. This firstly removes the need for real-time rendering and makes the questionnaire available with less hardware and software requirements and secondly eliminates the role of users familiarity with complex GUIs.
 
 
 \end{itemize}
