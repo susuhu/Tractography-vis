@@ -80,8 +80,10 @@ KW28:
 KW29: 
 •	Matching .nii file and .trk file with corresponding positions
 •	Apply FA/MD to color mapping
-KW30: 
+KW30,31:
+•	Pause due to teamate's illness
+KW32: 
 •	Design survey and write report
-KW31:
+KW33:
 •	Summarize survey results, finish the report
 
