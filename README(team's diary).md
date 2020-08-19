@@ -61,7 +61,6 @@ KW22:
 •	Cool-warm colormap implemented
 •	Starting to work on diverging color map
 KW23: 
-•	Try to implement the “coolwarm” colormap from the paper but no such color map is found
 •	Extended Kindlmann colormap implemented
 KW24: 
 •	Read the paper further to understand the process of localization and comparison survey
