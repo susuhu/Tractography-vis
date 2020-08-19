@@ -30,3 +30,17 @@ KW30: (chickenpox)
 KW31: Designed the Questionnaire and uploaded it on GitHub. Discussions in the team to see what questions we can actually implemented. Started research on similar papers to find out more ideas about it. Tryied to design questions with minimum 3D rendering requirements.
 KW32: Finally decided that only one question can be implemented. Carried out the questionnaire using the photos that Zihan had sent. Started writing the evaluation part of the report.
 KW33: Evaluation of the results, statistics, and trying to justify them. Editing and revision of the group report, match the parts in LaTex and uploaded on GitHub.
+
+Yu Kong 
+KW21: Get basic knowledge of DMRI, tract data. 
+KW22: Literature review on scalar colormap/Install CGV framework but fail/ Try to understand codes. 
+KW23: Still trying to install CGV framework with Susu’s help, still fail/ Read papers of spherical colormap. 
+KW24: Give up installing CGV and write codes of scalar colormap, Susu helps to test. 
+KW25: Prepare for intermediate presentation. 
+KW26: Get basic idea of FA and MD with FSL. 
+KW27: Compute FA and MD/ Install 3D slicer. 
+KW28: Have meeting with Susu& Zihan for codes of reading Nifti files with LAYNII. Since I have no CGV framework we work together in the classroom. 
+KW29: Have meeting with Susu& Zihan, implement the FA and MD with colormaps with the help of David. 
+KW30: Divide work for report. Prepare papers and result screenshots. Discuss the evaluation part. 
+KW31: No work. 
+KW32-33: write report Chapter 1 introduction, Chapter 2 scalar colormap& spherical colormap
