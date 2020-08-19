@@ -83,7 +83,7 @@ KW29:
 KW30,31:
 •	Pause due to teamate's illness
 KW32: 
-•	Design survey and write report
+•	Write the report and help Alaleh to design the survey and
 KW33:
-•	Summarize survey results, finish the report
+•	Finish the report
 
