@@ -47,42 +47,42 @@ KW32-33: write report Chapter 1 introduction, Chapter 2 scalar colormap& spheric
 
 
 Susu Hu
-1st week:  3 May 2020 – 09 May 2020\n
+KW19: 
 •	First meeting together
-•	Familiar with the task
-2nd week: 10 May 2020 – 16 May 2020
+•	Get familiar with the task
+KW20:
 •	Reading paper, trying to understand six scalar maps and four spherical color maps
 •	Trying to install CGV framework
-3rd week: 17 May 2020 –23 May 2020
+KW21: 
 •	Successfully installed CGV framework
 •	Getting familiar with CGV framework functions
 •	Starting to implement cool-warm colormap
-4th week: 24 May 2020 – 30 May 2020
+KW22: 
 •	Cool-warm colormap implemented
 •	Starting to work on diverging color map
-5th week: 31 May 2020 – 6 June 2020
+KW23: 
 •	Try to implement the “coolwarm” colormap from the paper but no such color map is found
 •	Extended Kindlmann colormap implemented
-6th week: 7 June 2020 – 13 June 2020
+KW24: 
 •	Read the paper further to understand the process of localization and comparison survey
 •	Start working on the intermediate presentation  
 •	Help others implemented their colormapping in CGV framework
-7th week: 14 June 2020 – 20 June 2020
+KW25: 
 •	intermediate presentation rehearsal 
 •	finish intermediate presentation slides
-8th week: 21 June 2020 – 27 June 2020
+KW26: 
 •	intermediate presentation
 •	FA calculation added after the presentation
-9th week: 28 June 2020 – 4 July 2020
+KW27: 
 •	Download and install FLS, calculation FA using TBSS
-10th week: 5 July 2020 – 11 July 2020
+KW28: 
 •	Calculating FA, MD
 •	Load nii file to CGV frame
-11th week: 12 July 2020 – 18 July 2020
+KW29: 
 •	Matching .nii file and .trk file with corresponding positions
 •	Apply FA/MD to color mapping
-12th week: 19 July 2020 – 25 July 2020
+KW30: 
 •	Design survey and write report
-13th week: 26 July 2020 – 31 July 2020
+KW31:
 •	Summarize survey results, finish the report
 
