@@ -8,5 +8,7 @@
 * Evaluation of the ensemble colormaps for accuracy and effectiveness of tract visualisation effects.<br/>
 
 
-remove extra voxels
-![logo](https://github.com/susuhu/fiber_viewer/blob/master/report/figures/5.png)
+###sample results:
+![logo](https://github.com/susuhu/fiber_viewer/blob/master/report/figures/8.png) <br/>
+
+![logo](https://github.com/susuhu/fiber_viewer/blob/master/report/figures/7.png)
