@@ -6,3 +6,7 @@
 * Study and implementation of ensemble comparison and localization based on the chosen colormaps.<br/>
 * Selection of viewpoints to conduct robust visualisation of dMRI fiber tube characteristics.<br/>
 * Evaluation of the ensemble colormaps for accuracy and effectiveness of tract visualisation effects.<br/>
+
+
+remove extra voxels
+![logo](https://github.com/susuhu/fiber_viewer/blob/master/report/figures/5.png)
